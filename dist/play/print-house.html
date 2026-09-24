@@ -13,7 +13,9 @@
 .hot{cursor:pointer}
 .hot.locked{cursor:not-allowed}
 .hot.locked .lbl{opacity:.35}
-.hot .frame{fill:transparent;stroke:transparent;stroke-width:3}
+.hot{pointer-events:all}
+.hot .frame{fill:#fff;fill-opacity:.001;stroke:transparent;stroke-width:3}
+.hot.cur .frame{fill-opacity:.06}
 .hot.cur .frame{stroke:#ffd166;stroke-width:4;animation:pulse 1.4s infinite}
 .hot.done .frame{stroke:#6fcf97;stroke-width:3;stroke-dasharray:6 6}
 .hot:not(.locked):hover .frame{stroke:#fff;stroke-width:4}
@@ -63,6 +65,11 @@
 .rows8 .r{display:grid;grid-template-columns:28% 1fr;align-items:center;gap:2%}
 .rows8 label{margin:0;font-weight:800;color:#2a1708;text-align:center;font-size:clamp(11px,1.8cqw,18px)}
 .rows8 input{background:#fdf8ea}
+.objbar{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.objbar .btn{padding:8px 12px;font-size:.92rem}
+.objbar .btn.cur{background:var(--c3);color:#111;border-color:var(--c3);animation:blink 1.4s infinite}
+.objbar .btn.done{opacity:.6;text-decoration:line-through}
+@keyframes blink{0%,100%{box-shadow:0 0 0 0 rgba(247,201,72,.8)}50%{box-shadow:0 0 0 6px rgba(247,201,72,0)}}
 .closebar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0}
 .closebar h2{margin:0;font-size:1.3rem}
 .wrapfb{margin-top:10px}
@@ -112,12 +119,13 @@
       <g class="hot" data-p="6" id="hot6"><rect class="frame" x="680" y="370" width="200" height="150"/><text class="lbl" x="780" y="534" text-anchor="middle">⚙️ מכונת הדפוס</text></g>
     </svg>
   </div>
+  <div class="objbar" id="objbar"></div>
   <div id="closeView" style="display:none">
     <div class="closebar"><h2 id="closeTitle"></h2><button class="btn ghost sm" id="backBtn">← חזרה לחדר</button></div>
     <div class="view" id="closeScene"><div class="bg" id="closeBg"></div><div id="ovs"></div></div>
     <div class="wrapfb"><div class="feedback" id="fb"></div><div id="hints"></div></div>
   </div>
-  <div class="stage pz" id="panel"><p class="muted">לחצו על חפץ מואר בחדר. כל חפץ נפתח למסך תקריב משלו. החידות משתמשות בדברים שנמצאים בחדר עצמו.</p></div>
+  <div class="stage pz" id="panel"><p class="muted">לחצו על החפץ עם המסגרת הצהובה המהבהבת (או על הכפתור הצהוב למטה). כל חפץ נפתח למסך תקריב משלו. המנורה, השלט והחלון הם חלק מהחדר: לא לוחצים עליהם, אבל כדאי להסתכל בהם.</p></div>
 </section>
 
 <section id="win" class="stage" style="display:none"></section>
@@ -207,14 +215,17 @@ function buildJig(){
 }
 
 function renderProgress(){ $("progress").innerHTML=[1,2,3,4,5,6,7,8].map(i=>`<span class="${S.solved.includes(i)?"done":(i===S.stage?"cur":"")}"></span>`).join(""); $("stageLbl").textContent="חידה "+Math.min(S.stage,8)+" מתוך 8"; $("penaltyLbl").textContent=S.penalty?`(+${S.penalty/60} דק' רמזים)`:""; }
-function renderScene(){ for(let i=1;i<=8;i++){ const h=$("hot"+i); h.classList.toggle("done",S.solved.includes(i)); h.classList.toggle("cur",i===S.stage); h.classList.toggle("locked",i>S.stage); } }
-function showRoom(){ $("closeView").style.display="none"; $("roomView").style.display="block"; $("panel").style.display="block"; }
+const NAMES={1:"🔡 גלופת הדפוס",2:"🗄️ ארון האותיות",3:"🧴 ארון הדיו",4:"📌 לוח המודעות",5:"✏️ התשבץ",6:"⚙️ המכונה",7:"📕 ספר ההזמנות",8:"🚪 הדלת"};
+function renderScene(){ for(let i=1;i<=8;i++){ const h=$("hot"+i); h.classList.toggle("done",S.solved.includes(i)); h.classList.toggle("cur",i===S.stage); h.classList.toggle("locked",i>S.stage); }
+  $("objbar").innerHTML='<span class="small muted" style="align-self:center">או בחרו חידה:</span>'+[1,2,3,4,5,6,7,8].map(i=>`<button class="btn ghost ${S.solved.includes(i)?"done":(i===S.stage?"cur":"")}" data-o="${i}" ${i>S.stage?"disabled":""}>${S.solved.includes(i)?"✔ ":""}${NAMES[i]}${i>S.stage?" 🔒":""}</button>`).join("");
+  $("objbar").querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>open(+b.dataset.o)); }
+function showRoom(){ $("closeView").style.display="none"; $("roomView").style.display="block"; $("objbar").style.display="flex"; $("panel").style.display="block"; }
 function open(p){
   if(p>S.stage){ $("panel").innerHTML=`<p class="muted">🔒 ${P[p].title}: עדיין נעול. פתרו קודם את החידה המוארת.</p>`; return; }
   if(S.solved.includes(p)){ $("panel").innerHTML=`<h2>${P[p].title}</h2><p class="feedback ok">✔ נפתר. ${P[p].success}</p>`; return; }
   if(p>FREE_STAGES && !Access.require("print-house",()=>open(p))) return;
   const d=P[p]; cur=p;
-  $("roomView").style.display="none"; $("panel").style.display="none"; $("closeView").style.display="block";
+  $("roomView").style.display="none"; $("objbar").style.display="none"; $("panel").style.display="none"; $("closeView").style.display="block";
   $("closeTitle").textContent=d.title; $("closeBg").innerHTML=PH_SCENES[d.bg]; $("ovs").innerHTML=d.ovs(); $("fb").className="feedback"; $("fb").textContent="";
   showHints(p); d.after&&d.after();
   $("chk").onclick=()=>check(p);
