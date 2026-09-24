@@ -9,7 +9,7 @@
 </head>
 <body>
 <header class="site"><div class="container">
-  <a class="logo" href="index.html"><span class="mark">משחקי</span> משפחה</a>
+  <a class="logo" href="index.html"><span class="mark"></span>משחקי משפחה</a>
   <nav><a href="index.html#games">← לכל המשחקים</a></nav>
 </div></header>
 <main class="container" id="main" style="padding-top:24px"></main>
@@ -26,10 +26,10 @@
   const owned=Access.owned(g.id);
   const catName=c=>{const x=CATEGORIES.find(y=>y.id===c); return x?x.icon+" "+x.name:c;};
   m.innerHTML=`
-  <div class="section" style="display:grid;grid-template-columns:1fr;gap:18px">
+  <div class="section" style="display:grid;grid-template-columns:1fr;gap:18px;border-top:0">
     <img class="cover" src="assets/img/covers/${g.id}.jpg" alt="" onerror="this.remove()">
     <div class="row" style="align-items:flex-start;gap:20px">
-      <div class="art" style="font-size:5rem;line-height:1">${g.icon}</div>
+      <div class="art tone-${g.tone}" style="font-size:4rem;line-height:1;width:120px;height:120px;display:flex;align-items:center;justify-content:center;flex:none">${g.icon}</div>
       <div style="flex:1;min-width:240px">
         <h1 style="margin:0;color:var(--accent)">${g.title}</h1>
         <div class="muted">${g.type}</div>

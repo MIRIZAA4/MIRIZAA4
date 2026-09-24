@@ -14,7 +14,7 @@ window.CATEGORIES = [
 ];
 window.GAMES = [
   {
-    id:"print-house", title:"בית הדפוס הישן", icon:"🖨️",
+    id:"print-house", tone:1, title:"בית הדפוס הישן", icon:"🖨️",
     type:"חדר בריחה על המסך", players:"1–6", time:"45–60 דק'", age:"20+", level:"בינוני–קשה",
     price:39, freeStages:"2 חידות ראשונות בחינם",
     cats:["adults","couple","family","benhazmanim","birthday","friends"],
@@ -24,7 +24,7 @@ window.GAMES = [
     url:"play/print-house.html"
   },
   {
-    id:"couple-quiz", title:"כמה מכירים את החתן והכלה?", icon:"💍",
+    id:"couple-quiz", tone:2, title:"כמה מכירים את החתן והכלה?", icon:"💍",
     type:"חידון לשבע ברכות", players:"6–40, בשני שולחנות", time:"15–20 דק'", age:"לכולם", level:"קל",
     price:29, freeStages:"3 שאלות ראשונות בחינם",
     cats:["sheva","friends","family"],
@@ -34,7 +34,7 @@ window.GAMES = [
     url:"play/couple-quiz.html"
   },
   {
-    id:"family-race", title:"המרוץ המשפחתי", icon:"🎡",
+    id:"family-race", tone:3, title:"המרוץ המשפחתי", icon:"🎡",
     type:"משימות בקבוצות", players:"6–20 ב־2–4 קבוצות", time:"45–60 דק'", age:"20+", level:"קל",
     price:35, freeStages:"5 משימות ראשונות בחינם",
     cats:["family","chanuka","sukkot","benhazmanim","purim","birthday","friends"],
@@ -44,7 +44,7 @@ window.GAMES = [
     url:"play/family-race.html"
   },
   {
-    id:"family-court", title:"המשפט המשפחתי", icon:"⚖️",
+    id:"family-court", tone:4, title:"המשפט המשפחתי", icon:"⚖️",
     type:"משחק הצגה קומי", players:"6–14", time:"60–90 דק'", age:"20+", level:"קל",
     price:35, freeStages:"משפט ראשון בחינם",
     cats:["family","friends","birthday","benhazmanim","adults"],

@@ -10,15 +10,19 @@
 </head>
 <body>
 <header class="site"><div class="container">
-  <a class="logo" href="index.html"><span class="mark">משחקי</span> משפחה</a>
+  <a class="logo" href="index.html"><span class="mark"></span>משחקי משפחה</a>
   <nav><a href="#games">המשחקים</a><a href="#how">איך זה עובד</a><a href="#buy">רכישה</a></nav>
 </div></header>
 
 <section class="hero container">
-  <h1>משחקים למשפחה, על המסך, בלי הכנות</h1>
-  <p>חדרי בריחה, חידונים ומשחקי משימות לשבע ברכות, לחגים, למפגשים ולזוג. יושבים מול המחשב, לוחצים "התחל", והמסך מנחה. תוכן נקי ומכובד.</p>
-  <div class="chips" id="chips"></div>
+  <div>
+    <h1>משחקים למשפחה, <em>על המסך</em>, בלי הכנות</h1>
+    <p>חדרי בריחה, חידונים ומשחקי משימות לשבע ברכות, לחגים, למפגשים ולזוג. יושבים מול המחשב, לוחצים "התחל", והמסך מנחה. תוכן נקי ומכובד.</p>
+    <div class="actions"><a class="btn primary" href="#games">▶ לנסות משחק בחינם</a><a class="btn" href="#how">איך זה עובד</a></div>
+  </div>
+  <div class="tiles"><div>🎲</div><div>🖨️</div><div>💍</div><div>⚖️</div><div>🎡</div><div>🧠</div><div>🕎</div><div>🎭</div><div>🏆</div></div>
 </section>
+<section class="container"><div class="chips" id="chips"></div></section>
 
 <section class="container" id="games">
   <img class="hero-art" src="assets/img/home-hero.jpg" alt="" onerror="this.remove()">
@@ -28,12 +32,12 @@
 <section class="container" id="how">
   <div class="section">
     <h2>איך זה עובד</h2>
-    <ol>
-      <li><b>בוחרים משחק</b> לפי האירוע: שבע ברכות, חנוכה, מפגש משפחתי, ערב לזוג.</li>
-      <li><b>מנסים בחינם.</b> בכל משחק השלב הראשון פתוח לכולם.</li>
-      <li><b>רוכשים</b> ומקבלים קוד פתיחה. המשחק נשאר פתוח במחשב שלכם.</li>
-      <li><b>משחקים.</b> מחשב או טאבלט אחד לכל החבורה. בלי להדפיס, בלי להחביא, בלי טלפונים.</li>
-    </ol>
+    <div class="steps">
+      <div class="step"><b data-n="1">בוחרים משחק</b><small>לפי האירוע: שבע ברכות, חנוכה, מפגש משפחתי, ערב לזוג.</small></div>
+      <div class="step"><b data-n="2">מנסים בחינם</b><small>בכל משחק השלב הראשון פתוח לכולם.</small></div>
+      <div class="step"><b data-n="3">רוכשים</b><small>מקבלים קוד פתיחה. המשחק נשאר פתוח במחשב שלכם.</small></div>
+      <div class="step"><b data-n="4">משחקים</b><small>מחשב או טאבלט אחד לכל החבורה. בלי להדפיס, בלי להחביא, בלי טלפונים.</small></div>
+    </div>
     <p class="muted small">האתר קל ומהיר ועובד גם דרך אינטרנט מסונן. אין וידאו ואין תמונות של אנשים.</p>
   </div>
 </section>
@@ -43,7 +47,7 @@
     <h2>רכישה</h2>
     <p>מחיר משחק בודד: <span class="price">29–39 ₪</span>. חבילת אירוע (3 משחקים לבחירה): <span class="price">89 ₪</span>.</p>
     <p>בשלב ההרצה של האתר הרכישה נעשית ישירות מול בעלי האתר, וקוד הפתיחה נשלח במייל או בטלפון. חיבור לסליקה אוטומטית יתווסף בהמשך.</p>
-    <p><a class="btn gold" href="mailto:?subject=רכישת משחק">לרכישה במייל</a></p>
+    <p><a class="btn primary" href="mailto:?subject=רכישת משחק">לרכישה במייל</a></p>
   </div>
 </section>
 
@@ -63,7 +67,7 @@
   function renderGrid(){
     const list=GAMES.filter(g=>active==="all"||g.cats.includes(active));
     grid.innerHTML=list.map(g=>`<a class="card" href="game.html#${g.id}" style="text-decoration:none;color:inherit">
-      <div class="art">${g.icon}<img src="assets/img/covers/${g.id}.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+      <div class="art tone-${g.tone}">${g.icon}<img src="assets/img/covers/${g.id}.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
       <div class="body">
         <h3>${g.title}</h3>
         <div class="meta">${g.type} · ${g.players} · ${g.time}</div>

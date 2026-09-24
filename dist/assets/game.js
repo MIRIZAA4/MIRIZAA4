@@ -25,7 +25,7 @@ window.G = {
   note(el,msg,ok){ el.className="feedback "+(ok?"ok":"bad"); el.textContent=msg; },
   shell(title, backHref){
     const h=document.createElement("header"); h.className="site";
-    h.innerHTML=`<div class="container"><a class="logo" href="${backHref||"../index.html"}"><span class="mark">משחקי</span> משפחה</a><nav><a href="${backHref||"../index.html"}">← לכל המשחקים</a></nav></div>`;
+    h.innerHTML=`<div class="container"><a class="logo" href="${backHref||"../index.html"}"><span class="mark"></span>משחקי משפחה</a><nav><a href="${backHref||"../index.html"}">← לכל המשחקים</a></nav></div>`;
     document.body.prepend(h);
     document.title=title+" · משחקי משפחה";
   }

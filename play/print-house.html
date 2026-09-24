@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 <style>
-.scene{background:#2b2118;border-radius:16px;padding:6px;box-shadow:var(--shadow)}
+.scene{background:#2b2118;border:1px solid var(--fg);padding:0}
 .scene svg{display:block;width:100%;height:auto}
 .scene svg.img .deco{display:none}
 .scene svg.img .hot .frame{fill:rgba(0,0,0,.001)}
@@ -20,17 +20,17 @@
 @keyframes pulse{0%,100%{stroke-opacity:1}50%{stroke-opacity:.3}}
 .mirror{display:inline-block;transform:scaleX(-1);font-size:1.5rem;letter-spacing:1px;line-height:1.8}
 .tiles{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
-.tile{width:64px;height:64px;border:2px solid #7a5a2a;background:#f1e2b8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;cursor:pointer;box-shadow:2px 3px 0 #b8965a;user-select:none}
+.tile{width:64px;height:64px;border:2px solid #7a5a2a;background:#f1e2b8;border-radius:0;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;cursor:pointer;user-select:none}
 .tile:hover{background:#ffeec2}
 .grid3{display:grid;grid-template-columns:repeat(3,100px);gap:3px;margin:12px auto;width:max-content;direction:ltr}
 .piece{width:100px;height:100px;background-size:300px 300px;border:1px solid #b9a37a;cursor:pointer}
 .piece.sel{outline:4px solid #ffd166}
-.bottle{display:inline-block;width:70px;height:110px;border-radius:12px 12px 8px 8px;margin:6px;position:relative;box-shadow:inset -8px 0 20px rgba(0,0,0,.25)}
-.bottle span{position:absolute;bottom:8px;left:0;right:0;text-align:center;background:#fff;margin:0 8px;border-radius:4px;font-weight:700;font-size:.9rem;color:#1f2430}
-.letterbox{display:inline-block;width:38px;height:44px;border:2px solid var(--accent);border-radius:6px;margin:0 3px;font-size:1.5rem;font-weight:800;text-align:center;line-height:40px;background:#fff}
+.bottle{display:inline-block;width:70px;height:110px;border-radius:0;margin:6px;position:relative;box-shadow:inset -8px 0 20px rgba(0,0,0,.25)}
+.bottle span{position:absolute;bottom:8px;left:0;right:0;text-align:center;background:#fff;margin:0 8px;border-radius:0;font-weight:700;font-size:.9rem;color:#1f2430}
+.letterbox{display:inline-block;width:38px;height:44px;border:2px solid var(--accent);border-radius:0;margin:0 3px;font-size:1.5rem;font-weight:800;text-align:center;line-height:40px;background:#fff}
 .letterbox.on{background:#fff2cc}
 .door-open .doorpanel{transform-origin:right center;transform:rotateY(70deg) translateX(-20px);transition:transform 1.2s ease}
-.cert{border:6px double var(--accent-2);padding:24px;background:#fffdf5;text-align:center;border-radius:8px}
+.cert{border:6px double var(--accent-2);padding:24px;background:#fffdf5;text-align:center;border-radius:0}
 .cert h2{margin:0 0 6px;color:var(--accent)}
 </style>
 </head>
@@ -74,7 +74,7 @@
       </defs>
       <rect width="900" height="400" fill="url(#wall)" class="deco"/>
       <rect y="400" width="900" height="140" fill="url(#floor)" class="deco"/>
-      <image id="roomImg" href="../assets/img/print-house/room.jpg" x="0" y="0" width="900" height="540" preserveAspectRatio="xMidYMid slice"/>
+      <image id="roomImg" x="0" y="0" width="900" height="540" preserveAspectRatio="xMidYMid slice"/>
       <!-- שלט -->
       <rect class="deco" x="300" y="28" width="300" height="46" rx="6" fill="#f1e2b8" stroke="#3b2a15" stroke-width="3"/>
       <text x="450" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#3b2a15">בית דפוס "אחים לוי" · נוסד תרפ"ט</text>
@@ -229,7 +229,7 @@ function ansRow(ph){ return `<div class="answer-row"><input type="text" id="ans"
 // ---------- לוח הגימטריה ----------
 function showGem(){
   const letters="אבגדהוזחטיכלמנסעפצקרשת".split(""), vals=[1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100,200,300,400];
-  openModal(`<h3>לוח הגימטריה</h3><div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;text-align:center">${letters.map((l,i)=>`<div style="border:1px solid var(--line);border-radius:8px;padding:6px"><b style="font-size:1.3rem">${l}</b><br><span class="small muted">${vals[i]}</span></div>`).join("")}</div>`);
+  openModal(`<h3>לוח הגימטריה</h3><div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;text-align:center">${letters.map((l,i)=>`<div style="border:1px solid var(--line);border-radius:0;padding:6px"><b style="font-size:1.3rem">${l}</b><br><span class="small muted">${vals[i]}</span></div>`).join("")}</div>`);
 }
 function openModal(html){ let m=$("gmodal"); if(!m){ m=document.createElement("div"); m.className="modal-bg"; m.id="gmodal"; m.innerHTML='<div class="modal"><div id="gmbody"></div><div class="row" style="margin-top:12px"><button class="btn ghost" id="gmclose">סגירה</button></div></div>'; document.body.appendChild(m); m.querySelector("#gmclose").onclick=()=>m.classList.remove("open"); m.onclick=e=>{if(e.target===m)m.classList.remove("open");}; } m.querySelector("#gmbody").innerHTML=html; m.classList.add("open"); }
 
@@ -284,7 +284,7 @@ function win(){
 function startGame(){ $("intro").style.display="none"; $("game").style.display="block"; S.started=true; save(); timer.reset(S.elapsed); timer.start(); renderProgress(); renderScene(); }
 // חיבור אירועים
 document.querySelectorAll(".hot[data-p]").forEach(h=>h.onclick=()=>open(+h.dataset.p));
-(function(){ const im=$("roomImg"); im.addEventListener("load",()=>$("svg").classList.add("img")); im.addEventListener("error",()=>im.remove()); })();
+(function(){ const src="../assets/img/print-house/room.jpg", pre=new Image(); pre.onload=()=>{ $("roomImg").setAttribute("href",src); $("svg").classList.add("img"); }; pre.onerror=()=>$("roomImg").remove(); pre.src=src; })();
 $("gemHot").onclick=showGem;
 $("restartBtn").onclick=function(){ G.ask(this,()=>{ S=fresh(); save(); location.reload(); }); };
 $("startBtn").onclick=()=>{ S=fresh(); startGame(); };
