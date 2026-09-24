@@ -14,6 +14,7 @@
 </section>
 
 <section class="container" id="games">
+  <img class="hero-art" src="assets/img/home-hero.jpg" alt="" onerror="this.remove()">
   <div class="grid" id="grid"></div>
 </section>
 
@@ -55,7 +56,7 @@
   function renderGrid(){
     const list=GAMES.filter(g=>active==="all"||g.cats.includes(active));
     grid.innerHTML=list.map(g=>`<a class="card" href="game.html#${g.id}" style="text-decoration:none;color:inherit">
-      <div class="art">${g.icon}</div>
+      <div class="art">${g.icon}<img src="assets/img/covers/${g.id}.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
       <div class="body">
         <h3>${g.title}</h3>
         <div class="meta">${g.type} · ${g.players} · ${g.time}</div>

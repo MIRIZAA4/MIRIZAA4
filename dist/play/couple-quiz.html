@@ -19,6 +19,7 @@
 
 <section id="setup" class="stage">
   <h2>💍 כמה מכירים את החתן והכלה?</h2>
+  <img class="pimg" src="../assets/img/couple-quiz/intro.jpg" alt="" onerror="this.remove()">
   <p>חידון של 15–20 דקות לשבע ברכות. <b>לפני האירוע</b> ממלאים כאן את התשובות (מי שמכיר את הזוג). <b>באירוע</b> המסך שואל, שני השולחנות מנחשים בקול, המנחה מסמן מי צדק, והמסך חושף.</p>
   <p class="small muted">הכול נשמר במחשב הזה. אפשר גם להוריד קובץ הכנה ולהעלות אותו במחשב אחר (למשל: מכינים בבית, משחקים באולם).</p>
   <div class="row">
@@ -91,7 +92,7 @@ function show(){
 function reveal(){ timer.stop(); revealed=true; G.beep(660,150); $("ansArea").innerHTML=`<div class="abig">${esc(list[i].a)}</div><p>מי צדק?</p><div class="who"><button class="btn ok" data-w="A">${esc(setup.teamA)}</button><button class="btn ok" data-w="B">${esc(setup.teamB)}</button><button class="btn gold" data-w="AB">שתי הקבוצות</button><button class="btn ghost" data-w="">אף אחת</button></div>`; $("ctrl").innerHTML="";
   $("ansArea").querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{ const w=b.dataset.w; if(w.includes("A")) score.A++; if(w.includes("B")) score.B++; i++; show(); }); }
 function end(){ $("play").style.display="none"; const e=$("end"); e.style.display="block"; const win=score.A===score.B?"תיקו! שני השולחנות מכירים את הזוג באותה מידה":(score.A>score.B?setup.teamA:setup.teamB)+" מכירים את הזוג טוב יותר!";
-  e.innerHTML=`<div style="font-size:3.5rem">💍🎉</div><h2 style="color:var(--accent)">מזל טוב ${esc(setup.chatan)} ו${esc(setup.kallah)}!</h2><div class="scoreboard" style="max-width:420px;margin:14px auto"><div class="score"><span>${esc(setup.teamA)}</span><b>${score.A}</b></div><div class="score"><span>${esc(setup.teamB)}</span><b>${score.B}</b></div></div><p style="font-size:1.3rem;font-weight:700">${win}</p><p class="muted">שיזכו לבנות בית נאמן בישראל</p><div class="row" style="justify-content:center"><button class="btn primary" onclick="location.reload()">לשחק שוב (למשל בשולחן השני)</button></div>`; }
+  e.innerHTML=`${G.img("../assets/img/couple-quiz/end.jpg")}<div style="font-size:3.5rem">💍🎉</div><h2 style="color:var(--accent)">מזל טוב ${esc(setup.chatan)} ו${esc(setup.kallah)}!</h2><div class="scoreboard" style="max-width:420px;margin:14px auto"><div class="score"><span>${esc(setup.teamA)}</span><b>${score.A}</b></div><div class="score"><span>${esc(setup.teamB)}</span><b>${score.B}</b></div></div><p style="font-size:1.3rem;font-weight:700">${win}</p><p class="muted">שיזכו לבנות בית נאמן בישראל</p><div class="row" style="justify-content:center"><button class="btn primary" onclick="location.reload()">לשחק שוב (למשל בשולחן השני)</button></div>`; }
 })();
 </script>
 </body>

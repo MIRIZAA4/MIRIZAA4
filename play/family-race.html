@@ -21,6 +21,7 @@
 
 <section id="setup" class="stage">
   <h2>🎡 המרוץ המשפחתי</h2>
+  <img class="pimg" src="../assets/img/family-race/intro.jpg" alt="" onerror="this.remove()">
   <p>מסובבים גלגל, מקבלים משימה, 90 שניות, נקודות. ארבעה סוגי משימות: <b>🎭 במה</b> (הצגה קטנה או גראמען), <b>🧠 מוח</b> (חידה), <b>🏃 זריזות</b> (כוסות, כפית, מטבעות, בלי מגע), <b>❤️ משפחה</b> (שאלות על המשפחה עצמה). הקבוצה הראשונה שמגיעה ליעד מנצחת.</p>
   <label>מספר קבוצות</label><select id="nTeams"><option>2</option><option>3</option><option>4</option></select>
   <div id="teamNames"></div>
@@ -51,7 +52,7 @@
 <script>
 (function(){
 G.shell("המרוץ המשפחתי"); const $=G.el, FREE=5;
-const CATS=[{k:"במה",icon:"🎭"},{k:"מוח",icon:"🧠"},{k:"זריזות",icon:"🏃"},{k:"משפחה",icon:"❤️"}];
+const CATS=[{k:"במה",icon:"🎭",img:"stage"},{k:"מוח",icon:"🧠",img:"brain"},{k:"זריזות",icon:"🏃",img:"agility"},{k:"משפחה",icon:"❤️",img:"family"}];
 const M={
  "במה":["הציגו את השיחה של סבא עם השדכן, לפני השידוך של סבתא. 60 שניות, חייב סוף מפתיע.","פרסומת: מכרו לנו את \"המרק של סבתא\" כאילו הוא המצאה טכנולוגית שזכתה בפרס בינלאומי.","גראמען: חברו 4 שורות חרוזים על בעל/ת השמחה. חייב לכלול: השם, מאכל שהוא אוהב, והמקום שבו הוא תמיד מאחר.","דיבוב: אחד מזיז רק את הפה, השני מדבר מאחוריו: \"נאום תודה בטקס פרסים על 'הסבא של השנה'\".","מהדורת חדשות: \"הדרמה הגדולה של המפגש המשפחתי הקודם\". כתב בשטח + מגיש באולפן.","פנטומימה, בלי מילים. בחרו אחת: מריבה על מי יושב ליד סבא / ליל הסדר / נסיעה למירון בל\"ג בעומר / חיפוש חנייה בערב שבת / בניית הסוכה. הקבוצות האחרות מנחשות.","תרגום סימולטני: אחד נואם בג'יבריש, השני \"מתרגם\" הרצאה בנושא \"איך להגיע ל־120 בלי לריב עם הגיס\".","הילוך איטי: שחזרו את הרגע שבו העוגה של החג נפלה על הרצפה. כולל פרשן ומעריצים."],
  "מוח":[["מה שייך לך, אבל אחרים משתמשים בו יותר ממך?","השם שלך."],["אני מספר דו־ספרתי. סכום הספרות שלי 9, וכשהופכים אותי אני גדול ב־27 ממה שהייתי. מי אני?","36 (63 פחות 36 = 27)."],["בחדר 3 מתגים. בחדר סמוך, עם דלת סגורה, נורה אחת. מותר להיכנס לחדר הנורה פעם אחת בלבד. איך תדעו איזה מתג מדליק אותה?","מדליקים מתג 1 לדקה ומכבים. מדליקים מתג 2 ונכנסים: דולקת = 2, כבויה וחמה = 1, כבויה וקרה = 3."],["לאמא של דוד יש ארבעה ילדים: ניסן, אייר, סיוון, ו…?","דוד."],["כמה פעמים אפשר להחסיר 5 מ־25?","פעם אחת. אחר כך זה כבר 20."],["אבא ובן: סכום הגילים 50. בעוד 5 שנים האב יהיה גדול פי 3 מהבן. בן כמה הבן היום?","10 (האב 40; בעוד 5 שנים 45 ו־15)."],["יש בי ערים, אבל אין בי בתים. יש בי יערות, אבל אין בי עצים. יש בי נהרות, אבל אין בי מים. מה אני?","מפה."],["שני אבות ושני בנים הלכו לדוג. כל אחד תפס דג אחד, ובסך הכול תפסו 3 דגים. איך?","סבא, אבא ונכד."]],
@@ -75,12 +76,12 @@ function spin(){
 }
 function showMission(c){
   count++; used[c.k]=used[c.k]||[]; let pool=M[c.k].map((_,i)=>i).filter(i=>!used[c.k].includes(i)); if(!pool.length){used[c.k]=[]; pool=M[c.k].map((_,i)=>i);} const idx=pool[Math.floor(Math.random()*pool.length)]; used[c.k].push(idx); const m=M[c.k][idx]; const isRiddle=c.k==="מוח";
-  $("area").innerHTML=`<div class="cat">${c.icon} ${c.k}</div><div class="mission">${isRiddle?m[0]:m}</div><div class="big-timer" id="bigT">${G.fmt(secs)}</div><div class="row" style="justify-content:center"><button class="btn primary" id="tStart">▶ להתחיל זמן</button>${isRiddle?'<button class="btn ghost" id="sol">להציג פתרון</button>':''}</div><div id="solBox"></div><p style="margin-top:14px">ניקוד ל<b>${teams[turn].name}</b>:</p><div class="rate">${isRiddle?'<button class="btn ok" data-s="3">נכון · 3</button><button class="btn gold" data-s="1">עם רמז · 1</button><button class="btn ghost" data-s="0">לא · 0</button>':'<button class="btn ghost" data-s="0">0</button><button class="btn ghost" data-s="1">1</button><button class="btn gold" data-s="2">2</button><button class="btn ok" data-s="3">3 ⭐</button>'}</div>`;
+  $("area").innerHTML=`<div class="cat">${G.img("../assets/img/family-race/"+c.img+".png","icon-img")} ${c.icon} ${c.k}</div><div class="mission">${isRiddle?m[0]:m}</div><div class="big-timer" id="bigT">${G.fmt(secs)}</div><div class="row" style="justify-content:center"><button class="btn primary" id="tStart">▶ להתחיל זמן</button>${isRiddle?'<button class="btn ghost" id="sol">להציג פתרון</button>':''}</div><div id="solBox"></div><p style="margin-top:14px">ניקוד ל<b>${teams[turn].name}</b>:</p><div class="rate">${isRiddle?'<button class="btn ok" data-s="3">נכון · 3</button><button class="btn gold" data-s="1">עם רמז · 1</button><button class="btn ghost" data-s="0">לא · 0</button>':'<button class="btn ghost" data-s="0">0</button><button class="btn ghost" data-s="1">1</button><button class="btn gold" data-s="2">2</button><button class="btn ok" data-s="3">3 ⭐</button>'}</div>`;
   $("tStart").onclick=()=>{ timer.reset(secs); timer.start(); $("tStart").disabled=true; };
   if(isRiddle) $("sol").onclick=()=>{ $("solBox").innerHTML=`<div class="hintbox">פתרון: ${m[1]}</div>`; };
   $("area").querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{ timer.stop(); teams[turn].score+=+b.dataset.s; if(teams[turn].score>=target){ end(teams[turn]); return; } turn=(turn+1)%teams.length; board(); $("turnLbl").textContent="תור: "+teams[turn].name; $("area").innerHTML='<button class="btn gold" id="spinBtn" style="font-size:1.2rem">🎡 לסובב את הגלגל</button>'; $("spinBtn").onclick=spin; });
 }
-function end(w){ $("play").style.display="none"; const e=$("end"); e.style.display="block"; e.innerHTML=`<div style="font-size:3.5rem">🏆</div><h2 style="color:var(--accent)">${w.name} ניצחו!</h2><div class="scoreboard" style="max-width:520px;margin:14px auto">${teams.slice().sort((a,b)=>b.score-a.score).map(t=>`<div class="score"><span>${t.name}</span><b>${t.score}</b></div>`).join("")}</div><button class="btn primary" onclick="location.reload()">משחק חדש</button>`; }
+function end(w){ $("play").style.display="none"; const e=$("end"); e.style.display="block"; e.innerHTML=`${G.img("../assets/img/family-race/end.jpg")}<div style="font-size:3.5rem">🏆</div><h2 style="color:var(--accent)">${w.name} ניצחו!</h2><div class="scoreboard" style="max-width:520px;margin:14px auto">${teams.slice().sort((a,b)=>b.score-a.score).map(t=>`<div class="score"><span>${t.name}</span><b>${t.score}</b></div>`).join("")}</div><button class="btn primary" onclick="location.reload()">משחק חדש</button>`; }
 $("exitBtn").onclick=function(){ G.ask(this,()=>end(teams.slice().sort((a,b)=>b.score-a.score)[0])); };
 })();
 </script>

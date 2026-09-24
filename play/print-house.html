@@ -9,6 +9,9 @@
 <style>
 .scene{background:#2b2118;border-radius:16px;padding:6px;box-shadow:var(--shadow)}
 .scene svg{display:block;width:100%;height:auto}
+.scene svg.img .deco{display:none}
+.scene svg.img .hot .frame{fill:rgba(0,0,0,.001)}
+.scene svg.img .hot text{paint-order:stroke;stroke:#2b2118;stroke-width:4px}
 .hot{cursor:pointer}
 .hot.locked{opacity:.4;cursor:not-allowed}
 .hot.cur .frame{stroke:#ffd166;stroke-width:4;animation:pulse 1.4s infinite}
@@ -37,6 +40,7 @@
 <!-- פתיחה -->
 <section id="intro" class="stage">
   <h2>🖨️ בית הדפוס הישן</h2>
+  <img class="pimg" src="../assets/img/print-house/intro.jpg" alt="" onerror="this.remove()">
   <div class="paper">
     <p>נכנסתם לבית דפוס ישן בירושלים כדי לאסוף את ההזמנות שהזמנתם. המדפיס הזקן לא היה שם. פתאום, רוח חזקה, הדלת נטרקה מאחוריכם, ונעולה.</p>
     <p>על השולחן פתק בכתב יד:</p>
@@ -68,15 +72,16 @@
         <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b6a44"/><stop offset="1" stop-color="#6d5133"/></linearGradient>
         <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3623"/><stop offset="1" stop-color="#2b2118"/></linearGradient>
       </defs>
-      <rect width="900" height="400" fill="url(#wall)"/>
-      <rect y="400" width="900" height="140" fill="url(#floor)"/>
+      <rect width="900" height="400" fill="url(#wall)" class="deco"/>
+      <rect y="400" width="900" height="140" fill="url(#floor)" class="deco"/>
+      <image id="roomImg" href="../assets/img/print-house/room.jpg" x="0" y="0" width="900" height="540" preserveAspectRatio="xMidYMid slice"/>
       <!-- שלט -->
-      <rect x="300" y="28" width="300" height="46" rx="6" fill="#f1e2b8" stroke="#3b2a15" stroke-width="3"/>
+      <rect class="deco" x="300" y="28" width="300" height="46" rx="6" fill="#f1e2b8" stroke="#3b2a15" stroke-width="3"/>
       <text x="450" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#3b2a15">בית דפוס "אחים לוי" · נוסד תרפ"ט</text>
       <!-- דלת (חידה 8) -->
       <g class="hot" data-p="8" id="hot8">
         <rect class="frame" x="370" y="90" width="160" height="300" rx="6" fill="#3b2a15" stroke="transparent"/>
-        <g class="doorpanel"><rect x="380" y="100" width="140" height="290" rx="4" fill="#7a4f22"/><rect x="395" y="115" width="110" height="110" fill="#5e3b18"/><rect x="395" y="245" width="110" height="130" fill="#5e3b18"/><circle cx="500" cy="250" r="7" fill="#e0b25c"/></g>
+        <g class="doorpanel deco"><rect class="deco" x="380" y="100" width="140" height="290" rx="4" fill="#7a4f22"/><rect class="deco" x="395" y="115" width="110" height="110" fill="#5e3b18"/><rect class="deco" x="395" y="245" width="110" height="130" fill="#5e3b18"/><circle class="deco" cx="500" cy="250" r="7" fill="#e0b25c"/></g>
         <text x="450" y="415" text-anchor="middle" font-size="15" fill="#f1e2b8">🚪 הדלת</text>
       </g>
       <!-- לוח אותיות הפוכות (חידה 1) -->
@@ -88,49 +93,49 @@
       <!-- ארון מגירות (חידה 2) -->
       <g class="hot" data-p="2" id="hot2">
         <rect class="frame" x="40" y="220" width="190" height="170" rx="6" fill="#5a3d1e" stroke="transparent"/>
-        <g fill="#7a5a2a" stroke="#3b2a15"><rect x="52" y="232" width="166" height="34"/><rect x="52" y="274" width="166" height="34"/><rect x="52" y="316" width="166" height="34"/></g>
-        <g fill="#e0b25c"><circle cx="135" cy="249" r="4"/><circle cx="135" cy="291" r="4"/><circle cx="135" cy="333" r="4"/></g>
+        <g class="deco" fill="#7a5a2a" stroke="#3b2a15"><rect class="deco" x="52" y="232" width="166" height="34"/><rect class="deco" x="52" y="274" width="166" height="34"/><rect class="deco" x="52" y="316" width="166" height="34"/></g>
+        <g class="deco" fill="#e0b25c"><circle class="deco" cx="135" cy="249" r="4"/><circle class="deco" cx="135" cy="291" r="4"/><circle class="deco" cx="135" cy="333" r="4"/></g>
         <text x="135" y="378" text-anchor="middle" font-size="14" fill="#f1e2b8">🗄️ מגירת האותיות</text>
       </g>
       <!-- מדף בקבוקי דיו (חידה 3) -->
       <g class="hot" data-p="3" id="hot3">
         <rect class="frame" x="600" y="70" width="180" height="110" rx="6" fill="#4a3623" stroke="transparent"/>
-        <rect x="610" y="150" width="160" height="8" fill="#8b6a44"/>
-        <rect x="625" y="100" width="30" height="50" rx="5" fill="#111"/><rect x="675" y="100" width="30" height="50" rx="5" fill="#1d4ed8"/><rect x="725" y="100" width="30" height="50" rx="5" fill="#b91c1c"/>
+        <rect class="deco" x="610" y="150" width="160" height="8" fill="#8b6a44"/>
+        <rect class="deco" x="625" y="100" width="30" height="50" rx="5" fill="#111"/><rect class="deco" x="675" y="100" width="30" height="50" rx="5" fill="#1d4ed8"/><rect class="deco" x="725" y="100" width="30" height="50" rx="5" fill="#b91c1c"/>
         <text x="690" y="172" text-anchor="middle" font-size="14" fill="#f1e2b8">🧴 בקבוקי הדיו</text>
       </g>
       <!-- לוח מודעות (חידה 4) -->
       <g class="hot" data-p="4" id="hot4">
         <rect class="frame" x="600" y="200" width="180" height="130" rx="6" fill="#a4835a" stroke="transparent"/>
-        <rect x="615" y="212" width="60" height="45" fill="#f1e2b8" transform="rotate(-6 645 234)"/><rect x="690" y="215" width="70" height="55" fill="#fff6d8" transform="rotate(5 725 242)"/><rect x="640" y="268" width="80" height="45" fill="#f8ecc8" transform="rotate(-3 680 290)"/>
+        <rect class="deco" x="615" y="212" width="60" height="45" fill="#f1e2b8" transform="rotate(-6 645 234)"/><rect class="deco" x="690" y="215" width="70" height="55" fill="#fff6d8" transform="rotate(5 725 242)"/><rect class="deco" x="640" y="268" width="80" height="45" fill="#f8ecc8" transform="rotate(-3 680 290)"/>
         <text x="690" y="322" text-anchor="middle" font-size="14" fill="#3b2a15">📌 לוח המודעות</text>
       </g>
       <!-- שולחן עם תשבץ (חידה 5) וספר הזמנות (חידה 7) -->
-      <rect x="250" y="420" width="400" height="16" fill="#8b6a44"/><rect x="265" y="436" width="14" height="80" fill="#5a3d1e"/><rect x="621" y="436" width="14" height="80" fill="#5a3d1e"/>
+      <rect class="deco" x="250" y="420" width="400" height="16" fill="#8b6a44"/><rect class="deco" x="265" y="436" width="14" height="80" fill="#5a3d1e"/><rect class="deco" x="621" y="436" width="14" height="80" fill="#5a3d1e"/>
       <g class="hot" data-p="5" id="hot5">
         <rect class="frame" x="258" y="362" width="140" height="56" rx="4" fill="#fdf8ea" stroke="transparent" transform="rotate(-4 328 390)"/>
-        <g fill="none" stroke="#999" stroke-width="1"><path d="M275 376h105M275 386h105M275 396h105M275 406h105"/></g>
+        <g class="deco" fill="none" stroke="#999" stroke-width="1"><path class="deco" d="M275 376h105M275 386h105M275 396h105M275 406h105"/></g>
         <text x="330" y="455" text-anchor="middle" font-size="14" fill="#f1e2b8">✏️ התשבץ של המדפיס</text>
       </g>
       <g class="hot" data-p="7" id="hot7">
         <rect class="frame" x="470" y="365" width="150" height="55" rx="4" fill="#7b1e1e" stroke="transparent"/>
-        <rect x="480" y="372" width="130" height="40" fill="#f1e2b8"/><text x="545" y="398" text-anchor="middle" font-size="13" fill="#3b2a15" font-weight="700">ספר הזמנות</text>
+        <rect class="deco" x="480" y="372" width="130" height="40" fill="#f1e2b8"/><text x="545" y="398" text-anchor="middle" font-size="13" fill="#3b2a15" font-weight="700">ספר הזמנות</text>
         <text x="545" y="455" text-anchor="middle" font-size="14" fill="#f1e2b8">📕 ספר ההזמנות</text>
       </g>
       <!-- מכונת הדפוס (חידה 6) -->
       <g class="hot" data-p="6" id="hot6">
         <rect class="frame" x="680" y="360" width="200" height="160" rx="8" fill="#333" stroke="transparent"/>
-        <circle cx="730" cy="420" r="30" fill="#555" stroke="#aaa" stroke-width="4"/><circle cx="800" cy="410" r="22" fill="#555" stroke="#aaa" stroke-width="4"/><circle cx="845" cy="450" r="18" fill="#555" stroke="#aaa" stroke-width="4"/>
-        <rect x="700" y="470" width="160" height="30" fill="#222"/><rect x="720" y="478" width="120" height="14" fill="#fdf8ea"/>
+        <circle class="deco" cx="730" cy="420" r="30" fill="#555" stroke="#aaa" stroke-width="4"/><circle class="deco" cx="800" cy="410" r="22" fill="#555" stroke="#aaa" stroke-width="4"/><circle class="deco" cx="845" cy="450" r="18" fill="#555" stroke="#aaa" stroke-width="4"/>
+        <rect class="deco" x="700" y="470" width="160" height="30" fill="#222"/><rect class="deco" x="720" y="478" width="120" height="14" fill="#fdf8ea"/>
         <text x="780" y="535" text-anchor="middle" font-size="14" fill="#f1e2b8">⚙️ מכונת הדפוס</text>
       </g>
       <!-- לוח גימטריה (מידע) -->
       <g class="hot info" id="gemHot">
-        <rect x="250" y="120" width="100" height="70" rx="4" fill="#f1e2b8" stroke="#3b2a15" stroke-width="2"/>
+        <rect class="deco" x="250" y="120" width="100" height="70" rx="4" fill="#f1e2b8" stroke="#3b2a15" stroke-width="2"/>
         <text x="300" y="150" text-anchor="middle" font-size="14" font-weight="700" fill="#3b2a15">לוח</text><text x="300" y="172" text-anchor="middle" font-size="14" font-weight="700" fill="#3b2a15">הגימטריה</text>
       </g>
       <!-- לוח אותיות דפוס ליד המכונה (קישוט) -->
-      <g class="hot info" id="typeHot"><rect x="560" y="120" width="30" height="70" fill="#3b2a15" opacity="0"/></g>
+      <g class="hot info" id="typeHot"><rect class="deco" x="560" y="120" width="30" height="70" fill="#3b2a15" opacity="0"/></g>
     </svg>
   </div>
   <div class="stage" id="panel"><p class="muted">לחצו על חפץ מואר בחדר כדי להתחיל.</p></div>
@@ -247,7 +252,7 @@ function open(p){
   if(p>S.stage){ $("panel").innerHTML=`<p class="muted">🔒 ${P[p].title}: עדיין נעול. פתרו קודם את החידה המוארת.</p>`; return; }
   if(S.solved.includes(p)){ $("panel").innerHTML=`<h2>${P[p].title}</h2><p class="feedback ok">✔ נפתר. ${P[p].success}</p>`; return; }
   if(p>FREE_STAGES && !Access.require("print-house",()=>open(p))) return;
-  const d=P[p]; $("panel").innerHTML=`<h2>${d.title}</h2>${d.render()}<div id="hints"></div>`;
+  const d=P[p]; $("panel").innerHTML=`<h2>${d.title}</h2>${G.img("../assets/img/print-house/p"+p+".jpg")}${d.render()}<div id="hints"></div>`;
   (S.hints[p]||0)>0 && showHints(p);
   d.after&&d.after();
   $("chk").onclick=()=>check(p);
@@ -266,7 +271,7 @@ function check(p){
 function win(){
   timer.stop(); $("scene").classList.add("door-open"); const total=S.elapsed+S.penalty, hints=Object.values(S.hints).reduce((a,b)=>a+b,0);
   setTimeout(()=>{ $("game").style.display="none"; const w=$("win"); w.style.display="block"; w.innerHTML=`
-   <div class="cert"><div style="font-size:3rem">🖨️🚪</div><h2>הדלת נפתחה!</h2>
+   <div class="cert">${G.img("../assets/img/certificate-frame.png","frame-img")}<div style="font-size:3rem">🖨️🚪</div><h2>הדלת נפתחה!</h2>
    <p>המכונה הדפיסה את הדף הנכון, המנעול נפתח, ואתם בחוץ, עם ההזמנות ביד.</p>
    <p style="font-size:1.3rem">זמן סופי: <b>${G.fmt(total)}</b> <span class="small muted">(משחק ${G.fmt(S.elapsed)} + ${S.penalty/60} דק' על ${hints} רמזים)</span></p>
    <label style="text-align:right">שמות המשתתפים (לתעודה)</label><input type="text" id="names" placeholder="למשל: משפחת כהן">
@@ -279,6 +284,7 @@ function win(){
 function startGame(){ $("intro").style.display="none"; $("game").style.display="block"; S.started=true; save(); timer.reset(S.elapsed); timer.start(); renderProgress(); renderScene(); }
 // חיבור אירועים
 document.querySelectorAll(".hot[data-p]").forEach(h=>h.onclick=()=>open(+h.dataset.p));
+(function(){ const im=$("roomImg"); im.addEventListener("load",()=>$("svg").classList.add("img")); im.addEventListener("error",()=>im.remove()); })();
 $("gemHot").onclick=showGem;
 $("restartBtn").onclick=function(){ G.ask(this,()=>{ S=fresh(); save(); location.reload(); }); };
 $("startBtn").onclick=()=>{ S=fresh(); startGame(); };

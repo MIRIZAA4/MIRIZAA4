@@ -18,6 +18,8 @@ window.G = {
   save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}},
   load(k,d){try{const v=localStorage.getItem(k); return v?JSON.parse(v):d;}catch(e){return d;}},
   el(id){return document.getElementById(id);},
+  // תמונה אופציונלית: אם הקובץ לא קיים, לא מוצג כלום
+  img(src,cls,alt){ return `<img class="${cls||"pimg"}" src="${src}" alt="${alt||""}" loading="lazy" onerror="this.remove()">`; },
   // אישור בשתי לחיצות (במקום חלון קופץ)
   ask(btn, fn){ if(btn.dataset.armed){ delete btn.dataset.armed; btn.textContent=btn.dataset.orig; fn(); return; } btn.dataset.orig=btn.textContent; btn.dataset.armed="1"; btn.textContent="בטוח? לחצו שוב"; setTimeout(()=>{ if(btn.dataset.armed){ delete btn.dataset.armed; btn.textContent=btn.dataset.orig; } },3000); },
   note(el,msg,ok){ el.className="feedback "+(ok?"ok":"bad"); el.textContent=msg; },

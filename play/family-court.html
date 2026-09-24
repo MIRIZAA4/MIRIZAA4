@@ -26,6 +26,7 @@
 
 <section id="setup" class="stage">
   <h2>⚖️ המשפט המשפחתי</h2>
+  <img class="pimg" src="../assets/img/family-court/intro.jpg" alt="" onerror="this.remove()">
   <p>בכל סבב מישהו מהמשפחה "נשפט" על עבירה מצחיקה. המסך מגריל נאשם, כתב אישום ותפקידים: תובע, סניגור ושני עדים עם כרטיסי עד. עדויות, חקירות, סיכומים, הצבעת המושבעים, ואם אשם: עונש מצחיק. משפט אחד לוקח כ־10 דקות. הכול בהומור טוב, בלי להעליב.</p>
   <label>המשתתפים (שם בכל שורה, לפחות 5)</label>
   <textarea id="names" rows="6" placeholder="אבא&#10;אמא&#10;יוסי&#10;רבקי&#10;הדוד משה"></textarea>
@@ -65,11 +66,11 @@ function newTrial(){
 }
 function header(){ return `<div class="charge">הנאשם/ת: <b>${T.def}</b><br>מואשם/ת בכך ש… ${T.charge}</div>`; }
 function renderRoles(){
-  $("tbody").innerHTML=`<h2>חלוקת תפקידים</h2>${header()}<div class="roles"><div class="role"><small>תובע/ת</small><b>${T.pros}</b></div><div class="role"><small>סניגור/ית</small><b>${T.defn}</b></div><div class="role"><small>עד/ת התביעה</small><b>${T.w1}</b></div><div class="role"><small>עד/ת ההגנה</small><b>${T.w2}</b></div><div class="role"><small>חבר המושבעים</small><b>${T.jury.join(", ")||"כולם"}</b></div></div>
+  $("tbody").innerHTML=`<h2>חלוקת תפקידים</h2>${G.img("../assets/img/family-court/roles.jpg")}${header()}<div class="roles"><div class="role"><small>תובע/ת</small><b>${T.pros}</b></div><div class="role"><small>סניגור/ית</small><b>${T.defn}</b></div><div class="role"><small>עד/ת התביעה</small><b>${T.w1}</b></div><div class="role"><small>עד/ת ההגנה</small><b>${T.w2}</b></div><div class="role"><small>חבר המושבעים</small><b>${T.jury.join(", ")||"כולם"}</b></div></div>
   <div class="row" style="justify-content:center;gap:12px"><button class="btn ghost" id="reroll">🎲 להגריל מחדש</button><button class="btn primary" id="go" style="font-size:1.1rem">▶ להתחיל את המשפט</button></div>`;
   $("reroll").onclick=()=>{ tried.pop(); usedC.pop(); usedW.pop(); usedW.pop(); newTrial(); }; $("go").onclick=()=>{ phase=0; renderPhase(); };
 }
-function witnessCard(who,c){ return `<div class="witness"><b>כרטיס העד/ה של ${who}:</b> ${c[0]}<br><span class="small">חייב/ת להגיד בעדות: ${c[1]}</span><br><button class="btn ghost sm" style="margin-top:6px" onclick="this.nextElementSibling.style.display='block';this.remove()">הטוויסט (רק העד/ה קורא/ת, נחשף אם שואלים ישירות)</button><div style="display:none" class="hintbox">${c[2]}</div></div>`; }
+function witnessCard(who,c){ const wi=WIT.indexOf(c)+1; return `<div class="witness">${G.img("../assets/img/family-court/witness-"+wi+".png","icon-img")} <b>כרטיס העד/ה של ${who}:</b> ${c[0]}<br><span class="small">חייב/ת להגיד בעדות: ${c[1]}</span><br><button class="btn ghost sm" style="margin-top:6px" onclick="this.nextElementSibling.style.display='block';this.remove()">הטוויסט (רק העד/ה קורא/ת, נחשף אם שואלים ישירות)</button><div style="display:none" class="hintbox">${c[2]}</div></div>`; }
 function renderPhase(){
   const p=PHASES[phase]; timer.reset(p[1]);
   $("tbody").innerHTML=`${header()}<div class="phase">${phase+1}/5 · ${p[0]}</div><p class="center muted">${p[2]}</p>${phase===1?witnessCard(T.w1,T.c1):""}${phase===2?witnessCard(T.w2,T.c2):""}<div class="big-timer" id="bigT">${G.fmt(p[1])}</div><div class="row" style="justify-content:center"><button class="btn primary" id="tStart">▶ להתחיל זמן</button><button class="btn gold" id="next">${phase<4?"לשלב הבא ←":"להצבעת המושבעים ←"}</button></div>`;
@@ -79,7 +80,7 @@ function renderVote(){
   $("tbody").innerHTML=`${header()}<div class="phase">הצבעת המושבעים</div><p class="center muted">המנחה סופר/ת ידיים ולוחץ/ת על הכפתורים.</p><div class="vote"><div class="score"><span>אשם</span><b id="vg">0</b><button class="btn bad sm" id="pg">+1</button></div><div class="score"><span>זכאי</span><b id="vi">0</b><button class="btn ok sm" id="pi">+1</button></div></div><div class="row" style="justify-content:center"><button class="btn primary" id="verdict" style="font-size:1.1rem">🔨 פסק דין</button></div>`;
   $("pg").onclick=()=>{votes.g++; $("vg").textContent=votes.g;}; $("pi").onclick=()=>{votes.i++; $("vi").textContent=votes.i;};
   $("verdict").onclick=()=>{ const guilty=votes.g>votes.i; const pun=guilty?PUN[Math.floor(Math.random()*PUN.length)]:null; log.push({def:T.def,charge:T.charge,guilty,pun}); G.beep(guilty?260:800,400);
-    $("tbody").innerHTML=`${header()}<div class="phase" style="font-size:2.4rem;color:${guilty?"var(--bad)":"var(--ok)"}">${guilty?"אשם/ה!":"זכאי/ת!"}</div><p class="center">${votes.g} מול ${votes.i}</p>${guilty?`<div class="charge">🎴 קלף העונש: ${pun}</div>`:'<p class="center">הנאשם/ת יוצא/ת מבית המשפט בראש מורם.</p>'}<div class="row" style="justify-content:center"><button class="btn primary" id="nextTrial" style="font-size:1.1rem">המשפט הבא ←</button></div>`;
+    $("tbody").innerHTML=`${header()}${G.img("../assets/img/family-court/"+(guilty?"guilty":"innocent")+".jpg")}<div class="phase" style="font-size:2.4rem;color:${guilty?"var(--bad)":"var(--ok)"}">${guilty?"אשם/ה!":"זכאי/ת!"}</div><p class="center">${votes.g} מול ${votes.i}</p>${guilty?`<div class="charge">🎴 קלף העונש: ${pun}</div>`:'<p class="center">הנאשם/ת יוצא/ת מבית המשפט בראש מורם.</p>'}<div class="row" style="justify-content:center"><button class="btn primary" id="nextTrial" style="font-size:1.1rem">המשפט הבא ←</button></div>`;
     $("nextTrial").onclick=newTrial; };
 }
 $("objBtn").onclick=()=>{ const o=$("obj"); o.classList.add("open"); let n=5; $("objN").textContent=n; G.beep(200,300); const id=setInterval(()=>{ n--; $("objN").textContent=n; G.beep(500,80); if(n<=0){ clearInterval(id); setTimeout(()=>o.classList.remove("open"),600); } },1000); };

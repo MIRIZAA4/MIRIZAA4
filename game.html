@@ -27,6 +27,7 @@
   const catName=c=>{const x=CATEGORIES.find(y=>y.id===c); return x?x.icon+" "+x.name:c;};
   m.innerHTML=`
   <div class="section" style="display:grid;grid-template-columns:1fr;gap:18px">
+    <img class="cover" src="assets/img/covers/${g.id}.jpg" alt="" onerror="this.remove()">
     <div class="row" style="align-items:flex-start;gap:20px">
       <div class="art" style="font-size:5rem;line-height:1">${g.icon}</div>
       <div style="flex:1;min-width:240px">
