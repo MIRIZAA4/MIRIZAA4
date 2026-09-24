@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" width="1800" height="1080">
+<defs>
+ <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a5f42"/><stop offset=".6" stop-color="#5a4330"/><stop offset="1" stop-color="#3a2a1c"/></linearGradient>
+ <linearGradient id="side" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2a1d12"/><stop offset="1" stop-color="#4a3624"/></linearGradient>
+ <linearGradient id="sideR" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a3624"/><stop offset="1" stop-color="#2a1d12"/></linearGradient>
+ <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3420"/><stop offset="1" stop-color="#1a110a"/></linearGradient>
+ <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a6a37"/><stop offset="1" stop-color="#5a381a"/></linearGradient>
+ <linearGradient id="woodD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b4523"/><stop offset="1" stop-color="#3a2410"/></linearGradient>
+ <linearGradient id="iron" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5a5a60"/><stop offset="1" stop-color="#1a1a1e"/></linearGradient>
+ <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6ead0"/><stop offset="1" stop-color="#d6c39a"/></linearGradient>
+ <radialGradient id="lamp" cx=".5" cy="0" r=".95"><stop offset="0" stop-color="#ffd98a" stop-opacity=".6"/><stop offset=".5" stop-color="#ffb347" stop-opacity=".18"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+ <radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".7"/></radialGradient>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .12"/></feComponentTransfer></filter>
+ <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
+ <filter id="sh"><feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity=".55"/></filter>
+ <pattern id="stone" width="110" height="52" patternUnits="userSpaceOnUse"><rect width="110" height="52" fill="none"/><path d="M0 26H110M55 0V26M0 26V52M110 26V52M55 52V26M0 0H110" stroke="#00000033" stroke-width="3"/><path d="M4 4h48v18H4zM58 4h48v18H58zM4 30h48v18H4zM58 30h48v18H58z" fill="#ffffff08"/></pattern>
+</defs>
+<!-- קירות ורצפה בפרספקטיבה -->
+<rect width="900" height="400" fill="url(#wall)"/><rect width="900" height="400" fill="url(#stone)"/>
+<path d="M0 0 L60 40 L60 400 L0 540Z" fill="url(#side)"/><path d="M900 0 L840 40 L840 400 L900 540Z" fill="url(#sideR)"/>
+<path d="M0 540 L60 400 L840 400 L900 540Z" fill="url(#floor)"/>
+<g stroke="#00000070" stroke-width="2"><path d="M60 400 L0 540M160 400 L120 540M260 400 L240 540M360 400 L360 540M460 400 L480 540M560 400 L600 540M660 400 L720 540M760 400 L840 540M840 400 L900 540"/><path d="M40 440H860M20 480H880M0 520H900" opacity=".6"/></g>
+<!-- קורות תקרה -->
+<path d="M0 0H900V40H0z" fill="#241910"/><g fill="#3a2a1c"><rect x="0" y="0" width="900" height="8"/><rect x="0" y="30" width="900" height="10"/></g>
+<!-- שטיח -->
+<path d="M230 470 L250 440 L650 440 L670 470 L640 520 L260 520Z" fill="#6b2323" opacity=".8"/><path d="M250 476 L262 452 L638 452 L650 476 L628 508 L272 508Z" fill="none" stroke="#c98a4b" stroke-width="2" opacity=".6"/>
+<!-- מנורה -->
+<path d="M450 40v22" stroke="#111" stroke-width="3"/><path d="M406 62h88l26 32H380z" fill="#1f1f1f"/><path d="M410 66h80l20 24H390z" fill="#2c2c2c"/><ellipse cx="450" cy="95" rx="46" ry="6" fill="#ffe9b0"/>
+<ellipse cx="450" cy="170" rx="380" ry="230" fill="url(#lamp)"/>
+<!-- שלט -->
+<g filter="url(#sh)"><rect x="300" y="26" width="300" height="46" fill="url(#paper)" stroke="#3b2a15" stroke-width="3"/><path d="M300 26l-10-10M600 26l10-10" stroke="#3b2a15" stroke-width="3"/></g>
+<text x="450" y="57" text-anchor="middle" font-family="Heebo,Arial" font-size="17" font-weight="800" fill="#3b2a15">בית דפוס "אחים לוי" · נוסד בשנת תרפ"ט</text>
+<!-- דלת -->
+<rect x="357" y="80" width="186" height="322" fill="#120c07"/><rect x="365" y="86" width="170" height="314" fill="#1d140c"/>
+<rect x="378" y="98" width="144" height="302" fill="url(#wood)"/>
+<g fill="#4a2d13" stroke="#2a1708" stroke-width="2"><rect x="393" y="112" width="114" height="112"/><rect x="393" y="240" width="114" height="140"/></g>
+<g fill="#5e3b18"><rect x="403" y="122" width="94" height="92"/><rect x="403" y="250" width="94" height="120"/></g>
+<circle cx="502" cy="262" r="7" fill="#e0b25c"/><rect x="470" y="276" width="40" height="22" fill="#2a2a2a"/><circle cx="490" cy="287" r="4" fill="#000"/>
+<path d="M378 98h144" stroke="#ffffff30" stroke-width="3"/>
+<!-- גלופה -->
+<g filter="url(#sh)"><rect x="40" y="70" width="190" height="110" fill="#2e2e32" stroke="#111" stroke-width="4"/><rect x="48" y="78" width="174" height="94" fill="url(#iron)"/>
+<g fill="#222226"><rect x="60" y="90" width="150" height="9"/><rect x="60" y="107" width="122" height="9"/><rect x="60" y="124" width="150" height="9"/><rect x="60" y="141" width="92" height="9"/></g><path d="M48 78h174" stroke="#ffffff25" stroke-width="2"/></g>
+<!-- לוח גימטריה -->
+<g filter="url(#sh)"><rect x="250" y="110" width="100" height="76" fill="url(#paper)" stroke="#3b2a15" stroke-width="2"/><g stroke="#8a6a44" stroke-width="2"><path d="M262 130h76M262 146h76M262 162h76"/></g><circle cx="300" cy="106" r="3" fill="#c93c2c"/></g>
+<text x="300" y="127" text-anchor="middle" font-family="Heebo,Arial" font-size="12" font-weight="800" fill="#3b2a15">לוח</text><text x="300" y="181" text-anchor="middle" font-family="Heebo,Arial" font-size="12" font-weight="800" fill="#3b2a15">הגימטריה</text>
+<!-- ארון אותיות -->
+<g filter="url(#sh)"><rect x="40" y="220" width="190" height="180" fill="#231710"/>
+<g fill="url(#wood)" stroke="#1d140c" stroke-width="2"><rect x="50" y="230" width="82" height="32"/><rect x="138" y="230" width="82" height="32"/><rect x="50" y="268" width="82" height="32"/><rect x="138" y="268" width="82" height="32"/><rect x="50" y="306" width="82" height="32"/><rect x="138" y="306" width="82" height="32"/><rect x="50" y="344" width="170" height="46"/></g>
+<g fill="#e0b25c"><circle cx="91" cy="246" r="3.5"/><circle cx="179" cy="246" r="3.5"/><circle cx="91" cy="284" r="3.5"/><circle cx="179" cy="284" r="3.5"/><circle cx="91" cy="322" r="3.5"/><circle cx="179" cy="322" r="3.5"/><rect x="125" y="363" width="20" height="8"/></g>
+<g fill="url(#paper)" opacity=".9"><rect x="56" y="236" width="18" height="8"/><rect x="144" y="236" width="18" height="8"/><rect x="56" y="274" width="18" height="8"/><rect x="144" y="274" width="18" height="8"/><rect x="56" y="312" width="18" height="8"/><rect x="144" y="312" width="18" height="8"/></g></g>
+<!-- מדף וארון דיו -->
+<g filter="url(#sh)"><rect x="600" y="140" width="190" height="10" fill="#4a2d13"/><rect x="600" y="150" width="190" height="36" fill="#231710"/><rect x="612" y="156" width="166" height="24" fill="url(#wood)"/><circle cx="695" cy="168" r="4" fill="#e0b25c"/>
+<g><rect x="612" y="96" width="26" height="44" rx="3" fill="#2e7d4f"/><rect x="646" y="96" width="26" height="44" rx="3" fill="#b91c1c"/><rect x="680" y="96" width="26" height="44" rx="3" fill="#d9a441"/><rect x="714" y="96" width="26" height="44" rx="3" fill="#1d4ed8"/><rect x="748" y="96" width="26" height="44" rx="3" fill="#111"/></g>
+<g fill="#ffffff35"><rect x="616" y="100" width="6" height="30"/><rect x="650" y="100" width="6" height="30"/><rect x="684" y="100" width="6" height="30"/><rect x="718" y="100" width="6" height="30"/><rect x="752" y="100" width="6" height="30"/></g>
+<g fill="#3a3a3a"><rect x="619" y="86" width="12" height="12"/><rect x="653" y="86" width="12" height="12"/><rect x="687" y="86" width="12" height="12"/><rect x="721" y="86" width="12" height="12"/><rect x="755" y="86" width="12" height="12"/></g></g>
+<!-- לוח מודעות -->
+<g filter="url(#sh)"><rect x="600" y="220" width="190" height="130" fill="#a4835a" stroke="#3b2a15" stroke-width="5"/><rect x="606" y="226" width="178" height="118" fill="#b4926a" opacity=".5"/>
+<g fill="url(#paper)"><rect x="612" y="232" width="62" height="46" transform="rotate(-6 643 255)"/><rect x="690" y="236" width="76" height="56" transform="rotate(5 728 264)"/><rect x="640" y="290" width="86" height="46" transform="rotate(-3 683 313)"/></g>
+<g stroke="#8a6a44" stroke-width="1.5" opacity=".7"><path d="M620 244h44M620 252h36M620 260h44" transform="rotate(-6 643 255)"/><path d="M700 250h56M700 260h40M700 270h56" transform="rotate(5 728 264)"/></g>
+<g fill="#c93c2c"><circle cx="643" cy="238" r="3"/><circle cx="728" cy="242" r="3"/><circle cx="683" cy="294" r="3"/></g></g>
+<!-- שולחן -->
+<g filter="url(#sh)"><rect x="250" y="404" width="400" height="6" fill="#a37a4a"/><rect x="250" y="410" width="400" height="14" fill="#8b6a44"/><rect x="262" y="424" width="14" height="90" fill="#4a2d13"/><rect x="624" y="424" width="14" height="90" fill="#4a2d13"/><rect x="262" y="470" width="376" height="6" fill="#4a2d13"/></g>
+<!-- ערימת ניירות + עט + כוס -->
+<g><rect x="290" y="380" width="60" height="26" fill="url(#paper)"/><rect x="292" y="376" width="60" height="26" fill="url(#paper)"/><rect x="294" y="372" width="60" height="26" fill="url(#paper)"/></g>
+<rect x="262" y="352" width="140" height="54" fill="#fdf8ea" transform="rotate(-4 332 379)"/><g stroke="#999" stroke-width="1" transform="rotate(-4 332 379)"><path d="M275 364h110M275 374h110M275 384h110M275 394h110"/></g><rect x="300" y="396" width="70" height="4" fill="#c98a4b" transform="rotate(-20 335 398)"/>
+<rect x="470" y="356" width="150" height="50" fill="#7b1e1e"/><rect x="480" y="362" width="130" height="38" fill="#f1e2b8"/><rect x="470" y="356" width="14" height="50" fill="#5a1414"/>
+<text x="548" y="386" text-anchor="middle" font-family="Heebo,Arial" font-size="12" fill="#3b2a15" font-weight="800">ספר הזמנות</text>
+<g><path d="M430 380 h22 l-3 26 h-16z" fill="#d38a2a" opacity=".85"/><path d="M430 380h22l-1 8h-20z" fill="#f2c27b"/></g>
+<!-- מכונת דפוס -->
+<g filter="url(#sh)"><rect x="680" y="370" width="200" height="150" fill="url(#iron)"/><rect x="690" y="380" width="180" height="8" fill="#6a6a70"/>
+<circle cx="730" cy="430" r="32" fill="#4a4a4e" stroke="#b0b0b8" stroke-width="5"/><circle cx="730" cy="430" r="10" fill="#111"/><g stroke="#b0b0b8" stroke-width="5" stroke-linecap="round"><path d="M730 398v-8M730 462v8M698 430h-8M762 430h8M707 407l-6-6M753 453l6 6M753 407l6-6M707 453l-6 6"/></g>
+<circle cx="800" cy="418" r="24" fill="#4a4a4e" stroke="#b0b0b8" stroke-width="4"/><circle cx="800" cy="418" r="7" fill="#111"/><g stroke="#b0b0b8" stroke-width="4" stroke-linecap="round"><path d="M800 394v-6M800 442v6M776 418h-6M824 418h6"/></g>
+<circle cx="848" cy="456" r="18" fill="#4a4a4e" stroke="#b0b0b8" stroke-width="4"/><circle cx="848" cy="456" r="5" fill="#111"/>
+<rect x="700" y="480" width="160" height="28" fill="#1a1a1c"/><rect x="720" y="487" width="120" height="14" fill="#fdf8ea"/><rect x="686" y="376" width="188" height="4" fill="#ffffff30"/></g>
+<!-- שרפרף וערימת נייר בצד -->
+<g filter="url(#sh)"><rect x="100" y="430" width="70" height="10" fill="#8b6a44"/><rect x="106" y="440" width="8" height="50" fill="#4a2d13"/><rect x="156" y="440" width="8" height="50" fill="#4a2d13"/><rect x="104" y="410" width="60" height="20" fill="url(#paper)"/><rect x="108" y="404" width="56" height="8" fill="url(#paper)"/></g>
+<!-- כתמי דיו על הרצפה -->
+<g fill="#0b0b12" opacity=".7"><ellipse cx="700" cy="500" rx="18" ry="6"/><ellipse cx="722" cy="508" rx="6" ry="3"/><ellipse cx="180" cy="505" rx="12" ry="4"/></g>
+<!-- אבק באור -->
+<g fill="#ffe9b0" opacity=".55"><circle cx="420" cy="140" r="1.2"/><circle cx="470" cy="180" r="1.5"/><circle cx="500" cy="130" r="1"/><circle cx="380" cy="210" r="1.2"/><circle cx="530" cy="230" r="1"/><circle cx="440" cy="260" r="1.3"/><circle cx="560" cy="170" r="1"/><circle cx="340" cy="160" r="1"/></g>
+<!-- קורי עכביש -->
+<g stroke="#ffffff30" stroke-width="1" fill="none"><path d="M840 40 L790 90 M840 40 L810 120 M840 40 L836 140 M840 40 L770 70 M800 66 Q822 82 830 110 M786 90 Q808 108 822 138"/></g>
+<rect width="900" height="540" fill="url(#vig)"/>
+<rect width="900" height="540" filter="url(#grain)"/>
+</svg>

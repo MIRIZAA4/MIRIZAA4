@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" width="1800" height="1080">
+<defs>
+ <pattern id="h1" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H6" stroke="#3b2a15" stroke-width="1" opacity=".55"/></pattern>
+ <pattern id="h2" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><path d="M0 0H5" stroke="#3b2a15" stroke-width="1.2" opacity=".7"/></pattern>
+ <pattern id="h3" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M0 0H4" stroke="#3b2a15" stroke-width="1.4" opacity=".85"/></pattern>
+ <pattern id="brick" width="110" height="52" patternUnits="userSpaceOnUse"><path d="M0 26H110M55 0V26M0 26V52M110 26V52M55 52V26M0 0H110" stroke="#3b2a15" stroke-width="1.6" fill="none" opacity=".8"/></pattern>
+ <filter id="paperTex"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="4" seed="3"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .18"/></feComponentTransfer></filter>
+ <radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".5" stop-color="#3b2a15" stop-opacity="0"/><stop offset="1" stop-color="#3b2a15" stop-opacity=".45"/></radialGradient>
+</defs>
+<rect width="900" height="540" fill="#efe3c6"/>
+<rect width="900" height="540" filter="url(#paperTex)"/>
+<!-- קירות -->
+<rect width="900" height="400" fill="url(#brick)"/>
+<path d="M0 0 L60 40 L60 400 L0 540Z" fill="url(#h2)"/><path d="M900 0 L840 40 L840 400 L900 540Z" fill="url(#h2)"/>
+<path d="M0 540 L60 400 L840 400 L900 540Z" fill="url(#h1)"/>
+<g stroke="#3b2a15" stroke-width="1.5"><path d="M60 400 L0 540M160 400 L120 540M260 400 L240 540M360 400 L360 540M460 400 L480 540M560 400 L600 540M660 400 L720 540M760 400 L840 540M840 400 L900 540"/></g>
+<rect width="900" height="40" fill="url(#h3)"/><path d="M0 40H900" stroke="#3b2a15" stroke-width="3"/>
+<!-- מנורה + אור (ללא הצללה = אזור בהיר) -->
+<path d="M450 40v22" stroke="#3b2a15" stroke-width="3"/><path d="M406 62h88l26 32H380z" fill="#efe3c6" stroke="#3b2a15" stroke-width="3"/><path d="M406 62h88l26 32H380z" fill="url(#h2)"/>
+<path d="M380 94 L250 400 L650 400 L520 94Z" fill="#fff8e6" opacity=".55"/>
+<g stroke="#3b2a15" stroke-width="3" fill="#efe3c6">
+ <!-- שלט -->
+ <rect x="300" y="26" width="300" height="46"/><path d="M300 26l-10-10M600 26l10-10"/>
+ <!-- דלת -->
+ <rect x="365" y="86" width="170" height="314"/><rect x="378" y="98" width="144" height="302"/><rect x="393" y="112" width="114" height="112"/><rect x="393" y="240" width="114" height="140"/>
+ <!-- גלופה -->
+ <rect x="40" y="70" width="190" height="110"/>
+ <!-- לוח גימטריה -->
+ <rect x="250" y="110" width="100" height="76"/>
+ <!-- ארון -->
+ <rect x="40" y="220" width="190" height="180"/><rect x="50" y="230" width="82" height="32"/><rect x="138" y="230" width="82" height="32"/><rect x="50" y="268" width="82" height="32"/><rect x="138" y="268" width="82" height="32"/><rect x="50" y="306" width="82" height="32"/><rect x="138" y="306" width="82" height="32"/><rect x="50" y="344" width="170" height="46"/>
+ <!-- מדף -->
+ <rect x="600" y="140" width="190" height="10"/><rect x="600" y="150" width="190" height="36"/><rect x="612" y="156" width="166" height="24"/>
+ <rect x="612" y="96" width="26" height="44" rx="3"/><rect x="646" y="96" width="26" height="44" rx="3"/><rect x="680" y="96" width="26" height="44" rx="3"/><rect x="714" y="96" width="26" height="44" rx="3"/><rect x="748" y="96" width="26" height="44" rx="3"/>
+ <rect x="619" y="86" width="12" height="12"/><rect x="653" y="86" width="12" height="12"/><rect x="687" y="86" width="12" height="12"/><rect x="721" y="86" width="12" height="12"/><rect x="755" y="86" width="12" height="12"/>
+ <!-- לוח מודעות -->
+ <rect x="600" y="220" width="190" height="130"/>
+ <rect x="612" y="232" width="62" height="46" transform="rotate(-6 643 255)"/><rect x="690" y="236" width="76" height="56" transform="rotate(5 728 264)"/><rect x="640" y="290" width="86" height="46" transform="rotate(-3 683 313)"/>
+ <!-- שולחן -->
+ <rect x="250" y="404" width="400" height="20"/><rect x="262" y="424" width="14" height="90"/><rect x="624" y="424" width="14" height="90"/><rect x="262" y="470" width="376" height="6"/>
+ <rect x="262" y="352" width="140" height="54" transform="rotate(-4 332 379)"/>
+ <rect x="470" y="356" width="150" height="50"/><rect x="480" y="362" width="130" height="38"/>
+ <!-- מכונה -->
+ <rect x="680" y="370" width="200" height="150"/><circle cx="730" cy="430" r="32"/><circle cx="730" cy="430" r="10"/><circle cx="800" cy="418" r="24"/><circle cx="800" cy="418" r="7"/><circle cx="848" cy="456" r="18"/><circle cx="848" cy="456" r="5"/><rect x="700" y="480" width="160" height="28"/><rect x="720" y="487" width="120" height="14"/>
+ <!-- שרפרף -->
+ <rect x="100" y="430" width="70" height="10"/><rect x="106" y="440" width="8" height="50"/><rect x="156" y="440" width="8" height="50"/><rect x="104" y="410" width="60" height="20"/>
+</g>
+<!-- הצללות בקווקוו -->
+<g>
+ <rect x="378" y="98" width="144" height="302" fill="url(#h1)"/><rect x="393" y="112" width="114" height="112" fill="url(#h2)"/><rect x="393" y="240" width="114" height="140" fill="url(#h2)"/>
+ <rect x="48" y="78" width="174" height="94" fill="url(#h3)"/>
+ <rect x="40" y="220" width="190" height="180" fill="url(#h1)"/>
+ <rect x="612" y="96" width="26" height="44" rx="3" fill="url(#h1)"/><rect x="646" y="96" width="26" height="44" rx="3" fill="url(#h2)"/><rect x="680" y="96" width="26" height="44" rx="3" fill="url(#h1)"/><rect x="714" y="96" width="26" height="44" rx="3" fill="url(#h2)"/><rect x="748" y="96" width="26" height="44" rx="3" fill="url(#h3)"/>
+ <rect x="600" y="220" width="190" height="130" fill="url(#h1)"/>
+ <rect x="680" y="370" width="200" height="150" fill="url(#h2)"/><circle cx="730" cy="430" r="32" fill="url(#h1)"/><circle cx="800" cy="418" r="24" fill="url(#h1)"/><circle cx="848" cy="456" r="18" fill="url(#h1)"/>
+ <rect x="250" y="404" width="400" height="20" fill="url(#h1)"/><rect x="470" y="356" width="150" height="50" fill="url(#h2)"/>
+ <rect x="600" y="150" width="190" height="36" fill="url(#h1)"/>
+</g>
+<!-- שיני גלגלים -->
+<g stroke="#3b2a15" stroke-width="4" stroke-linecap="round"><path d="M730 398v-8M730 462v8M698 430h-8M762 430h8M707 407l-6-6M753 453l6 6M753 407l6-6M707 453l-6 6M800 394v-6M800 442v6M776 418h-6M824 418h6"/></g>
+<!-- פרטים -->
+<g fill="#3b2a15"><circle cx="91" cy="246" r="3.5"/><circle cx="179" cy="246" r="3.5"/><circle cx="91" cy="284" r="3.5"/><circle cx="179" cy="284" r="3.5"/><circle cx="91" cy="322" r="3.5"/><circle cx="179" cy="322" r="3.5"/><rect x="125" y="363" width="20" height="8"/><circle cx="502" cy="262" r="7"/><circle cx="695" cy="168" r="4"/><circle cx="643" cy="238" r="3"/><circle cx="728" cy="242" r="3"/><circle cx="683" cy="294" r="3"/></g>
+<g stroke="#3b2a15" stroke-width="1.5"><path d="M262 130h76M262 146h76M262 162h76"/><path d="M275 364h110M275 374h110M275 384h110M275 394h110" transform="rotate(-4 332 379)"/><path d="M60 90h150M60 107h122M60 124h150M60 141h92" stroke-width="5"/></g>
+<text x="450" y="57" text-anchor="middle" font-family="'Frank Ruhl Libre',serif" font-size="17" font-weight="700" fill="#3b2a15">בית דפוס "אחים לוי" · נוסד בשנת תרפ"ט</text>
+<text x="548" y="386" text-anchor="middle" font-family="'Frank Ruhl Libre',serif" font-size="12" fill="#3b2a15" font-weight="700">ספר הזמנות</text>
+<text x="300" y="127" text-anchor="middle" font-family="'Frank Ruhl Libre',serif" font-size="12" font-weight="700" fill="#3b2a15">לוח</text><text x="300" y="181" text-anchor="middle" font-family="'Frank Ruhl Libre',serif" font-size="12" font-weight="700" fill="#3b2a15">הגימטריה</text>
+<rect width="900" height="540" fill="url(#vig)"/>
+<rect x="8" y="8" width="884" height="524" fill="none" stroke="#3b2a15" stroke-width="3"/><rect x="14" y="14" width="872" height="512" fill="none" stroke="#3b2a15" stroke-width="1"/>
+</svg>

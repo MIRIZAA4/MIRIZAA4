@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" width="1800" height="1080">
+<defs><clipPath id="c"><rect width="900" height="540"/></clipPath></defs>
+<g clip-path="url(#c)">
+<rect width="900" height="400" fill="#f2c94c"/>
+<g fill="#e8b93a"><rect x="0" y="0" width="900" height="50"/><rect x="0" y="100" width="900" height="50"/><rect x="0" y="200" width="900" height="50"/><rect x="0" y="300" width="900" height="50"/></g>
+<rect y="400" width="900" height="140" fill="#1f7a8c"/>
+<g fill="#176575"><rect x="0" y="440" width="900" height="6"/><rect x="0" y="490" width="900" height="6"/></g>
+<rect x="240" y="450" width="420" height="70" fill="#e2542b"/><rect x="256" y="462" width="388" height="46" fill="none" stroke="#f6f1e6" stroke-width="4"/>
+<!-- long shadows -->
+<g fill="#000" opacity=".12"><path d="M230 180 L330 280 L330 400 L230 400z"/><path d="M790 186 L890 286 L890 350 L790 350z"/><path d="M535 400 L635 500 L635 540 L535 540z"/><path d="M880 520 L900 540 L900 540z"/></g>
+<!-- lamp -->
+<rect x="446" y="40" width="8" height="24" fill="#1d2433"/><path d="M400 64h100l30 36H370z" fill="#1d2433"/><rect x="410" y="100" width="80" height="8" fill="#fff"/>
+<path d="M370 100 L250 400 L650 400 L530 100Z" fill="#fff" opacity=".22"/>
+<!-- sign -->
+<rect x="300" y="26" width="300" height="46" fill="#f6f1e6" stroke="#1d2433" stroke-width="4"/>
+<text x="450" y="57" text-anchor="middle" font-family="Heebo,Arial" font-size="17" font-weight="900" fill="#1d2433">בית דפוס "אחים לוי" · נוסד בשנת תרפ"ט</text>
+<!-- door -->
+<rect x="365" y="86" width="170" height="314" fill="#1d2433"/><rect x="378" y="98" width="144" height="302" fill="#7a5bd6"/><rect x="393" y="112" width="114" height="112" fill="#5f44b5"/><rect x="393" y="240" width="114" height="140" fill="#5f44b5"/><circle cx="502" cy="262" r="8" fill="#f2c94c"/><rect x="470" y="276" width="40" height="22" fill="#1d2433"/>
+<!-- plate -->
+<rect x="40" y="70" width="190" height="110" fill="#1d2433"/><rect x="48" y="78" width="174" height="94" fill="#3a4256"/><g fill="#1d2433"><rect x="60" y="90" width="150" height="9"/><rect x="60" y="107" width="122" height="9"/><rect x="60" y="124" width="150" height="9"/><rect x="60" y="141" width="92" height="9"/></g>
+<!-- gematria -->
+<rect x="250" y="110" width="100" height="76" fill="#f6f1e6" stroke="#1d2433" stroke-width="3"/><g stroke="#1d2433" stroke-width="2"><path d="M262 130h76M262 146h76M262 162h76"/></g><circle cx="300" cy="106" r="4" fill="#e2542b"/>
+<text x="300" y="127" text-anchor="middle" font-family="Heebo,Arial" font-size="12" font-weight="900" fill="#1d2433">לוח</text><text x="300" y="181" text-anchor="middle" font-family="Heebo,Arial" font-size="12" font-weight="900" fill="#1d2433">הגימטריה</text>
+<!-- cabinet -->
+<rect x="40" y="220" width="190" height="180" fill="#1d2433"/>
+<g fill="#e2542b"><rect x="50" y="230" width="82" height="32"/><rect x="138" y="230" width="82" height="32"/><rect x="50" y="268" width="82" height="32"/><rect x="138" y="268" width="82" height="32"/><rect x="50" y="306" width="82" height="32"/><rect x="138" y="306" width="82" height="32"/><rect x="50" y="344" width="170" height="46"/></g>
+<g fill="#f6f1e6"><circle cx="91" cy="246" r="4"/><circle cx="179" cy="246" r="4"/><circle cx="91" cy="284" r="4"/><circle cx="179" cy="284" r="4"/><circle cx="91" cy="322" r="4"/><circle cx="179" cy="322" r="4"/><rect x="125" y="363" width="20" height="8"/></g>
+<!-- shelf + bottles -->
+<rect x="600" y="140" width="190" height="10" fill="#1d2433"/><rect x="600" y="150" width="190" height="36" fill="#1d2433"/><rect x="612" y="156" width="166" height="24" fill="#e2542b"/><circle cx="695" cy="168" r="4" fill="#f6f1e6"/>
+<g><rect x="612" y="96" width="26" height="44" fill="#2e7d4f"/><rect x="646" y="96" width="26" height="44" fill="#c93c2c"/><rect x="680" y="96" width="26" height="44" fill="#f2c94c" stroke="#1d2433" stroke-width="2"/><rect x="714" y="96" width="26" height="44" fill="#1d4ed8"/><rect x="748" y="96" width="26" height="44" fill="#1d2433"/></g>
+<g fill="#1d2433"><rect x="619" y="86" width="12" height="12"/><rect x="653" y="86" width="12" height="12"/><rect x="687" y="86" width="12" height="12"/><rect x="721" y="86" width="12" height="12"/><rect x="755" y="86" width="12" height="12"/></g>
+<!-- board -->
+<rect x="600" y="220" width="190" height="130" fill="#c98a4b" stroke="#1d2433" stroke-width="4"/>
+<g fill="#f6f1e6"><rect x="612" y="232" width="62" height="46" transform="rotate(-6 643 255)"/><rect x="690" y="236" width="76" height="56" transform="rotate(5 728 264)"/><rect x="640" y="290" width="86" height="46" transform="rotate(-3 683 313)"/></g>
+<g fill="#e2542b"><circle cx="643" cy="238" r="4"/><circle cx="728" cy="242" r="4"/><circle cx="683" cy="294" r="4"/></g>
+<!-- table -->
+<rect x="250" y="404" width="400" height="20" fill="#1d2433"/><rect x="262" y="424" width="14" height="90" fill="#1d2433"/><rect x="624" y="424" width="14" height="90" fill="#1d2433"/>
+<rect x="262" y="352" width="140" height="54" fill="#f6f1e6" transform="rotate(-4 332 379)"/><g stroke="#1d2433" stroke-width="1.5" transform="rotate(-4 332 379)"><path d="M275 364h110M275 374h110M275 384h110M275 394h110"/></g><rect x="300" y="396" width="70" height="5" fill="#e2542b" transform="rotate(-20 335 398)"/>
+<rect x="470" y="356" width="150" height="50" fill="#c93c2c"/><rect x="480" y="362" width="130" height="38" fill="#f6f1e6"/>
+<text x="548" y="386" text-anchor="middle" font-family="Heebo,Arial" font-size="12" fill="#1d2433" font-weight="900">ספר הזמנות</text>
+<!-- press -->
+<rect x="680" y="370" width="200" height="150" fill="#1d2433"/>
+<circle cx="730" cy="430" r="32" fill="#f6f1e6"/><circle cx="730" cy="430" r="10" fill="#1d2433"/><g stroke="#f6f1e6" stroke-width="6" stroke-linecap="round"><path d="M730 398v-8M730 462v8M698 430h-8M762 430h8M707 407l-6-6M753 453l6 6M753 407l6-6M707 453l-6 6"/></g>
+<circle cx="800" cy="418" r="24" fill="#f2c94c"/><circle cx="800" cy="418" r="7" fill="#1d2433"/><g stroke="#f2c94c" stroke-width="5" stroke-linecap="round"><path d="M800 394v-6M800 442v6M776 418h-6M824 418h6"/></g>
+<circle cx="848" cy="456" r="18" fill="#e2542b"/><circle cx="848" cy="456" r="5" fill="#1d2433"/>
+<rect x="700" y="480" width="160" height="28" fill="#3a4256"/><rect x="720" y="487" width="120" height="14" fill="#f6f1e6"/>
+<!-- stool -->
+<rect x="100" y="430" width="70" height="10" fill="#1d2433"/><rect x="106" y="440" width="8" height="50" fill="#1d2433"/><rect x="156" y="440" width="8" height="50" fill="#1d2433"/><rect x="104" y="410" width="60" height="20" fill="#f6f1e6"/>
+</g>
+</svg>
