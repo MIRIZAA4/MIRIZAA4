@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>כמה מכירים את החתן והכלה? · משחקי משפחה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+.qrow{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin:6px 0}
+.qbig{font-size:clamp(1.5rem,4vw,2.4rem);font-weight:800;color:var(--accent);text-align:center;margin:20px 0;line-height:1.35}
+.abig{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:800;color:var(--ok);text-align:center;background:#eaf6ee;border-radius:14px;padding:16px;margin:14px 0}
+.who{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+@media (max-width:600px){.qrow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="container" style="padding:12px 16px 40px">
+
+<section id="setup" class="stage">
+  <h2>💍 כמה מכירים את החתן והכלה?</h2>
+  <p>חידון של 15–20 דקות לשבע ברכות. <b>לפני האירוע</b> ממלאים כאן את התשובות (מי שמכיר את הזוג). <b>באירוע</b> המסך שואל, שני השולחנות מנחשים בקול, המנחה מסמן מי צדק, והמסך חושף.</p>
+  <p class="small muted">הכול נשמר במחשב הזה. אפשר גם להוריד קובץ הכנה ולהעלות אותו במחשב אחר (למשל: מכינים בבית, משחקים באולם).</p>
+  <div class="row">
+    <div style="flex:1;min-width:160px"><label>שם החתן</label><input type="text" id="chatan" placeholder="למשל: משה"></div>
+    <div style="flex:1;min-width:160px"><label>שם הכלה</label><input type="text" id="kallah" placeholder="למשל: רבקה"></div>
+  </div>
+  <div class="row">
+    <div style="flex:1;min-width:160px"><label>קבוצה א'</label><input type="text" id="teamA" value="שולחן החתן"></div>
+    <div style="flex:1;min-width:160px"><label>קבוצה ב'</label><input type="text" id="teamB" value="שולחן הכלה"></div>
+    <div style="min-width:120px"><label>שניות לשאלה</label><input type="number" id="secs" value="45" min="10" max="180"></div>
+  </div>
+  <h3>השאלות והתשובות</h3>
+  <p class="small muted">אפשר לשנות כל שאלה, למחוק, ולהוסיף. שאלה בלי תשובה לא תופיע במשחק.</p>
+  <div id="qs"></div>
+  <div class="row" style="margin-top:10px"><button class="btn ghost sm" id="addQ">+ שאלה</button><button class="btn ghost sm" id="dl">📋 העתקת קוד הכנה</button><button class="btn ghost sm" id="paste">📥 הדבקת קוד הכנה</button><label class="btn ghost sm" style="margin:0">⬆ העלאת קובץ <input type="file" id="ul" accept=".json" style="display:none"></label></div>
+  <div class="feedback" id="setupFb"></div><div class="row" style="margin-top:18px"><button class="btn primary" id="startBtn" style="font-size:1.15rem">▶ להתחיל את החידון</button><span class="small muted">3 שאלות ראשונות בחינם</span></div>
+</section>
+
+<section id="play" style="display:none">
+  <div class="game-top">
+    <div class="scoreboard" style="flex:1;min-width:260px"><div class="score" id="sA"><span id="nA"></span><b>0</b></div><div class="score" id="sB"><span id="nB"></span><b>0</b></div></div>
+    <div class="row"><span class="timer" id="timer">00:45</span><button class="btn ghost sm" id="exitBtn">יציאה</button></div>
+  </div>
+  <div class="progress" id="progress"></div>
+  <div class="stage center">
+    <div class="small muted" id="qnum"></div>
+    <div class="qbig" id="qtext"></div>
+    <div id="ansArea"></div>
+    <div class="row" style="justify-content:center" id="ctrl"></div>
+  </div>
+</section>
+
+<section id="end" class="stage center" style="display:none"></section>
+</main>
+<script src="../assets/game.js"></script>
+<script src="../assets/access.js"></script>
+<script>
+(function(){
+G.shell("כמה מכירים את החתן והכלה?");
+const KEY="couple-quiz:setup", FREE=3, $=G.el;
+const DEF=["איפה נערכה הפגישה הראשונה של החתן והכלה?","מי הציע את השידוך?","מה המאכל האהוב על החתן?","מה המאכל שהכלה לא סובלת?","באיזו ישיבה למד החתן?","באיזה סמינר למדה הכלה?","כמה אחים ואחיות יש לחתן (יחד)?","כמה אחים ואחיות יש לכלה (יחד)?","באיזו עיר יגורו החתן והכלה?","מה התחביב של החתן?","מה התחביב של הכלה?","באיזה תאריך עברי נערך הוורט?"];
+let setup=G.load(KEY,{chatan:"",kallah:"",teamA:"שולחן החתן",teamB:"שולחן הכלה",secs:45,qs:DEF.map(q=>({q,a:""}))});
+function renderQs(){ $("qs").innerHTML=setup.qs.map((x,i)=>`<div class="qrow"><input type="text" data-i="${i}" data-k="q" value="${esc(x.q)}" placeholder="שאלה"><input type="text" data-i="${i}" data-k="a" value="${esc(x.a)}" placeholder="התשובה הנכונה"><button class="btn ghost sm" data-del="${i}">✕</button></div>`).join("");
+  $("qs").querySelectorAll("input").forEach(inp=>inp.oninput=()=>{ setup.qs[+inp.dataset.i][inp.dataset.k]=inp.value; G.save(KEY,setup); });
+  $("qs").querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{ setup.qs.splice(+b.dataset.del,1); G.save(KEY,setup); renderQs(); }); }
+function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");}
+function fill(){ $("chatan").value=setup.chatan; $("kallah").value=setup.kallah; $("teamA").value=setup.teamA; $("teamB").value=setup.teamB; $("secs").value=setup.secs; renderQs(); }
+["chatan","kallah","teamA","teamB","secs"].forEach(k=>$(k).oninput=()=>{ setup[k]=$(k).value; G.save(KEY,setup); });
+$("addQ").onclick=()=>{ setup.qs.push({q:"",a:""}); G.save(KEY,setup); renderQs(); };
+$("dl").onclick=()=>{ const txt=JSON.stringify(setup); (navigator.clipboard&&navigator.clipboard.writeText(txt)||Promise.reject()).then(()=>G.note($("setupFb"),"קוד ההכנה הועתק. שמרו אותו במייל או בקובץ, והדביקו במחשב השני.",true)).catch(()=>{ $("setupFb").innerHTML='<textarea rows="3" readonly>'+txt.replace(/</g,"&lt;")+'</textarea><span class="small">העתיקו את הטקסט ידנית.</span>'; }); };
+$("paste").onclick=()=>{ $("setupFb").innerHTML='<textarea id="pasteBox" rows="3" placeholder="הדביקו כאן את קוד ההכנה"></textarea><button class="btn primary sm" id="pasteGo">טעינה</button>'; $("pasteGo").onclick=()=>{ try{ setup=JSON.parse($("pasteBox").value); G.save(KEY,setup); fill(); G.note($("setupFb"),"ההכנה נטענה.",true);}catch(e){ G.note($("setupFb"),"הקוד לא תקין.",false);} }; };
+$("ul").onchange=e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ setup=JSON.parse(r.result); G.save(KEY,setup); fill(); }catch(err){ G.note($("setupFb"),"הקובץ לא תקין",false); } }; r.readAsText(f); };
+fill();
+
+// ---------- משחק ----------
+let list=[], i=0, score={A:0,B:0}, revealed=false;
+const timer=G.timer($("timer"),{seconds:45,dir:-1,onEnd:()=>G.beep(440,500)});
+function names(q){ return q.replace(/החתן/g, setup.chatan?setup.chatan:"החתן").replace(/הכלה/g, setup.kallah?setup.kallah:"הכלה"); }
+$("startBtn").onclick=()=>{ list=setup.qs.filter(x=>x.q.trim()&&x.a.trim()); if(list.length<3){ G.note($("setupFb"),"צריך לפחות 3 שאלות עם תשובות.",false); return; } i=0; score={A:0,B:0}; $("setup").style.display="none"; $("play").style.display="block"; $("nA").textContent=setup.teamA; $("nB").textContent=setup.teamB; show(); };
+$("exitBtn").onclick=function(){ G.ask(this,()=>{ timer.stop(); $("play").style.display="none"; $("setup").style.display="block"; }); };
+function show(){
+  if(i>=list.length){ end(); return; }
+  if(i>=FREE && !Access.require("couple-quiz",show)) return;
+  revealed=false; const q=list[i];
+  $("progress").innerHTML=list.map((_,k)=>`<span class="${k<i?"done":(k===i?"cur":"")}"></span>`).join("");
+  $("qnum").textContent=`שאלה ${i+1} מתוך ${list.length}`; $("qtext").textContent=names(q.q); $("ansArea").innerHTML=""; 
+  $("ctrl").innerHTML=`<button class="btn primary" id="reveal" style="font-size:1.1rem">להציג את התשובה</button>`;
+  $("reveal").onclick=reveal; timer.reset(+setup.secs||45); timer.start(); $("sA").querySelector("b").textContent=score.A; $("sB").querySelector("b").textContent=score.B;
+}
+function reveal(){ timer.stop(); revealed=true; G.beep(660,150); $("ansArea").innerHTML=`<div class="abig">${esc(list[i].a)}</div><p>מי צדק?</p><div class="who"><button class="btn ok" data-w="A">${esc(setup.teamA)}</button><button class="btn ok" data-w="B">${esc(setup.teamB)}</button><button class="btn gold" data-w="AB">שתי הקבוצות</button><button class="btn ghost" data-w="">אף אחת</button></div>`; $("ctrl").innerHTML="";
+  $("ansArea").querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{ const w=b.dataset.w; if(w.includes("A")) score.A++; if(w.includes("B")) score.B++; i++; show(); }); }
+function end(){ $("play").style.display="none"; const e=$("end"); e.style.display="block"; const win=score.A===score.B?"תיקו! שני השולחנות מכירים את הזוג באותה מידה":(score.A>score.B?setup.teamA:setup.teamB)+" מכירים את הזוג טוב יותר!";
+  e.innerHTML=`<div style="font-size:3.5rem">💍🎉</div><h2 style="color:var(--accent)">מזל טוב ${esc(setup.chatan)} ו${esc(setup.kallah)}!</h2><div class="scoreboard" style="max-width:420px;margin:14px auto"><div class="score"><span>${esc(setup.teamA)}</span><b>${score.A}</b></div><div class="score"><span>${esc(setup.teamB)}</span><b>${score.B}</b></div></div><p style="font-size:1.3rem;font-weight:700">${win}</p><p class="muted">שיזכו לבנות בית נאמן בישראל</p><div class="row" style="justify-content:center"><button class="btn primary" onclick="location.reload()">לשחק שוב (למשל בשולחן השני)</button></div>`; }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>בית הדפוס הישן · משחקי משפחה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+.scene{background:#2b2118;border-radius:16px;padding:6px;box-shadow:var(--shadow)}
+.scene svg{display:block;width:100%;height:auto}
+.hot{cursor:pointer}
+.hot.locked{opacity:.4;cursor:not-allowed}
+.hot.cur .frame{stroke:#ffd166;stroke-width:4;animation:pulse 1.4s infinite}
+.hot.done .frame{stroke:#6fcf97;stroke-width:3}
+.hot:not(.locked):hover .frame{stroke:#fff;stroke-width:4}
+@keyframes pulse{0%,100%{stroke-opacity:1}50%{stroke-opacity:.3}}
+.mirror{display:inline-block;transform:scaleX(-1);font-size:1.5rem;letter-spacing:1px;line-height:1.8}
+.tiles{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.tile{width:64px;height:64px;border:2px solid #7a5a2a;background:#f1e2b8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;cursor:pointer;box-shadow:2px 3px 0 #b8965a;user-select:none}
+.tile:hover{background:#ffeec2}
+.grid3{display:grid;grid-template-columns:repeat(3,100px);gap:3px;margin:12px auto;width:max-content;direction:ltr}
+.piece{width:100px;height:100px;background-size:300px 300px;border:1px solid #b9a37a;cursor:pointer}
+.piece.sel{outline:4px solid #ffd166}
+.bottle{display:inline-block;width:70px;height:110px;border-radius:12px 12px 8px 8px;margin:6px;position:relative;box-shadow:inset -8px 0 20px rgba(0,0,0,.25)}
+.bottle span{position:absolute;bottom:8px;left:0;right:0;text-align:center;background:#fff;margin:0 8px;border-radius:4px;font-weight:700;font-size:.9rem;color:#1f2430}
+.letterbox{display:inline-block;width:38px;height:44px;border:2px solid var(--accent);border-radius:6px;margin:0 3px;font-size:1.5rem;font-weight:800;text-align:center;line-height:40px;background:#fff}
+.letterbox.on{background:#fff2cc}
+.door-open .doorpanel{transform-origin:right center;transform:rotateY(70deg) translateX(-20px);transition:transform 1.2s ease}
+.cert{border:6px double var(--accent-2);padding:24px;background:#fffdf5;text-align:center;border-radius:8px}
+.cert h2{margin:0 0 6px;color:var(--accent)}
+</style>
+</head>
+<body>
+<main class="container" style="padding:12px 16px 40px">
+
+<!-- פתיחה -->
+<section id="intro" class="stage">
+  <h2>🖨️ בית הדפוס הישן</h2>
+  <div class="paper">
+    <p>נכנסתם לבית דפוס ישן בירושלים כדי לאסוף את ההזמנות שהזמנתם. המדפיס הזקן לא היה שם. פתאום, רוח חזקה, הדלת נטרקה מאחוריכם, ונעולה.</p>
+    <p>על השולחן פתק בכתב יד:</p>
+    <p style="font-style:italic">"מי שיודע לקרוא נכון, יודע גם לצאת. הדלת נפתחת רק למי שמדפיס את הדף הנכון. הכול כאן בחדר. הסתכלו טוב."</p>
+  </div>
+  <h3>איך משחקים</h3>
+  <ul>
+    <li>לוחצים על חפצים בחדר. כל חפץ פותח חידה. פותרים חידה, ונפתח החפץ הבא.</li>
+    <li>יש 8 חידות. בכל חידה 3 רמזים. כל רמז מוסיף 2 דקות לזמן שלכם.</li>
+    <li>המשחק נשמר במחשב הזה: אפשר לסגור ולהמשיך אחר כך.</li>
+    <li>שתי החידות הראשונות פתוחות בחינם. ההמשך לרוכשים (קוד פתיחה).</li>
+  </ul>
+  <div class="row">
+    <button class="btn primary" id="startBtn" style="font-size:1.15rem">▶ להתחיל</button>
+    <button class="btn ghost" id="resumeBtn" style="display:none">להמשיך את המשחק השמור</button>
+  </div>
+</section>
+
+<!-- המשחק -->
+<section id="game" style="display:none">
+  <div class="game-top">
+    <div class="row"><span class="muted">זמן:</span><span class="timer" id="timer">00:00</span><span class="small muted" id="penaltyLbl"></span></div>
+    <div class="row"><span class="small muted" id="stageLbl"></span><button class="btn ghost sm" id="restartBtn">התחלה מחדש</button></div>
+  </div>
+  <div class="progress" id="progress"></div>
+  <div class="scene" id="scene">
+    <svg viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" font-family="Heebo,Arial" id="svg">
+      <defs>
+        <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b6a44"/><stop offset="1" stop-color="#6d5133"/></linearGradient>
+        <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3623"/><stop offset="1" stop-color="#2b2118"/></linearGradient>
+      </defs>
+      <rect width="900" height="400" fill="url(#wall)"/>
+      <rect y="400" width="900" height="140" fill="url(#floor)"/>
+      <!-- שלט -->
+      <rect x="300" y="28" width="300" height="46" rx="6" fill="#f1e2b8" stroke="#3b2a15" stroke-width="3"/>
+      <text x="450" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#3b2a15">בית דפוס "אחים לוי" · נוסד תרפ"ט</text>
+      <!-- דלת (חידה 8) -->
+      <g class="hot" data-p="8" id="hot8">
+        <rect class="frame" x="370" y="90" width="160" height="300" rx="6" fill="#3b2a15" stroke="transparent"/>
+        <g class="doorpanel"><rect x="380" y="100" width="140" height="290" rx="4" fill="#7a4f22"/><rect x="395" y="115" width="110" height="110" fill="#5e3b18"/><rect x="395" y="245" width="110" height="130" fill="#5e3b18"/><circle cx="500" cy="250" r="7" fill="#e0b25c"/></g>
+        <text x="450" y="415" text-anchor="middle" font-size="15" fill="#f1e2b8">🚪 הדלת</text>
+      </g>
+      <!-- לוח אותיות הפוכות (חידה 1) -->
+      <g class="hot" data-p="1" id="hot1">
+        <rect class="frame" x="40" y="70" width="190" height="110" rx="6" fill="#4d4d4d" stroke="transparent"/>
+        <text x="135" y="118" text-anchor="middle" font-size="26" fill="#ddd" transform="scale(-1,1) translate(-270,0)">ואיפה השנה?</text>
+        <text x="135" y="165" text-anchor="middle" font-size="14" fill="#f1e2b8">🔡 פלטת הדפוס</text>
+      </g>
+      <!-- ארון מגירות (חידה 2) -->
+      <g class="hot" data-p="2" id="hot2">
+        <rect class="frame" x="40" y="220" width="190" height="170" rx="6" fill="#5a3d1e" stroke="transparent"/>
+        <g fill="#7a5a2a" stroke="#3b2a15"><rect x="52" y="232" width="166" height="34"/><rect x="52" y="274" width="166" height="34"/><rect x="52" y="316" width="166" height="34"/></g>
+        <g fill="#e0b25c"><circle cx="135" cy="249" r="4"/><circle cx="135" cy="291" r="4"/><circle cx="135" cy="333" r="4"/></g>
+        <text x="135" y="378" text-anchor="middle" font-size="14" fill="#f1e2b8">🗄️ מגירת האותיות</text>
+      </g>
+      <!-- מדף בקבוקי דיו (חידה 3) -->
+      <g class="hot" data-p="3" id="hot3">
+        <rect class="frame" x="600" y="70" width="180" height="110" rx="6" fill="#4a3623" stroke="transparent"/>
+        <rect x="610" y="150" width="160" height="8" fill="#8b6a44"/>
+        <rect x="625" y="100" width="30" height="50" rx="5" fill="#111"/><rect x="675" y="100" width="30" height="50" rx="5" fill="#1d4ed8"/><rect x="725" y="100" width="30" height="50" rx="5" fill="#b91c1c"/>
+        <text x="690" y="172" text-anchor="middle" font-size="14" fill="#f1e2b8">🧴 בקבוקי הדיו</text>
+      </g>
+      <!-- לוח מודעות (חידה 4) -->
+      <g class="hot" data-p="4" id="hot4">
+        <rect class="frame" x="600" y="200" width="180" height="130" rx="6" fill="#a4835a" stroke="transparent"/>
+        <rect x="615" y="212" width="60" height="45" fill="#f1e2b8" transform="rotate(-6 645 234)"/><rect x="690" y="215" width="70" height="55" fill="#fff6d8" transform="rotate(5 725 242)"/><rect x="640" y="268" width="80" height="45" fill="#f8ecc8" transform="rotate(-3 680 290)"/>
+        <text x="690" y="322" text-anchor="middle" font-size="14" fill="#3b2a15">📌 לוח המודעות</text>
+      </g>
+      <!-- שולחן עם תשבץ (חידה 5) וספר הזמנות (חידה 7) -->
+      <rect x="250" y="420" width="400" height="16" fill="#8b6a44"/><rect x="265" y="436" width="14" height="80" fill="#5a3d1e"/><rect x="621" y="436" width="14" height="80" fill="#5a3d1e"/>
+      <g class="hot" data-p="5" id="hot5">
+        <rect class="frame" x="258" y="362" width="140" height="56" rx="4" fill="#fdf8ea" stroke="transparent" transform="rotate(-4 328 390)"/>
+        <g fill="none" stroke="#999" stroke-width="1"><path d="M275 376h105M275 386h105M275 396h105M275 406h105"/></g>
+        <text x="330" y="455" text-anchor="middle" font-size="14" fill="#f1e2b8">✏️ התשבץ של המדפיס</text>
+      </g>
+      <g class="hot" data-p="7" id="hot7">
+        <rect class="frame" x="470" y="365" width="150" height="55" rx="4" fill="#7b1e1e" stroke="transparent"/>
+        <rect x="480" y="372" width="130" height="40" fill="#f1e2b8"/><text x="545" y="398" text-anchor="middle" font-size="13" fill="#3b2a15" font-weight="700">ספר הזמנות</text>
+        <text x="545" y="455" text-anchor="middle" font-size="14" fill="#f1e2b8">📕 ספר ההזמנות</text>
+      </g>
+      <!-- מכונת הדפוס (חידה 6) -->
+      <g class="hot" data-p="6" id="hot6">
+        <rect class="frame" x="680" y="360" width="200" height="160" rx="8" fill="#333" stroke="transparent"/>
+        <circle cx="730" cy="420" r="30" fill="#555" stroke="#aaa" stroke-width="4"/><circle cx="800" cy="410" r="22" fill="#555" stroke="#aaa" stroke-width="4"/><circle cx="845" cy="450" r="18" fill="#555" stroke="#aaa" stroke-width="4"/>
+        <rect x="700" y="470" width="160" height="30" fill="#222"/><rect x="720" y="478" width="120" height="14" fill="#fdf8ea"/>
+        <text x="780" y="535" text-anchor="middle" font-size="14" fill="#f1e2b8">⚙️ מכונת הדפוס</text>
+      </g>
+      <!-- לוח גימטריה (מידע) -->
+      <g class="hot info" id="gemHot">
+        <rect x="250" y="120" width="100" height="70" rx="4" fill="#f1e2b8" stroke="#3b2a15" stroke-width="2"/>
+        <text x="300" y="150" text-anchor="middle" font-size="14" font-weight="700" fill="#3b2a15">לוח</text><text x="300" y="172" text-anchor="middle" font-size="14" font-weight="700" fill="#3b2a15">הגימטריה</text>
+      </g>
+      <!-- לוח אותיות דפוס ליד המכונה (קישוט) -->
+      <g class="hot info" id="typeHot"><rect x="560" y="120" width="30" height="70" fill="#3b2a15" opacity="0"/></g>
+    </svg>
+  </div>
+  <div class="stage" id="panel"><p class="muted">לחצו על חפץ מואר בחדר כדי להתחיל.</p></div>
+</section>
+
+<!-- סיום -->
+<section id="win" class="stage" style="display:none"></section>
+</main>
+
+<script src="../assets/game.js"></script>
+<script src="../assets/access.js"></script>
+<script>
+(function(){
+G.shell("בית הדפוס הישן");
+const KEY="print-house:state";
+const FREE_STAGES=2;
+let S = G.load(KEY, null);
+const fresh=()=>({stage:1, solved:[], hints:{}, elapsed:0, penalty:0, started:false, p4:null});
+const $=G.el;
+const timer=G.timer($("timer"),{seconds:0,dir:1,onTick:s=>{S.elapsed=s; if(s%5===0) save();}});
+function save(){G.save(KEY,S);}
+
+// ---------- הגדרות החידות ----------
+const P = {
+ 1:{ title:"🔡 פלטת הדפוס", hints:["בבית דפוס האותיות יצוקות הפוך, כמו במראה. נסו לקרוא את הפלטה מהצד השני.","הפלטה שואלת על שנה. איפה בחדר כתובה שנה?","השלט שמעל הדלת: נוסד בשנת תרפ\"ט. הקלידו תרפט (או 1929)."],
+   render(){ return `<p>על הפלטה יצוק טקסט, אבל הוא הפוך, כמו כל אות דפוס:</p>
+     <div class="paper center"><span class="mirror">כדי לפתוח את מגירת האותיות,<br>הקלידו את שנת הייסוד<br>הכתובה בשלט שמעל הדלת.</span></div>
+     ${ansRow("הקלידו את השנה")}`; },
+   check(v){ return ["תרפט","1929"].includes(G.norm(v)); }, success:"המגירה נפתחה בחריקה."
+ },
+ 2:{ title:"🗄️ מגירת האותיות", hints:["בלוח הגימטריה שעל הקיר יש את הערך של כל אות. לחצו עליו.","סדרו את ארבע האותיות מהערך הקטן לגדול. ה=5 היא הראשונה.","ה(5) כ(20) נ(50) ס(60): המילה היא הכנס."],
+   render(){ const t=G.shuffle(["ה","כ","נ","ס"]);
+     return `<p>במגירה ארבע אותיות דפוס בלבד, ופתק: <b>"סדרו אותי מהקטנה לגדולה, ותקבלו את ההוראה."</b></p>
+     <div class="tiles" id="tiles">${t.map(l=>`<div class="tile" data-l="${l}">${l}</div>`).join("")}</div>
+     <p class="small muted">לחצו על האותיות לפי הסדר, או הקלידו את המילה. <button class="btn ghost sm" id="gemBtn">לוח הגימטריה</button></p>
+     ${ansRow("המילה")}`; },
+   after(){ document.querySelectorAll("#tiles .tile").forEach(t=>t.onclick=()=>{ $("ans").value+=t.dataset.l; }); $("gemBtn").onclick=showGem; },
+   check(v){ return G.norm(v)==="הכנס"; }, success:"'הכנס'. ההוראה ברורה. ספר ההזמנות מחכה, אבל קודם, המדף."
+ },
+ 3:{ title:"🧴 בקבוקי הדיו", hints:["אם כל התוויות שגויות, אז בבקבוק שכתוב עליו 'כחול' בטוח אין כחול.","הפתק אומר שבבקבוק עם התווית 'אדום' יש כחול. אז איפה האדום? הוא לא בבקבוק 'אדום', ולא בבקבוק שכבר יש בו כחול.","בבקבוק עם התווית 'שחור' יש דיו אדום."],
+   render(){ return `<p>על המדף שלושה בקבוקי דיו עם תוויות: שחור, כחול, אדום. פתק של המדפיס:</p>
+     <div class="paper"><b>"השוליה החליף את כל התוויות. אף תווית לא נכונה. בדקתי רק אחד: בבקבוק שכתוב עליו 'אדום' יש בעצם דיו כחול. את הדף הנכון מדפיסים בצבע שנמצא בבקבוק שכתוב עליו 'שחור'."</b></div>
+     <div class="center"><div class="bottle" style="background:#222"><span>שחור</span></div><div class="bottle" style="background:#1d4ed8"><span>כחול</span></div><div class="bottle" style="background:#b91c1c"><span>אדום</span></div></div>
+     <p>באיזה צבע מדפיסים את הדף?</p>${ansRow("שחור / כחול / אדום")}`; },
+   check(v){ return G.norm(v)==="אדומ"; }, success:"אדום. רשמו לעצמכם: צבע הדף הוא אדום."
+ },
+ 4:{ title:"📌 לוח המודעות", hints:["לחצו על שני חלקים כדי להחליף ביניהם. התחילו מהפינות.","הכותרת 'בית דפוס אחים לוי' צריכה להיות בשורה העליונה.","כשהמודעה מורכבת, מספר הרישיון מופיע בשורה התחתונה: 7315."],
+   render(){ return `<p>על הלוח מודעה ישנה שנקרעה לתשעה חלקים. הרכיבו אותה (לחיצה על שני חלקים מחליפה ביניהם) וקראו את <b>מספר הרישיון</b> של בית הדפוס.</p>
+     <div class="grid3" id="jig"></div>${ansRow("מספר הרישיון")}`; },
+   after(){ buildJig(); },
+   check(v){ return G.norm(v)==="7315"; }, success:"רישיון מספר 7315. המדפיס היה מסודר."
+ },
+ 5:{ title:"✏️ התשבץ של המדפיס", hints:["כל תשובה היא מילה אחת. המספר בסוגריים אומר איזו אות מהתשובה לקחת.","1: החג של אסתר ומרדכי. 2: מה שהחתן נותן לכלה בחופה. 3: החודש של ט\"ו בשבט. 4: 'מה נשתנה' הן ארבע ה...","פורים (5=מ), כתובה (1=כ), שבט (2=ב), קושיות (3=ש). המילה: מכבש."],
+   render(){ const cl=[["החג של אסתר ומרדכי",5],["המסמך שהחתן נותן לכלה בחופה",1],["החודש שבו חל ט\"ו בשבט",2],["'מה נשתנה' הן ארבע ה___",3]];
+     return `<p>על השולחן דף עם ארבע הגדרות. ליד כל הגדרה מספר: איזו אות מהתשובה לקחת. ארבע האותיות יוצרות מילה, וזה השם של הכלי הכי חשוב בחדר.</p>
+     ${cl.map((c,i)=>`<label>${i+1}. ${c[0]} <span class="badge">אות ${c[1]}</span></label><input type="text" class="cw" data-i="${i}" placeholder="תשובה">`).join("")}
+     <div class="center" style="margin:14px 0"><span class="letterbox" id="lb0"></span><span class="letterbox" id="lb1"></span><span class="letterbox" id="lb2"></span><span class="letterbox" id="lb3"></span></div>
+     ${ansRow("המילה שהתקבלה")}`; },
+   after(){ const ans=["פורימ","כתובה","שבט","קושיות"], pos=[5,1,2,3];
+     document.querySelectorAll(".cw").forEach(inp=>inp.oninput=()=>{ const i=+inp.dataset.i, ok=G.norm(inp.value)===ans[i]; const lb=$("lb"+i); lb.textContent= ok? inp.value.trim()[pos[i]-1].replace("ם","מ").replace("ן","נ").replace("ך","כ").replace("ף","פ").replace("ץ","צ") : ""; lb.classList.toggle("on",ok); }); },
+   check(v){ return G.norm(v)==="מכבש"; }, success:"מכבש. עכשיו למכונה עצמה."
+ },
+ 6:{ title:"⚙️ מכונת הדפוס", hints:["חפשו את המספר הקטן ביותר שמתחלק גם ב־4, גם ב־6 וגם ב־10.","4 ו־6 נפגשים כל 12 שניות. מתי 12 ו־10 נפגשים?","הגלגלים מתיישרים כל 60 שניות."],
+   render(){ return `<p>על המכונה שלושה גלגלים, ולוחית:</p>
+     <div class="paper"><b>"הגלגל הגדול מסתובב סיבוב שלם כל 4 שניות, הבינוני כל 6 שניות, והקטן כל 10 שניות. כולם מתחילים יחד מהסימן. המכונה מדפיסה רק ברגע שבו שלושתם חוזרים לסימן באותה שנייה. אחרי כמה שניות זה קורה בפעם הראשונה?"</b></div>
+     ${ansRow("מספר השניות")}`; },
+   check(v){ return G.norm(v)==="60"; }, success:"60 שניות. המכונה נאנחת ומתחילה לזוז."
+ },
+ 7:{ title:"📕 ספר ההזמנות", hints:["התחילו מהוודאי: ישיבת 'אור' הזמינה ביום רביעי, ויום שני זה כרטיסי ביקור, יום שלישי זה תהילים.","נשארו יום ראשון ויום רביעי להזמנות ולמודעות. הישיבה הזמינה מודעות, אז ההזמנות ביום ראשון. מי יכול להזמין ביום ראשון, אם משפחת לוי הזמינה יום לפני החנות?","ההזמנות לחתונה: משפחת לוי, יום ראשון."],
+   render(){ return `<p>הדף האחרון בספר ההזמנות נמרח בדיו. נשארו רק הערות בשוליים. גלו <b>מי הזמין את ההזמנות לחתונה ובאיזה יום</b>, כי זה מה שיודפס בשורה האחרונה של הדף.</p>
+     <div class="paper"><p>ארבעה לקוחות: <b>הרב כהן, משפחת לוי, ישיבת "אור", חנות "הספר"</b>.<br>ארבע הזמנות: <b>הזמנות לחתונה, כרטיסי ביקור, ספר תהילים, מודעות</b>.<br>ארבעה ימים: <b>ראשון, שני, שלישי, רביעי</b>. כל לקוח הזמין דבר אחד ביום אחר.</p>
+     <ol><li>את ההזמנות לחתונה לא הזמינו הרב כהן ולא החנות.</li><li>ביום שני הוזמנו כרטיסי ביקור.</li><li>ישיבת "אור" הזמינה ביום רביעי.</li><li>משפחת לוי הזמינה יום אחד לפני החנות.</li><li>ספר התהילים הוזמן ביום שלישי.</li><li>ישיבת "אור" הזמינה מודעות.</li></ol></div>
+     <label>מי הזמין את ההזמנות לחתונה?</label><select id="q7who"><option value="">בחרו</option><option>הרב כהן</option><option>משפחת לוי</option><option>ישיבת "אור"</option><option>חנות "הספר"</option></select>
+     <label>באיזה יום?</label><select id="q7day"><option value="">בחרו</option><option>ראשון</option><option>שני</option><option>שלישי</option><option>רביעי</option></select>
+     <div class="answer-row"><button class="btn primary" id="chk">בדיקה</button><button class="btn ghost" id="hintBtn">רמז</button></div><div class="feedback" id="fb"></div>`; },
+   custom:true, check(){ return $("q7who").value==="משפחת לוי" && $("q7day").value==="ראשון"; }, success:"משפחת לוי, יום ראשון. יש לכם את כל מה שצריך לדף."
+ },
+ 8:{ title:"🚪 הדף הנכון", hints:["כל ארבעת הפרטים כבר בידיכם: מהבקבוקים, מהתשבץ, מהמודעה ומספר ההזמנות.","הצבע: מה היה בבקבוק 'שחור'. המילה: מהתשבץ. המספר: מהמודעה. היום: מספר ההזמנות.","אדום, מכבש, 7315, ראשון."],
+   render(){ return `<p>המכונה מוכנה. על הלוח ארבעה שדות. מלאו אותם נכון, והמכונה תדפיס את הדף שפותח את הדלת.</p>
+     <div class="paper">
+     <label>צבע הדיו</label><input type="text" id="f1" placeholder="הצבע מהבקבוקים">
+     <label>המילה בכותרת</label><input type="text" id="f2" placeholder="המילה מהתשבץ">
+     <label>מספר הרישיון</label><input type="text" id="f3" placeholder="המספר מהמודעה">
+     <label>יום המסירה</label><input type="text" id="f4" placeholder="היום מספר ההזמנות"></div>
+     <div class="answer-row"><button class="btn gold" id="chk" style="font-size:1.1rem">🖨️ להדפיס</button><button class="btn ghost" id="hintBtn">רמז</button></div><div class="feedback" id="fb"></div>`; },
+   custom:true, check(){ return G.norm($("f1").value)==="אדומ" && G.norm($("f2").value)==="מכבש" && G.norm($("f3").value)==="7315" && G.norm($("f4").value)==="ראשונ"; }, success:""
+ }
+};
+function ansRow(ph){ return `<div class="answer-row"><input type="text" id="ans" placeholder="${ph}" autocomplete="off"><button class="btn primary" id="chk">בדיקה</button><button class="btn ghost" id="hintBtn">רמז</button></div><div class="feedback" id="fb"></div>`; }
+
+// ---------- לוח הגימטריה ----------
+function showGem(){
+  const letters="אבגדהוזחטיכלמנסעפצקרשת".split(""), vals=[1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100,200,300,400];
+  openModal(`<h3>לוח הגימטריה</h3><div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;text-align:center">${letters.map((l,i)=>`<div style="border:1px solid var(--line);border-radius:8px;padding:6px"><b style="font-size:1.3rem">${l}</b><br><span class="small muted">${vals[i]}</span></div>`).join("")}</div>`);
+}
+function openModal(html){ let m=$("gmodal"); if(!m){ m=document.createElement("div"); m.className="modal-bg"; m.id="gmodal"; m.innerHTML='<div class="modal"><div id="gmbody"></div><div class="row" style="margin-top:12px"><button class="btn ghost" id="gmclose">סגירה</button></div></div>'; document.body.appendChild(m); m.querySelector("#gmclose").onclick=()=>m.classList.remove("open"); m.onclick=e=>{if(e.target===m)m.classList.remove("open");}; } m.querySelector("#gmbody").innerHTML=html; m.classList.add("open"); }
+
+// ---------- פאזל המודעה ----------
+function posterURI(){
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><rect width="300" height="300" fill="#fdf3d0"/><rect x="8" y="8" width="284" height="284" fill="none" stroke="#5a3d1e" stroke-width="4"/><g font-family="Arial,Heebo" text-anchor="middle" fill="#3b2a15" direction="rtl"><text x="150" y="62" font-size="30" font-weight="700">בית דפוס</text><text x="150" y="108" font-size="34" font-weight="700">"אחים לוי"</text><text x="150" y="150" font-size="20">ירושלים · הדפסה משובחת</text><line x1="40" y1="172" x2="260" y2="172" stroke="#5a3d1e" stroke-width="2"/><text x="150" y="212" font-size="20">הזמנות · מודעות · ספרים</text><text x="150" y="262" font-size="24" font-weight="700">רישיון מס' 7315</text></g></svg>`;
+  return "url(\"data:image/svg+xml;utf8,"+encodeURIComponent(svg)+"\")";
+}
+function buildJig(){
+  const jig=$("jig"); let perm=S.p4; if(!perm||perm.length!==9){ do{perm=G.shuffle([0,1,2,3,4,5,6,7,8]);}while(perm.every((v,i)=>v===i)); S.p4=perm; save(); }
+  let sel=null; const uri=posterURI();
+  function draw(){ jig.innerHTML=""; perm.forEach((orig,slot)=>{ const d=document.createElement("div"); d.className="piece"+(sel===slot?" sel":""); d.style.backgroundImage=uri; d.style.backgroundPosition=`-${(orig%3)*100}px -${Math.floor(orig/3)*100}px`; d.onclick=()=>{ if(sel===null){sel=slot;} else { [perm[sel],perm[slot]]=[perm[slot],perm[sel]]; sel=null; S.p4=perm; save(); } draw(); if(perm.every((v,i)=>v===i)){ $("fb").className="feedback ok"; $("fb").textContent="המודעה הורכבה. מה מספר הרישיון?"; } }; jig.appendChild(d); }); }
+  draw();
+}
+
+// ---------- מנוע ----------
+function renderProgress(){ $("progress").innerHTML=[1,2,3,4,5,6,7,8].map(i=>`<span class="${S.solved.includes(i)?"done":(i===S.stage?"cur":"")}"></span>`).join(""); $("stageLbl").textContent="חידה "+Math.min(S.stage,8)+" מתוך 8"; $("penaltyLbl").textContent=S.penalty?`(+${S.penalty/60} דק' רמזים)`:""; }
+function renderScene(){ for(let i=1;i<=8;i++){ const h=$("hot"+i); h.classList.toggle("done",S.solved.includes(i)); h.classList.toggle("cur",i===S.stage); h.classList.toggle("locked",i>S.stage); } }
+function open(p){
+  if(p>S.stage){ $("panel").innerHTML=`<p class="muted">🔒 ${P[p].title}: עדיין נעול. פתרו קודם את החידה המוארת.</p>`; return; }
+  if(S.solved.includes(p)){ $("panel").innerHTML=`<h2>${P[p].title}</h2><p class="feedback ok">✔ נפתר. ${P[p].success}</p>`; return; }
+  if(p>FREE_STAGES && !Access.require("print-house",()=>open(p))) return;
+  const d=P[p]; $("panel").innerHTML=`<h2>${d.title}</h2>${d.render()}<div id="hints"></div>`;
+  (S.hints[p]||0)>0 && showHints(p);
+  d.after&&d.after();
+  $("chk").onclick=()=>check(p);
+  const a=$("ans"); if(a){ a.focus(); a.onkeydown=e=>{if(e.key==="Enter")check(p);}; }
+  $("hintBtn").onclick=()=>{ const n=(S.hints[p]||0); if(n>=3) return; S.hints[p]=n+1; S.penalty+=120; save(); renderProgress(); showHints(p); };
+  $("panel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function showHints(p){ const n=S.hints[p]||0; $("hints").innerHTML=P[p].hints.slice(0,n).map((h,i)=>`<div class="hintbox">💡 רמז ${i+1}: ${h}</div>`).join("")+(n<3?"":`<p class="small muted">אין עוד רמזים.</p>`); }
+function check(p){
+  const d=P[p], v=d.custom?null:$("ans").value, fb=$("fb");
+  if(d.check(v)){ G.beep(880,200); S.solved.push(p); S.stage=p+1; save(); renderProgress(); renderScene();
+    if(p===8){ win(); return; }
+    fb.className="feedback ok"; fb.textContent="✔ נכון! "+d.success; setTimeout(()=>{ $("panel").innerHTML=`<h2>${d.title}</h2><p class="feedback ok">✔ ${d.success}</p><p>עכשיו לחצו על החפץ המואר הבא בחדר.</p>`; },1200);
+  } else { G.beep(220,250); fb.className="feedback bad"; fb.textContent="לא נכון. נסו שוב, או קחו רמז."; }
+}
+function win(){
+  timer.stop(); $("scene").classList.add("door-open"); const total=S.elapsed+S.penalty, hints=Object.values(S.hints).reduce((a,b)=>a+b,0);
+  setTimeout(()=>{ $("game").style.display="none"; const w=$("win"); w.style.display="block"; w.innerHTML=`
+   <div class="cert"><div style="font-size:3rem">🖨️🚪</div><h2>הדלת נפתחה!</h2>
+   <p>המכונה הדפיסה את הדף הנכון, המנעול נפתח, ואתם בחוץ, עם ההזמנות ביד.</p>
+   <p style="font-size:1.3rem">זמן סופי: <b>${G.fmt(total)}</b> <span class="small muted">(משחק ${G.fmt(S.elapsed)} + ${S.penalty/60} דק' על ${hints} רמזים)</span></p>
+   <label style="text-align:right">שמות המשתתפים (לתעודה)</label><input type="text" id="names" placeholder="למשל: משפחת כהן">
+   <div style="margin-top:14px" id="certOut"></div>
+   <div class="row" style="justify-content:center;margin-top:14px"><button class="btn gold" id="certBtn">להציג תעודה</button><button class="btn ghost" id="againBtn">לשחק שוב</button></div></div>`;
+   $("certBtn").onclick=()=>{ $("certOut").innerHTML=`<div class="paper" style="text-align:center"><b style="font-size:1.4rem">תעודת בריחה</b><br>ניתנת בזאת ל<b>${$("names").value||"המשתתפים"}</b><br>על שיצאו מבית הדפוס הישן בזמן של <b>${G.fmt(total)}</b><br><span class="small muted">${new Date().toLocaleDateString("he-IL")}</span></div>`; };
+   $("againBtn").onclick=()=>{ S=fresh(); save(); location.reload(); };
+  },1400);
+}
+function startGame(){ $("intro").style.display="none"; $("game").style.display="block"; S.started=true; save(); timer.reset(S.elapsed); timer.start(); renderProgress(); renderScene(); }
+// חיבור אירועים
+document.querySelectorAll(".hot[data-p]").forEach(h=>h.onclick=()=>open(+h.dataset.p));
+$("gemHot").onclick=showGem;
+$("restartBtn").onclick=function(){ G.ask(this,()=>{ S=fresh(); save(); location.reload(); }); };
+$("startBtn").onclick=()=>{ S=fresh(); startGame(); };
+if(S&&S.started&&S.stage<=8){ $("resumeBtn").style.display="inline-flex"; $("resumeBtn").onclick=startGame; $("startBtn").textContent="▶ משחק חדש"; } else S=fresh();
+})();
+</script>
+</body>
+</html>

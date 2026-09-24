@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>המשפט המשפחתי · משחקי משפחה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+.charge{font-size:clamp(1.2rem,3vw,1.7rem);font-weight:700;line-height:1.5;background:#fff8e6;border:2px solid var(--accent-2);border-radius:14px;padding:18px;margin:12px 0;text-align:center}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0}
+.role{background:var(--soft);border-radius:12px;padding:10px;text-align:center}
+.role small{display:block;color:var(--muted)}
+.role b{font-size:1.15rem;color:var(--accent)}
+.phase{font-size:1.4rem;font-weight:800;color:var(--accent);text-align:center;margin-top:8px}
+.witness{background:#fdf8ea;border:1px solid #e6d8b0;border-radius:12px;padding:14px;margin:10px 0}
+.vote{display:flex;gap:16px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.vote .score{min-width:150px}
+.obj{position:fixed;inset:0;background:rgba(178,58,58,.92);color:#fff;display:none;align-items:center;justify-content:center;flex-direction:column;z-index:60;font-size:2rem;font-weight:900;text-align:center}
+.obj.open{display:flex}
+.obj b{font-size:6rem;line-height:1}
+</style>
+</head>
+<body>
+<main class="container" style="padding:12px 16px 40px">
+
+<section id="setup" class="stage">
+  <h2>⚖️ המשפט המשפחתי</h2>
+  <p>בכל סבב מישהו מהמשפחה "נשפט" על עבירה מצחיקה. המסך מגריל נאשם, כתב אישום ותפקידים: תובע, סניגור ושני עדים עם כרטיסי עד. עדויות, חקירות, סיכומים, הצבעת המושבעים, ואם אשם: עונש מצחיק. משפט אחד לוקח כ־10 דקות. הכול בהומור טוב, בלי להעליב.</p>
+  <label>המשתתפים (שם בכל שורה, לפחות 5)</label>
+  <textarea id="names" rows="6" placeholder="אבא&#10;אמא&#10;יוסי&#10;רבקי&#10;הדוד משה"></textarea>
+  <label>כתבי אישום משלכם (אופציונלי, שורה לכל אישום. יתווספו לרשימה הקיימת)</label>
+  <textarea id="customCharges" rows="2" placeholder="הביא לשבת את אותו קוגל שלוש שבתות ברצף וטען שזה מתכון חדש"></textarea>
+  <div class="feedback" id="setupFb"></div><div class="row" style="margin-top:16px"><button class="btn primary" id="startBtn" style="font-size:1.15rem">▶ לפתוח את בית המשפט</button><span class="small muted">המשפט הראשון בחינם</span></div>
+</section>
+
+<section id="trial" style="display:none">
+  <div class="game-top"><div><span class="badge" id="tnum"></span></div><div class="row"><button class="btn bad sm" id="objBtn">✋ התנגדות!</button><button class="btn ghost sm" id="endBtn">סיום הערב</button></div></div>
+  <div class="stage" id="tbody"></div>
+</section>
+
+<section id="end" class="stage center" style="display:none"></section>
+</main>
+<div class="obj" id="obj"><div>התנגדות!</div><b id="objN">5</b><div style="font-size:1.2rem">לשופט/ת יש 5 שניות להחליט: מתקבל או נדחה</div></div>
+<script src="../assets/game.js"></script>
+<script src="../assets/access.js"></script>
+<script>
+(function(){
+G.shell("המשפט המשפחתי"); const $=G.el;
+const CHARGES=["בפסח האחרון אכל/ה את כל הקניידלך לפני שהאורחים הגיעו, וטען/ה \"זה היה ככה כשהגעתי\".","השאיר/ה הודעה של 4 דקות במשיבון של ההורים ב־6:30 בבוקר, ובסוף אמר/ה \"בקיצור, לא משנה, אני אתקשר\".","הבטיח/ה \"רק 5 דקות מנוחה\" באמצע ביקור משפחתי בשבת אחר הצהריים, ונרדם/ה עד הבדלה.","העדיף/ה בגלוי נכד/ה אחד/ת על פני השאר (\"הוא תמיד היה הכי מוצלח\").","השתמש/ה בביטוי \"בזמני זה לא היה ככה\" יותר מ־5 פעמים בסעודה אחת.","הביא/ה לחג עוגה מהקונדיטוריה, העביר/ה לצלחת של הבית, וטען/ה \"אפיתי בלילה\".","המליץ/ה על ספר \"שאי אפשר לעזוב\", ומדובר ב־800 עמודים שאי אפשר לעבור את עמוד 12.","תפס/ה את הכיסא ליד המזגן בתחילת הסעודה ולא קם/ה ממנו במשך 3 שעות, גם לא לנטילת ידיים.","שאל/ה בקול רם, מול כל השולחן, \"נו, מתי כבר תסיימו את השיפוץ?\" בפעם העשירית השנה.","לא החזיר/ה טלפון במשך 11 ימים, ואז אמר/ה \"וואי, לא ראיתי שהתקשרת\".","הגיע/ה למפגש עם \"סלט\" שהוא עגבנייה אחת חתוכה, וקיבל/ה קרדיט שווה למי שבישל 6 שעות.","חנה/תה כך שאף אחד לא יכול לצאת מהחניה, ואז נעלם/ה לשעתיים \"רק לרגע לגמ\"ח\"."];
+const WIT=[["השכנה שרואה הכול","\"הייתי במקרה במרפסת\" · \"יש לי הכול רשום במחברת\"","המחברת כולה כתובה בכתב שאף אחד לא מצליח לקרוא, גם לא היא."],["החבר/ה מהעבודה","\"הוא/היא הכי אמין/ה במשרד\" · \"לא סיפר/ה לי כלום על זה\"","יצא/ה לחופשה ולא היה/תה בארץ באותו יום."],["הדוד שזוכר הכול","\"אני זוכר את זה כאילו זה היה אתמול\" · \"זה היה בתשמ\"ז\"","מבלבל בין הנאשם/ת לבין אח/ות שלו/ה."],["הילד/ה בן/בת 7 שתמיד דובר/ת אמת","\"אמא אמרה לי לא לספר\" · \"ראיתי הכול מתחת לשולחן\"","מוכן/ה לשנות את הגרסה תמורת קינוח."],["המומחה/ית מטעם ההגנה","\"לפי המחקר שלי\" · \"זו תופעה מוכרת בכל משפחה\"","ה\"תואר\" הוא מקורס של שלושה שיעורים בטלפון."],["השדכן/ית שמכיר/ה את כולם","\"אני מכיר/ה את המשפחה הזאת 30 שנה\" · \"זה בדיוק מה שהסבא שלו/ה עשה\"","כל המידע הוא משמועות ומ\"מישהי אמרה לי\"."],["הסבתא","\"הוא/היא ילד/ה טוב/ה\" · \"אני אשמה, אני חינכתי\"","בעצם היא זו שעשתה את זה, וזורקת רמזים."],["הנכד הגאון בן 12","\"לפי החישובים שלי\" · \"רשמתי הכול בטבלה\"","מדבר רק במספרים ובאחוזים, וטועה בכולם."]];
+const PUN=["שוטף/ת כלים בסוף הערב.","מספר/ת סיפור מצחיק על עצמו/ה מהילדות.","הצלם/ת הרשמי/ת עד סוף המפגש.","מביא/ה את הקינוח למפגש הבא.","מקריא/ה גראמען של 4 שורות על \"הקורבן\", במקום.","נותן/ת 3 מחמאות כנות ל\"הקורבן\".","עונש קהילה: מסדר/ת את המזנון ומגיש/ה תה לכולם.","חנינה! (הקלף היחיד שמזכה.)"];
+const PHASES=[["הקראת כתב האישום",60,"השופט/ת מקריא/ה. הנאשם/ת עונה: \"אשם\", \"לא אשם\", או \"אשם, אבל זה בגלל אמא\"."],["עד התביעה",120,"העד מעיד (חייב לשלב את שתי העובדות מהכרטיס). אחר כך הסניגור/ית חוקר/ת."],["עד ההגנה",120,"העד מעיד. אחר כך התובע/ת חוקר/ת."],["סיכום התביעה",60,"התובע/ת משכנע/ת את המושבעים."],["סיכום ההגנה",60,"הסניגור/ית משכנע/ת את המושבעים."]];
+let names=[], charges=[], tried=[], usedC=[], usedW=[], log=[], T=null, phase=0, votes={g:0,i:0};
+const timer=G.timer(null,{seconds:60,dir:-1,onTick:s=>{const t=$("bigT"); if(t){t.textContent=G.fmt(s); t.classList.toggle("warn",s<=10);}},onEnd:()=>G.beep(300,700)});
+$("startBtn").onclick=()=>{ names=$("names").value.split("\n").map(s=>s.trim()).filter(Boolean); if(names.length<5){ G.note($("setupFb"),"צריך לפחות 5 משתתפים.",false); return; } charges=CHARGES.concat($("customCharges").value.split("\n").map(s=>s.trim()).filter(Boolean)); $("setup").style.display="none"; $("trial").style.display="block"; newTrial(); };
+function pick(arr,used){ let pool=arr.map((_,i)=>i).filter(i=>!used.includes(i)); if(!pool.length){used.length=0; pool=arr.map((_,i)=>i);} const i=pool[Math.floor(Math.random()*pool.length)]; used.push(i); return arr[i]; }
+function newTrial(){
+  if(log.length>=1 && !Access.require("family-court",newTrial)) return;
+  let dpool=names.filter(n=>!tried.includes(n)); if(!dpool.length){tried=[]; dpool=names.slice();}
+  const def=dpool[Math.floor(Math.random()*dpool.length)]; tried.push(def);
+  const others=G.shuffle(names.filter(n=>n!==def));
+  T={def, charge:pick(charges,usedC), pros:others[0], defn:others[1], w1:others[2], w2:others[3], jury:others.slice(4), c1:pick(WIT,usedW), c2:pick(WIT,usedW)};
+  phase=-1; votes={g:0,i:0}; $("tnum").textContent="משפט מספר "+(log.length+1); renderRoles();
+}
+function header(){ return `<div class="charge">הנאשם/ת: <b>${T.def}</b><br>מואשם/ת בכך ש… ${T.charge}</div>`; }
+function renderRoles(){
+  $("tbody").innerHTML=`<h2>חלוקת תפקידים</h2>${header()}<div class="roles"><div class="role"><small>תובע/ת</small><b>${T.pros}</b></div><div class="role"><small>סניגור/ית</small><b>${T.defn}</b></div><div class="role"><small>עד/ת התביעה</small><b>${T.w1}</b></div><div class="role"><small>עד/ת ההגנה</small><b>${T.w2}</b></div><div class="role"><small>חבר המושבעים</small><b>${T.jury.join(", ")||"כולם"}</b></div></div>
+  <div class="row" style="justify-content:center;gap:12px"><button class="btn ghost" id="reroll">🎲 להגריל מחדש</button><button class="btn primary" id="go" style="font-size:1.1rem">▶ להתחיל את המשפט</button></div>`;
+  $("reroll").onclick=()=>{ tried.pop(); usedC.pop(); usedW.pop(); usedW.pop(); newTrial(); }; $("go").onclick=()=>{ phase=0; renderPhase(); };
+}
+function witnessCard(who,c){ return `<div class="witness"><b>כרטיס העד/ה של ${who}:</b> ${c[0]}<br><span class="small">חייב/ת להגיד בעדות: ${c[1]}</span><br><button class="btn ghost sm" style="margin-top:6px" onclick="this.nextElementSibling.style.display='block';this.remove()">הטוויסט (רק העד/ה קורא/ת, נחשף אם שואלים ישירות)</button><div style="display:none" class="hintbox">${c[2]}</div></div>`; }
+function renderPhase(){
+  const p=PHASES[phase]; timer.reset(p[1]);
+  $("tbody").innerHTML=`${header()}<div class="phase">${phase+1}/5 · ${p[0]}</div><p class="center muted">${p[2]}</p>${phase===1?witnessCard(T.w1,T.c1):""}${phase===2?witnessCard(T.w2,T.c2):""}<div class="big-timer" id="bigT">${G.fmt(p[1])}</div><div class="row" style="justify-content:center"><button class="btn primary" id="tStart">▶ להתחיל זמן</button><button class="btn gold" id="next">${phase<4?"לשלב הבא ←":"להצבעת המושבעים ←"}</button></div>`;
+  $("tStart").onclick=()=>{timer.start(); $("tStart").disabled=true;}; $("next").onclick=()=>{ timer.stop(); phase++; phase<5?renderPhase():renderVote(); };
+}
+function renderVote(){
+  $("tbody").innerHTML=`${header()}<div class="phase">הצבעת המושבעים</div><p class="center muted">המנחה סופר/ת ידיים ולוחץ/ת על הכפתורים.</p><div class="vote"><div class="score"><span>אשם</span><b id="vg">0</b><button class="btn bad sm" id="pg">+1</button></div><div class="score"><span>זכאי</span><b id="vi">0</b><button class="btn ok sm" id="pi">+1</button></div></div><div class="row" style="justify-content:center"><button class="btn primary" id="verdict" style="font-size:1.1rem">🔨 פסק דין</button></div>`;
+  $("pg").onclick=()=>{votes.g++; $("vg").textContent=votes.g;}; $("pi").onclick=()=>{votes.i++; $("vi").textContent=votes.i;};
+  $("verdict").onclick=()=>{ const guilty=votes.g>votes.i; const pun=guilty?PUN[Math.floor(Math.random()*PUN.length)]:null; log.push({def:T.def,charge:T.charge,guilty,pun}); G.beep(guilty?260:800,400);
+    $("tbody").innerHTML=`${header()}<div class="phase" style="font-size:2.4rem;color:${guilty?"var(--bad)":"var(--ok)"}">${guilty?"אשם/ה!":"זכאי/ת!"}</div><p class="center">${votes.g} מול ${votes.i}</p>${guilty?`<div class="charge">🎴 קלף העונש: ${pun}</div>`:'<p class="center">הנאשם/ת יוצא/ת מבית המשפט בראש מורם.</p>'}<div class="row" style="justify-content:center"><button class="btn primary" id="nextTrial" style="font-size:1.1rem">המשפט הבא ←</button></div>`;
+    $("nextTrial").onclick=newTrial; };
+}
+$("objBtn").onclick=()=>{ const o=$("obj"); o.classList.add("open"); let n=5; $("objN").textContent=n; G.beep(200,300); const id=setInterval(()=>{ n--; $("objN").textContent=n; G.beep(500,80); if(n<=0){ clearInterval(id); setTimeout(()=>o.classList.remove("open"),600); } },1000); };
+$("endBtn").onclick=function(){ G.ask(this,()=>{ timer.stop(); $("trial").style.display="none"; const e=$("end"); e.style.display="block";
+  const opts=names.map(n=>`<option>${n}</option>`).join("");
+  e.innerHTML=`<div style="font-size:3.5rem">🏆⚖️</div><h2 style="color:var(--accent)">סיכום הערב</h2><ul class="list-clean" style="text-align:right;max-width:640px;margin:0 auto">${log.map(l=>`<li><b>${l.def}</b>: ${l.guilty?"אשם/ה. עונש: "+l.pun:"זכאי/ת"}</li>`).join("")||"<li>לא נערכו משפטים.</li>"}</ul><h3>פרסים (המנחה בוחר/ת)</h3><div class="roles"><div class="role"><small>העד/ה הכי משכנע/ת</small><select>${opts}</select></div><div class="role"><small>הסניגור/ית של השנה</small><select>${opts}</select></div><div class="role"><small>הנאשם/ת שהכי הצחיק/ה</small><select>${opts}</select></div></div><button class="btn primary" onclick="location.reload()">ערב חדש</button>`; }); };
+})();
+</script>
+</body>
+</html>
