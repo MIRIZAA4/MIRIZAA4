@@ -26,7 +26,7 @@ body{background-image:var(--bg-image);background-attachment:fixed}
 .skins button.on{background:var(--fg);color:var(--bg)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.6;font-size:17px;direction:rtl}
+body{margin:0;background-color:var(--bg);background-image:var(--bg-image);background-attachment:fixed;color:var(--fg);font-family:var(--font-body);line-height:1.6;font-size:17px;direction:rtl}
 a{color:var(--fg)}
 img,svg{max-width:100%}
 h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.3px}
