@@ -8,6 +8,22 @@
   --radius:0;--shadow:none;
   --font-display:"Heebo","Segoe UI",Arial,sans-serif;--font-body:"Assistant","Heebo","Segoe UI",Arial,sans-serif;
 }
+:root[data-skin="light"]{color-scheme:light;--bg:#ffffff;--card:#ffffff;--fg:#111111;--muted:#737373;--line:#dcdcdc;--accent:#111111;--accent-ink:#ffffff;--accent-2:#1f7a8c;--soft:#f4f4f4;--c2:#1f7a8c;--ok:#1f7a5c;--bad:#c93c2c;--bg-image:none}
+:root[data-skin="color"]{color-scheme:light;--bg:#fff4df;--card:#ffffff;--fg:#1d1b2a;--muted:#5f5b6e;--line:#e6d3b8;--accent:#e2542b;--accent-ink:#ffffff;--accent-2:#1f7a8c;--soft:#fff9ec;--c2:#1f7a8c;--ok:#1f7a5c;--bad:#c93c2c;--bg-image:linear-gradient(135deg,#ffe6a8 0%,#ffd2bd 40%,#c4ece6 75%,#dcd2ff 100%)}
+:root{--bg-image:none}
+body{background-image:var(--bg-image);background-attachment:fixed}
+:root[data-skin="color"] header.site{background:rgba(255,255,255,.7);backdrop-filter:blur(8px)}
+:root[data-skin="color"] .card .body,:root[data-skin="color"] .stage,:root[data-skin="color"] .section{background:transparent}
+:root[data-skin="color"] .btn.primary{background:var(--accent);border-color:var(--accent)}
+:root[data-skin="color"] .chip.active{background:var(--c3)}
+:root[data-skin="color"] .score,:root[data-skin="color"] .modal,:root[data-skin="color"] .timer,:root[data-skin="color"] .tiles div:not(:nth-child(2)):not(:nth-child(6)):not(:nth-child(7)),:root[data-skin="color"] .card .art{background:var(--card)}
+:root[data-skin="color"] header.site .logo span.mark{background:var(--c2)}
+:root[data-skin="color"] .stage,:root[data-skin="color"] .section{border-top-color:var(--accent)}
+/* בורר רקע */
+.skins{display:inline-flex;border:1px solid var(--line);margin-inline-start:18px;vertical-align:middle}
+.skins button{border:0;background:transparent;color:var(--muted);font-family:inherit;font-size:.8rem;padding:4px 10px;cursor:pointer;border-inline-start:1px solid var(--line)}
+.skins button:first-child{border-inline-start:0}
+.skins button.on{background:var(--fg);color:var(--bg)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.6;font-size:17px;direction:rtl}

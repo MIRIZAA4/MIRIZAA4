@@ -25,8 +25,8 @@ window.G = {
   note(el,msg,ok){ el.className="feedback "+(ok?"ok":"bad"); el.textContent=msg; },
   shell(title, backHref){
     const h=document.createElement("header"); h.className="site";
-    h.innerHTML=`<div class="container"><a class="logo" href="${backHref||"../index.html"}"><span class="mark"></span>משחקי משפחה</a><nav><a href="${backHref||"../index.html"}">← לכל המשחקים</a></nav></div>`;
-    document.body.prepend(h);
+    h.innerHTML=`<div class="container"><a class="logo" href="${backHref||"../index.html"}"><span class="mark"></span>משחקי משפחה</a><nav><a href="${backHref||"../index.html"}">← לכל המשחקים</a>${window.Skin?Skin.html():""}</nav></div>`;
+    document.body.prepend(h); window.Skin&&Skin.wire();
     document.title=title+" · משחקי משפחה";
   }
 };
