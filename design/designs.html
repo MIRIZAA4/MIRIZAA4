@@ -1,0 +1,237 @@
+<title>ארבעה עיצובים</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Suez+One&family=Frank+Ruhl+Libre:wght@400;500;700&family=David+Libre:wght@400;500;700&family=Assistant:wght@300;400;600;700&family=Secular+One&family=Rubik:wght@400;500;700;800&family=Heebo:wght@300;400;600;800;900&display=swap">
+<style>
+/* ---------- בסיס ---------- */
+:root{
+  --bg:#fbf8f1;--surface:#ffffff;--ink:#1e1c18;--muted:#6b665c;--line:#e3ddd0;--accent:#1f3a5f;--accent-2:#b98a2e;--accent-ink:#ffffff;
+  --radius:14px;--shadow:0 8px 30px rgba(30,28,24,.08);
+  --font-display:"Heebo",sans-serif;--font-body:"Heebo",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#141311;--surface:#1f1d19;--ink:#efe9dc;--muted:#a49d90;--line:#332f28;--accent:#8fb3e6;--accent-2:#e0b25c;--accent-ink:#141311;--shadow:0 8px 30px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#141311;--surface:#1f1d19;--ink:#efe9dc;--muted:#a49d90;--line:#332f28;--accent:#8fb3e6;--accent-2:#e0b25c;--accent-ink:#141311;--shadow:0 8px 30px rgba(0,0,0,.4)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);direction:rtl;line-height:1.6;padding-block:0;padding-inline:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+/* ---------- סרגל הבחירה ---------- */
+.picker{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--surface);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;font-family:"Heebo",sans-serif}
+.picker .lbl{font-size:.85rem;color:var(--muted);margin-inline-end:4px}
+.picker button{border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:6px 14px;font-size:.92rem;font-weight:600}
+.picker button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.picker .sep{width:1px;height:24px;background:var(--line);margin:0 6px}
+/* ---------- שלד משותף ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding-inline:16px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:16px}
+.logo{font-family:var(--font-display);font-size:1.4rem;font-weight:800;display:flex;align-items:center;gap:10px}
+nav.menu{display:flex;gap:18px;font-size:.95rem;color:var(--muted);flex-wrap:wrap}
+.hero{padding-block:48px 28px}
+.hero h1{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.4rem);line-height:1.15;margin:0 0 14px;text-wrap:balance}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:40ch;margin:0 0 22px}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:var(--radius);padding:13px 24px;font-size:1.05rem;font-weight:700}
+.cta.alt{background:transparent;color:var(--ink);border:1.5px solid var(--line);margin-inline-start:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding-block:8px 28px}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:.92rem}
+.chip.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;padding-block:8px 40px}
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
+.art{height:150px;display:flex;align-items:center;justify-content:center;font-size:3.6rem;background:var(--accent);color:var(--accent-ink)}
+.body{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card h3{margin:0;font-family:var(--font-display);font-size:1.2rem}
+.meta{font-size:.88rem;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px}
+.price{font-weight:800;color:var(--accent-2)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding-block:8px 48px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.step b{display:block;font-family:var(--font-display);font-size:1.1rem;margin-bottom:4px}
+.step small{color:var(--muted)}
+h2.sec{font-family:var(--font-display);font-size:1.6rem;margin:0 0 14px}
+footer.bottom{padding-block:28px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;text-align:center}
+.tile{display:none}
+@media (max-width:640px){header.top{flex-direction:column;align-items:flex-start}}
+
+/* ================= עיצוב 1: דפוס ירושלמי (Letterpress) ================= */
+[data-design="1"]{--font-display:"Suez One",serif;--font-body:"Frank Ruhl Libre",serif;--radius:4px;--bg:#f4eddc;--surface:#fbf6ea;--ink:#231f1a;--muted:#6e6558;--line:#c9bda3;--accent:#8a1c1c;--accent-2:#8a6a1f;--accent-ink:#fbf6ea;--shadow:none}
+[data-design="1"][data-theme="dark"]{--bg:#17130f;--surface:#211b15;--ink:#eadfc6;--muted:#a89a80;--line:#4a3f30;--accent:#d9a441;--accent-2:#c9563e;--accent-ink:#17130f}
+@media (prefers-color-scheme: dark){[data-design="1"]:not([data-theme="light"]){--bg:#17130f;--surface:#211b15;--ink:#eadfc6;--muted:#a89a80;--line:#4a3f30;--accent:#d9a441;--accent-2:#c9563e;--accent-ink:#17130f}}
+[data-design="1"] body{background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1px);background-size:5px 5px}
+[data-design="1"] header.top{border-top:3px double var(--ink);border-bottom:1px solid var(--ink);padding-block:12px;margin-top:12px}
+[data-design="1"] .logo{letter-spacing:.5px;font-weight:400}
+[data-design="1"] .logo span{border:2px solid var(--ink);padding:0 8px;transform:rotate(-3deg);display:inline-block}
+[data-design="1"] .hero{text-align:center;padding-block:56px 20px;position:relative}
+[data-design="1"] .hero:before{content:"·  ✦  ·";display:block;letter-spacing:8px;color:var(--accent-2);margin-bottom:14px;font-size:.9rem}
+[data-design="1"] .hero h1{font-weight:400;font-size:clamp(2.3rem,6vw,4rem)}
+[data-design="1"] .hero p{margin-inline:auto;font-style:italic}
+[data-design="1"] .cta{border-radius:0;box-shadow:4px 4px 0 var(--ink);letter-spacing:.5px}
+[data-design="1"] .cta.alt{box-shadow:none;border:1.5px solid var(--ink)}
+[data-design="1"] .chips{justify-content:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:12px;margin-bottom:24px}
+[data-design="1"] .chip{border:0;border-radius:0;background:transparent;font-weight:500;padding:2px 10px}
+[data-design="1"] .chip.on{background:transparent;color:var(--accent);text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+[data-design="1"] .card{border:1.5px solid var(--ink);box-shadow:6px 6px 0 var(--line);position:relative}
+[data-design="1"] .card:after{content:"№ 1";position:absolute;top:10px;left:10px;font-size:.75rem;border:1.5px solid var(--accent-ink);color:var(--accent-ink);padding:0 6px;transform:rotate(-8deg);opacity:.85}
+[data-design="1"] .card:nth-child(2):after{content:"№ 2"}[data-design="1"] .card:nth-child(3):after{content:"№ 3"}[data-design="1"] .card:nth-child(4):after{content:"№ 4"}
+[data-design="1"] .art{background:var(--ink);color:var(--bg);border-bottom:1.5px solid var(--ink);filter:sepia(.2)}
+[data-design="1"] .card h3{font-weight:400;font-size:1.35rem}
+[data-design="1"] .price{font-family:var(--font-display);color:var(--accent)}
+[data-design="1"] h2.sec{font-weight:400;text-align:center}
+[data-design="1"] h2.sec:after{content:"";display:block;width:80px;height:2px;background:var(--accent-2);margin:10px auto 0}
+[data-design="1"] .step{border:1px solid var(--ink);background:transparent}
+[data-design="1"] .step b{font-weight:400}
+[data-design="1"] footer.bottom{border-top:3px double var(--ink)}
+
+/* ================= עיצוב 2: קלף ומשי (Simcha / הזמנה) ================= */
+[data-design="2"]{--font-display:"David Libre",serif;--font-body:"Assistant",sans-serif;--radius:22px;--bg:#fbf7f4;--surface:#ffffff;--ink:#2a2622;--muted:#7a716a;--line:#eadfd4;--accent:#3b2f5b;--accent-2:#b9975b;--accent-ink:#ffffff;--shadow:0 12px 40px rgba(59,47,91,.10)}
+[data-design="2"][data-theme="dark"]{--bg:#12101a;--surface:#1b1826;--ink:#f1eadf;--muted:#a79f92;--line:#2f2a3f;--accent:#d8bb7a;--accent-2:#b9975b;--accent-ink:#12101a;--shadow:0 12px 40px rgba(0,0,0,.5)}
+@media (prefers-color-scheme: dark){[data-design="2"]:not([data-theme="light"]){--bg:#12101a;--surface:#1b1826;--ink:#f1eadf;--muted:#a79f92;--line:#2f2a3f;--accent:#d8bb7a;--accent-2:#b9975b;--accent-ink:#12101a;--shadow:0 12px 40px rgba(0,0,0,.5)}}
+[data-design="2"] body{font-weight:400}
+[data-design="2"] header.top{padding-block:22px}
+[data-design="2"] .logo{font-weight:500;font-size:1.6rem;letter-spacing:1px}
+[data-design="2"] .logo span{color:var(--accent-2)}
+[data-design="2"] nav.menu{letter-spacing:.5px;text-transform:none}
+[data-design="2"] .hero{text-align:center;padding-block:64px 24px;background:radial-gradient(ellipse at top,color-mix(in srgb,var(--accent-2) 18%,transparent),transparent 60%)}
+[data-design="2"] .hero h1{font-weight:500;font-size:clamp(2.4rem,6vw,4.2rem);letter-spacing:.5px}
+[data-design="2"] .hero h1:after{content:"";display:block;width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--accent-2),transparent);margin:18px auto 0}
+[data-design="2"] .hero p{margin-inline:auto;font-weight:300;font-size:1.25rem}
+[data-design="2"] .cta{border-radius:999px;background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 70%,var(--accent-2)));padding:14px 30px;letter-spacing:.5px;box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 35%,transparent)}
+[data-design="2"] .cta.alt{background:transparent;box-shadow:none;border-color:var(--accent-2);color:var(--ink)}
+[data-design="2"] .chips{justify-content:center}
+[data-design="2"] .chip{border-color:var(--accent-2);background:transparent;font-weight:600;letter-spacing:.3px}
+[data-design="2"] .chip.on{background:var(--accent-2);color:#fff;border-color:var(--accent-2)}
+[data-design="2"] .card{border:1px solid color-mix(in srgb,var(--accent-2) 50%,var(--line));border-radius:var(--radius) var(--radius) 8px 8px;position:relative}
+[data-design="2"] .card:before{content:"";position:absolute;inset:8px;border:1px solid color-mix(in srgb,var(--accent-2) 45%,transparent);border-radius:16px 16px 4px 4px;pointer-events:none}
+[data-design="2"] .art{background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 88%,#000),var(--accent));height:160px}
+[data-design="2"] .card h3{font-weight:500;font-size:1.35rem}
+[data-design="2"] .price{color:var(--accent-2);font-family:var(--font-display);font-size:1.15rem}
+[data-design="2"] h2.sec{font-weight:500;text-align:center}
+[data-design="2"] .step{border-radius:var(--radius);text-align:center;border-color:color-mix(in srgb,var(--accent-2) 40%,var(--line))}
+[data-design="2"] .step b{font-weight:500;font-size:1.25rem}
+[data-design="2"] .step b:before{content:"◆";display:block;color:var(--accent-2);font-size:.7rem;margin-bottom:8px}
+
+/* ================= עיצוב 3: משחק קופסה (Board game) ================= */
+[data-design="3"]{--font-display:"Secular One",sans-serif;--font-body:"Rubik",sans-serif;--radius:18px;--bg:#fff8ea;--surface:#ffffff;--ink:#1d2433;--muted:#5d6675;--line:#1d2433;--accent:#e2542b;--accent-2:#1f7a8c;--accent-ink:#ffffff;--shadow:6px 6px 0 #1d2433}
+[data-design="3"][data-theme="dark"]{--bg:#161b26;--surface:#1f2637;--ink:#f6f1e6;--muted:#a9b0bf;--line:#f6f1e6;--accent:#ff7a4d;--accent-2:#4fc3d6;--accent-ink:#161b26;--shadow:6px 6px 0 #f6f1e6}
+@media (prefers-color-scheme: dark){[data-design="3"]:not([data-theme="light"]){--bg:#161b26;--surface:#1f2637;--ink:#f6f1e6;--muted:#a9b0bf;--line:#f6f1e6;--accent:#ff7a4d;--accent-2:#4fc3d6;--accent-ink:#161b26;--shadow:6px 6px 0 #f6f1e6}}
+[data-design="3"] body{background-image:linear-gradient(color-mix(in srgb,var(--ink) 6%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--ink) 6%,transparent) 1px,transparent 1px);background-size:32px 32px}
+[data-design="3"] header.top{padding-block:14px}
+[data-design="3"] .logo{font-size:1.6rem;font-weight:400}
+[data-design="3"] .logo span{background:var(--accent);color:var(--accent-ink);padding:2px 12px;border-radius:12px;border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);transform:rotate(-4deg);display:inline-block}
+[data-design="3"] nav.menu{font-weight:500;color:var(--ink)}
+[data-design="3"] .hero{padding-block:52px 24px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+[data-design="3"] .hero h1{font-weight:400;font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.05}
+[data-design="3"] .hero h1 em{font-style:normal;background:var(--accent-2);color:var(--accent-ink);padding:0 10px;border-radius:10px;border:2.5px solid var(--ink);display:inline-block;transform:rotate(-2deg)}
+[data-design="3"] .hero p{font-weight:400;color:var(--ink)}
+[data-design="3"] .cta{border:2.5px solid var(--ink);box-shadow:5px 5px 0 var(--ink);border-radius:14px;font-family:var(--font-display);font-weight:400;font-size:1.15rem}
+[data-design="3"] .cta:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+[data-design="3"] .cta.alt{background:var(--surface);color:var(--ink)}
+[data-design="3"] .tile{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;transform:rotate(4deg)}
+[data-design="3"] .tile div{aspect-ratio:1;border:2.5px solid var(--ink);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:2rem;background:var(--surface);box-shadow:4px 4px 0 var(--ink)}
+[data-design="3"] .tile div:nth-child(2){background:var(--accent);color:var(--accent-ink)}[data-design="3"] .tile div:nth-child(4){background:var(--accent-2)}[data-design="3"] .tile div:nth-child(9){background:#f7c948}
+[data-design="3"] .chip{border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font-weight:500;border-radius:12px}
+[data-design="3"] .chip.on{background:#f7c948;color:#1d2433;border-color:var(--ink)}
+[data-design="3"] .card{border:2.5px solid var(--ink);box-shadow:var(--shadow);border-radius:var(--radius)}
+[data-design="3"] .art{border-bottom:2.5px solid var(--ink)}
+[data-design="3"] .card:nth-child(2) .art{background:var(--accent-2)}[data-design="3"] .card:nth-child(3) .art{background:#f7c948;color:#1d2433}[data-design="3"] .card:nth-child(4) .art{background:#7a5bd6}
+[data-design="3"] .card h3{font-weight:400;font-size:1.4rem}
+[data-design="3"] .price{background:#f7c948;color:#1d2433;border:2px solid var(--ink);border-radius:8px;padding:0 8px;font-family:var(--font-display);font-weight:400}
+[data-design="3"] h2.sec{font-weight:400;font-size:2rem}
+[data-design="3"] .step{border:2.5px solid var(--ink);box-shadow:4px 4px 0 var(--ink);position:relative;padding-top:26px}
+[data-design="3"] .step:before{content:attr(data-n);position:absolute;top:-16px;right:14px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--accent-ink);border:2.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--font-display)}
+[data-design="3"] .step b{font-weight:400;font-size:1.2rem}
+[data-design="3"] footer.bottom{border-top:2.5px solid var(--ink)}
+@media (max-width:760px){[data-design="3"] .hero{grid-template-columns:1fr}[data-design="3"] .tile{transform:none;max-width:280px}}
+
+/* ================= עיצוב 4: מודרני נקי (App) ================= */
+[data-design="4"]{--font-display:"Heebo",sans-serif;--font-body:"Heebo",sans-serif;--radius:20px;--bg:#f6f7f9;--surface:#ffffff;--ink:#101828;--muted:#667085;--line:#e4e7ec;--accent:#0f766e;--accent-2:#0f766e;--accent-ink:#ffffff;--shadow:0 1px 2px rgba(16,24,40,.06),0 12px 32px rgba(16,24,40,.06)}
+[data-design="4"][data-theme="dark"]{--bg:#0b0f14;--surface:#141a22;--ink:#f2f4f7;--muted:#98a2b3;--line:#232b36;--accent:#2dd4bf;--accent-2:#2dd4bf;--accent-ink:#0b0f14;--shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.5)}
+@media (prefers-color-scheme: dark){[data-design="4"]:not([data-theme="light"]){--bg:#0b0f14;--surface:#141a22;--ink:#f2f4f7;--muted:#98a2b3;--line:#232b36;--accent:#2dd4bf;--accent-2:#2dd4bf;--accent-ink:#0b0f14;--shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.5)}}
+[data-design="4"] header.top{padding-block:18px}
+[data-design="4"] .logo{font-weight:900;letter-spacing:-.5px}
+[data-design="4"] .logo span{width:34px;height:34px;border-radius:10px;background:var(--accent);color:var(--accent-ink);display:inline-flex;align-items:center;justify-content:center;font-size:1rem}
+[data-design="4"] nav.menu{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 6px;gap:4px}
+[data-design="4"] nav.menu a{padding:6px 14px;border-radius:999px}
+[data-design="4"] nav.menu a:first-child{background:var(--bg);color:var(--ink);font-weight:600}
+[data-design="4"] .hero{padding-block:64px 28px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+[data-design="4"] .hero h1{font-weight:900;letter-spacing:-1px;font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.05}
+[data-design="4"] .hero h1 em{font-style:normal;color:var(--accent)}
+[data-design="4"] .hero p{font-weight:300;font-size:1.2rem}
+[data-design="4"] .cta{border-radius:12px;padding:14px 26px;font-weight:700}
+[data-design="4"] .cta.alt{background:var(--surface)}
+[data-design="4"] .tile{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+[data-design="4"] .tile div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);font-size:1rem;color:var(--muted)}
+[data-design="4"] .tile div b{display:block;font-size:2rem;color:var(--ink);font-weight:900;letter-spacing:-1px;line-height:1.1}
+[data-design="4"] .tile div:first-child{grid-column:span 2;background:var(--accent);color:var(--accent-ink);border:0}
+[data-design="4"] .tile div:first-child b{color:var(--accent-ink)}
+[data-design="4"] .chip{border-radius:999px;font-weight:500;background:var(--surface)}
+[data-design="4"] .chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+[data-design="4"] .card{border-radius:var(--radius);border:1px solid var(--line)}
+[data-design="4"] .art{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 20%,var(--surface)),color-mix(in srgb,var(--accent) 60%,var(--surface)));color:var(--ink);height:160px}
+[data-design="4"] .card h3{font-weight:800;letter-spacing:-.3px}
+[data-design="4"] .price{color:var(--ink);background:var(--bg);border-radius:8px;padding:2px 8px;font-weight:700}
+[data-design="4"] h2.sec{font-weight:900;letter-spacing:-.5px}
+[data-design="4"] .step{border-radius:16px}
+[data-design="4"] .step b{font-weight:800}
+[data-design="4"] .step b:before{content:attr(data-n);display:inline-flex;width:26px;height:26px;border-radius:8px;background:var(--accent);color:var(--accent-ink);align-items:center;justify-content:center;font-size:.85rem;margin-inline-end:8px}
+@media (max-width:760px){[data-design="4"] .hero{grid-template-columns:1fr}}
+</style>
+
+<div class="picker">
+  <span class="lbl">עיצוב:</span>
+  <button data-d="1" class="on">1 · דפוס ירושלמי</button>
+  <button data-d="2">2 · קלף ומשי</button>
+  <button data-d="3">3 · משחק קופסה</button>
+  <button data-d="4">4 · מודרני נקי</button>
+  <span class="sep"></span>
+  <span class="lbl">רקע:</span>
+  <button data-t="light">לבן</button>
+  <button data-t="dark">שחור</button>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="logo"><span>משחקי</span> משפחה</div>
+    <nav class="menu"><a href="#">המשחקים</a><a href="#">לפי אירוע</a><a href="#">איך זה עובד</a><a href="#">רכישה</a></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>משחקים למשפחה, <em>על המסך</em>, בלי הכנות</h1>
+      <p>חדרי בריחה, חידונים ומשחקי משימות לשבע ברכות, לחגים, למפגשים ולזוג. יושבים מול המחשב, לוחצים "התחל", והמסך מנחה.</p>
+      <a class="cta" href="#">▶ לנסות משחק בחינם</a><a class="cta alt" href="#">לפי אירוע</a>
+    </div>
+    <div class="tile" id="tile"></div>
+  </section>
+
+  <div class="chips">
+    <span class="chip on">הכול</span><span class="chip">💍 שבע ברכות</span><span class="chip">🎂 יום הולדת</span><span class="chip">🤝 מפגש חברים</span><span class="chip">🏡 מפגש משפחתי</span><span class="chip">🕎 חנוכה</span><span class="chip">🌿 סוכות</span><span class="chip">🍷 פסח</span><span class="chip">🎭 פורים</span><span class="chip">☀️ בין הזמנים</span><span class="chip">👫 לזוג</span>
+  </div>
+
+  <div class="grid">
+    <div class="card"><div class="art">🖨️</div><div class="body"><h3>בית הדפוס הישן</h3><div class="meta">חדר בריחה על המסך · 1–6 · 45–60 דק'</div><div>נעולים בבית דפוס ישן בירושלים. 8 חידות, ובסוף מדפיסים את הדף שפותח את הדלת.</div><div class="foot"><span class="price">39 ₪</span><span class="meta">2 חידות בחינם</span></div></div></div>
+    <div class="card"><div class="art">💍</div><div class="body"><h3>כמה מכירים את החתן והכלה?</h3><div class="meta">חידון לשבע ברכות · 15–20 דק'</div><div>המשפחה ממלאת מראש 12 תשובות. באירוע המסך שואל, השולחנות מנחשים, והמסך חושף.</div><div class="foot"><span class="price">29 ₪</span><span class="meta">3 שאלות בחינם</span></div></div></div>
+    <div class="card"><div class="art">🎡</div><div class="body"><h3>המרוץ המשפחתי</h3><div class="meta">משימות בקבוצות · 6–20 · 45–60 דק'</div><div>מסובבים גלגל, מקבלים משימה, 90 שניות, נקודות. במה, מוח, זריזות ומשפחה.</div><div class="foot"><span class="price">35 ₪</span><span class="meta">5 משימות בחינם</span></div></div></div>
+    <div class="card"><div class="art">⚖️</div><div class="body"><h3>המשפט המשפחתי</h3><div class="meta">משחק הצגה קומי · 6–14 · 60–90 דק'</div><div>מישהו מהמשפחה נשפט על עבירה מצחיקה. תובע, סניגור, עדים מופרעים וגזר דין.</div><div class="foot"><span class="price">35 ₪</span><span class="meta">משפט ראשון בחינם</span></div></div></div>
+  </div>
+
+  <h2 class="sec">איך זה עובד</h2>
+  <div class="steps">
+    <div class="step" data-n="1"><b data-n="1">בוחרים משחק</b><small>לפי האירוע: שבע ברכות, חנוכה, מפגש משפחתי, ערב לזוג.</small></div>
+    <div class="step" data-n="2"><b data-n="2">מנסים בחינם</b><small>בכל משחק השלב הראשון פתוח לכולם.</small></div>
+    <div class="step" data-n="3"><b data-n="3">רוכשים</b><small>מקבלים קוד פתיחה. המשחק נשאר פתוח במחשב שלכם.</small></div>
+    <div class="step" data-n="4"><b data-n="4">משחקים</b><small>מחשב אחד לכל החבורה. בלי להדפיס, בלי טלפונים.</small></div>
+  </div>
+
+  <footer class="bottom">משחקי משפחה © תשפ"ז · כל המשחקים מותאמים לציבור שומר תורה ומצוות</footer>
+</div>
+
+<script>
+(function(){
+  const root=document.documentElement;
+  const tiles={3:'<div>🎲</div><div>🖨️</div><div>💍</div><div>⚖️</div><div>🎡</div><div>🧠</div><div>🕎</div><div>🎭</div><div>🏆</div>',
+               4:'<div><b>4</b>משחקים מוכנים לערב הזה</div><div><b>15</b>דקות לחידון שבע ברכות</div><div><b>0</b>הדפסות והכנות</div>'};
+  function setD(d){ root.setAttribute("data-design",d); document.querySelectorAll("[data-d]").forEach(b=>b.classList.toggle("on",b.dataset.d===d)); document.getElementById("tile").innerHTML=tiles[d]||""; try{localStorage.setItem("design",d);}catch(e){} }
+  function setT(t){ if(t) root.setAttribute("data-theme",t); else root.removeAttribute("data-theme"); document.querySelectorAll("[data-t]").forEach(b=>b.classList.toggle("on",b.dataset.t===t)); }
+  document.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>setD(b.dataset.d));
+  document.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>setT(b.dataset.t));
+  let d="1"; try{ d=localStorage.getItem("design")||"1"; }catch(e){}
+  setD(d); setT(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+})();
+</script>
