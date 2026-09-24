@@ -17,4 +17,4 @@ python3 -m http.server 8765
 ואז לפתוח `http://localhost:8765/`.
 
 ## קודי פתיחה (זמני, עד חיבור סליקה)
-מוגדרים ב־`assets/access.js`. הקוד `MISHPACHA` פותח את כל המשחקים.
+מוגדרים ב־`assets/access.js`. הקוד `4321` (וגם `MISHPACHA`) פותח את כל המשחקים.

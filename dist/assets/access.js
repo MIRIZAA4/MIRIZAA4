@@ -1,6 +1,7 @@
 // גישה למשחקים. כרגע: קודי פתיחה (עד חיבור ספק סליקה). הקודים יוחלפו במנגנון תשלום אמיתי.
 window.Access = (function(){
-  const CODES = { "print-house":["DAFUS2026","MISHPACHA"], "couple-quiz":["MAZALTOV","MISHPACHA"], "family-race":["MEROTZ","MISHPACHA"], "family-court":["MISHPAT","MISHPACHA"] };
+  const MASTER=["4321","MISHPACHA"];
+  const CODES = { "print-house":["DAFUS2026",...MASTER], "couple-quiz":["MAZALTOV",...MASTER], "family-race":["MEROTZ",...MASTER], "family-court":["MISHPAT",...MASTER] };
   function owned(id){ try{ return localStorage.getItem("owned:"+id)==="1"; }catch(e){ return false; } }
   function unlock(id, code){
     code=(code||"").trim().toUpperCase();
