@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+<defs>
+ <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1f3d"/><stop offset="1" stop-color="#3f2f5a"/></linearGradient>
+ <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a381a"/><stop offset="1" stop-color="#2e1c0c"/></linearGradient>
+ <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a06a33"/><stop offset="1" stop-color="#6b4523"/></linearGradient>
+ <linearGradient id="velvet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9b2335"/><stop offset="1" stop-color="#5e1420"/></linearGradient>
+ <radialGradient id="spot" cx=".5" cy=".3" r=".6"><stop offset="0" stop-color="#ffe0a3" stop-opacity=".4"/><stop offset="1" stop-color="#ffe0a3" stop-opacity="0"/></radialGradient>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .07"/></feComponentTransfer></filter>
+ <filter id="shadow"><feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000" flood-opacity=".5"/></filter>
+</defs>
+<rect width="1200" height="560" fill="url(#wall)"/>
+<rect y="560" width="1200" height="240" fill="url(#floor)"/>
+<rect width="1200" height="800" fill="url(#spot)"/>
+<!-- curtain -->
+<path d="M0 0 h140 q-40 300 20 560 H0z" fill="url(#velvet)"/><path d="M1200 0 h-140 q40 300 -20 560 H1200z" fill="url(#velvet)"/>
+<!-- judge bench: chair on crate -->
+<g filter="url(#shadow)">
+ <rect x="470" y="440" width="260" height="140" fill="url(#wood)"/><g stroke="#3a2410" stroke-width="4"><path d="M470 480h260M470 540h260M600 440v140"/></g>
+ <rect x="520" y="200" width="160" height="250" fill="#6b4523"/><rect x="535" y="215" width="130" height="150" fill="#8a5a2b"/>
+ <rect x="500" y="360" width="200" height="90" fill="url(#velvet)"/><path d="M500 360 q100 -30 200 0 v20 q-100 -20 -200 0z" fill="#b8324a"/>
+</g>
+<!-- gavel -->
+<g transform="translate(300 520) rotate(-25)" filter="url(#shadow)">
+ <rect x="-90" y="-28" width="180" height="56" rx="8" fill="url(#wood)"/><rect x="-96" y="-32" width="26" height="64" rx="4" fill="#3a2410"/><rect x="70" y="-32" width="26" height="64" rx="4" fill="#3a2410"/>
+ <rect x="-14" y="20" width="28" height="190" rx="8" fill="#8a5a2b"/>
+</g>
+<rect x="180" y="640" width="240" height="30" rx="4" fill="url(#wood)"/>
+<!-- cookies plate -->
+<g transform="translate(900 600)"><ellipse cx="0" cy="40" rx="120" ry="34" fill="#f6f1e6"/><ellipse cx="0" cy="34" rx="105" ry="26" fill="#fff"/>
+<g fill="#c98a4b" stroke="#8a5a2b" stroke-width="3"><circle cx="-40" cy="20" r="24"/><circle cx="10" cy="10" r="24"/><circle cx="50" cy="28" r="24"/><circle cx="-5" cy="40" r="24"/></g>
+<g fill="#5a381a"><circle cx="-46" cy="14" r="3"/><circle cx="-32" cy="24" r="3"/><circle cx="6" cy="4" r="3"/><circle cx="18" cy="16" r="3"/><circle cx="46" cy="22" r="3"/><circle cx="58" cy="34" r="3"/><circle cx="-10" cy="36" r="3"/><circle cx="2" cy="46" r="3"/></g></g>
+<!-- tea glass -->
+<g transform="translate(1060 560)"><path d="M0 0 h60 l-6 90 h-48z" fill="#d38a2a" opacity=".9"/><path d="M0 0 h60 l-2 30 h-56z" fill="#f2c27b"/><path d="M60 20 q30 10 0 50" stroke="#c9ccd4" stroke-width="6" fill="none"/></g>
+<!-- jury chairs -->
+<g fill="#6b4523" stroke="#3a2410" stroke-width="3">
+ <g transform="translate(160 330)"><rect x="0" y="0" width="70" height="80"/><rect x="0" y="80" width="70" height="30" fill="#8a5a2b"/><rect x="6" y="110" width="8" height="60"/><rect x="56" y="110" width="8" height="60"/></g>
+ <g transform="translate(260 330)"><rect x="0" y="0" width="70" height="80"/><rect x="0" y="80" width="70" height="30" fill="#8a5a2b"/><rect x="6" y="110" width="8" height="60"/><rect x="56" y="110" width="8" height="60"/></g>
+ <g transform="translate(870 330)"><rect x="0" y="0" width="70" height="80"/><rect x="0" y="80" width="70" height="30" fill="#8a5a2b"/><rect x="6" y="110" width="8" height="60"/><rect x="56" y="110" width="8" height="60"/></g>
+ <g transform="translate(970 330)"><rect x="0" y="0" width="70" height="80"/><rect x="0" y="80" width="70" height="30" fill="#8a5a2b"/><rect x="6" y="110" width="8" height="60"/><rect x="56" y="110" width="8" height="60"/></g>
+</g>
+<!-- scales -->
+<g transform="translate(600 120)" stroke="#f3d27a" stroke-width="8" fill="none" stroke-linecap="round">
+ <path d="M0 0v70M-120 0h240M-120 0l-40 70h80zM120 0l-40 70h80z"/><path d="M-160 70 q40 40 80 0M80 70 q40 40 80 0" fill="#f3d27a"/>
+</g>
+<rect width="1200" height="800" filter="url(#grain)"/>
+</svg>

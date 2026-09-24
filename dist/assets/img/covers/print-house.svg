@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+<defs>
+ <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a4330"/><stop offset="1" stop-color="#2e2117"/></linearGradient>
+ <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a1c"/><stop offset="1" stop-color="#17110c"/></linearGradient>
+ <radialGradient id="lamp" cx="0.5" cy="0" r="0.8"><stop offset="0" stop-color="#ffd98a" stop-opacity=".55"/><stop offset="1" stop-color="#ffd98a" stop-opacity="0"/></radialGradient>
+ <linearGradient id="iron" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4b4b4f"/><stop offset="1" stop-color="#1c1c1f"/></linearGradient>
+ <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a2b"/><stop offset="1" stop-color="#5a381a"/></linearGradient>
+ <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4e7c6"/><stop offset="1" stop-color="#d9c79b"/></linearGradient>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .08"/></feComponentTransfer></filter>
+ <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<rect width="1200" height="560" fill="url(#wall)"/>
+<g stroke="#00000022" stroke-width="2" fill="none">
+ <path d="M0 80H1200M0 160H1200M0 240H1200M0 320H1200M0 400H1200M0 480H1200"/>
+ <path d="M100 0v80M300 0v80M500 0v80M700 0v80M900 0v80M1100 0v80M200 80v80M400 80v80M600 80v80M800 80v80M1000 80v80M100 160v80M300 160v80M500 160v80M700 160v80M900 160v80M1100 160v80M200 240v80M400 240v80M600 240v80M800 240v80M1000 240v80M100 320v80M300 320v80M500 320v80M700 320v80M900 320v80M1100 320v80M200 400v80M400 400v80M600 400v80M800 400v80M1000 400v80"/>
+</g>
+<rect y="560" width="1200" height="240" fill="url(#floor)"/>
+<g stroke="#00000055" stroke-width="3"><path d="M0 620H1200M0 690H1200M0 760H1200"/></g>
+<!-- lamp -->
+<path d="M600 0v70" stroke="#222" stroke-width="4"/>
+<path d="M540 70h120l30 50H510z" fill="#2b2b2b"/>
+<ellipse cx="600" cy="122" rx="60" ry="10" fill="#ffe9b0"/>
+<ellipse cx="600" cy="200" rx="420" ry="260" fill="url(#lamp)"/>
+<!-- door -->
+<rect x="470" y="160" width="260" height="410" fill="#1d140c"/>
+<rect x="485" y="175" width="230" height="395" fill="url(#wood)"/>
+<rect x="505" y="195" width="190" height="150" fill="#4a2d13"/><rect x="505" y="365" width="190" height="185" fill="#4a2d13"/>
+<circle cx="680" cy="380" r="10" fill="#d9a441"/>
+<rect x="640" y="400" width="60" height="30" fill="#2a2a2a"/><circle cx="670" cy="415" r="6" fill="#111"/>
+<!-- sign -->
+<rect x="455" y="110" width="290" height="44" fill="url(#paper)" stroke="#3b2a15" stroke-width="3"/>
+<g stroke="#5a4325" stroke-width="3" stroke-linecap="round"><path d="M480 132h60M560 132h80M660 132h60"/></g>
+<!-- type cabinet -->
+<rect x="60" y="260" width="330" height="310" fill="#2a1b10"/>
+<g fill="url(#wood)" stroke="#1d140c" stroke-width="3">
+ <rect x="75" y="275" width="145" height="60"/><rect x="230" y="275" width="145" height="60"/>
+ <rect x="75" y="345" width="145" height="60"/><rect x="230" y="345" width="145" height="60"/>
+ <rect x="75" y="415" width="145" height="60"/><rect x="230" y="415" width="145" height="60"/>
+ <rect x="75" y="485" width="300" height="70"/>
+</g>
+<g fill="#d9a441"><circle cx="147" cy="305" r="6"/><circle cx="302" cy="305" r="6"/><circle cx="147" cy="375" r="6"/><circle cx="302" cy="375" r="6"/><circle cx="147" cy="445" r="6"/><circle cx="302" cy="445" r="6"/><circle cx="225" cy="520" r="7"/></g>
+<!-- shelf + ink bottles -->
+<rect x="790" y="300" width="340" height="14" fill="#4a2d13"/>
+<g><rect x="820" y="230" width="60" height="70" rx="6" fill="#0f0f10"/><rect x="835" y="212" width="30" height="22" fill="#333"/>
+<rect x="920" y="230" width="60" height="70" rx="6" fill="#1d4ed8"/><rect x="935" y="212" width="30" height="22" fill="#333"/>
+<rect x="1020" y="230" width="60" height="70" rx="6" fill="#b91c1c"/><rect x="1035" y="212" width="30" height="22" fill="#333"/>
+<g fill="#f4e7c6"><rect x="830" y="255" width="40" height="22"/><rect x="930" y="255" width="40" height="22"/><rect x="1030" y="255" width="40" height="22"/></g></g>
+<!-- notice board -->
+<rect x="800" y="340" width="320" height="200" fill="#8b6a44" stroke="#3b2a15" stroke-width="6"/>
+<g fill="url(#paper)"><rect x="820" y="360" width="110" height="80" transform="rotate(-5 875 400)"/><rect x="960" y="365" width="130" height="95" transform="rotate(4 1025 412)"/><rect x="870" y="450" width="140" height="70" transform="rotate(-2 940 485)"/></g>
+<g fill="#c93c2c"><circle cx="875" cy="368" r="5"/><circle cx="1025" cy="372" r="5"/><circle cx="940" cy="456" r="5"/></g>
+<!-- press -->
+<rect x="820" y="470" width="340" height="280" fill="url(#iron)"/>
+<circle cx="900" cy="600" r="70" fill="#3a3a3e" stroke="#9a9aa0" stroke-width="10"/><circle cx="900" cy="600" r="22" fill="#111"/>
+<g stroke="#9a9aa0" stroke-width="10" stroke-linecap="round"><path d="M900 530v-18M900 670v18M830 600h-18M970 600h18M851 551l-13-13M949 649l13 13M949 551l13-13M851 649l-13 13"/></g>
+<circle cx="1040" cy="570" r="45" fill="#3a3a3e" stroke="#9a9aa0" stroke-width="8"/><circle cx="1040" cy="570" r="14" fill="#111"/>
+<circle cx="1100" cy="650" r="34" fill="#3a3a3e" stroke="#9a9aa0" stroke-width="7"/><circle cx="1100" cy="650" r="10" fill="#111"/>
+<rect x="840" y="690" width="300" height="40" fill="#151517"/><rect x="870" y="700" width="240" height="20" fill="#f4e7c6"/>
+<!-- workbench -->
+<rect x="120" y="600" width="560" height="22" fill="#6b4523"/><rect x="140" y="622" width="22" height="130" fill="#3a2410"/><rect x="638" y="622" width="22" height="130" fill="#3a2410"/>
+<rect x="170" y="560" width="150" height="40" fill="url(#paper)" transform="rotate(-6 245 580)"/>
+<rect x="400" y="555" width="200" height="45" fill="#7b1e1e"/><rect x="412" y="562" width="176" height="31" fill="#f4e7c6"/>
+<!-- glow + grain -->
+<ellipse cx="600" cy="150" rx="200" ry="90" fill="#ffd98a" opacity=".18" filter="url(#soft)"/>
+<rect width="1200" height="800" filter="url(#grain)"/>
+</svg>

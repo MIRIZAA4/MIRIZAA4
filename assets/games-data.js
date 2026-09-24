@@ -14,17 +14,17 @@ window.CATEGORIES = [
 ];
 window.GAMES = [
   {
-    id:"print-house", tone:1, title:"בית הדפוס הישן", icon:"🖨️",
-    type:"חדר בריחה על המסך", players:"1–6", time:"45–60 דק'", age:"20+", level:"בינוני–קשה",
+    id:"print-house", cover:"assets/img/covers/print-house.svg", tone:1, title:"בית הדפוס הישן", icon:"🖨️",
+    type:"חדר בריחה על המסך", players:"1–6", time:"45–60 דק'", age:"20+", level:"קשה (למבוגרים)",
     price:39, freeStages:"2 חידות ראשונות בחינם",
     cats:["adults","couple","family","benhazmanim","birthday","friends"],
-    short:"נעולים בבית דפוס ישן בירושלים. 8 חידות על המסך, ובסוף מדפיסים את הדף שפותח את הדלת.",
-    long:"נכנסתם לבית דפוס ישן בירושלים כדי לאסוף הזמנות. הדלת נטרקה מאחוריכם. המדפיס הזקן השאיר פתק: \"הדלת נפתחת רק למי שמדפיס את הדף הנכון.\" לוחצים על חפצים בחדר, כל חפץ פותח חידה: כתב מראה, גימטריה, בקבוקי דיו, מודעה קרועה, תשבץ, גלגלי מכונה וספר הזמנות. הכול על המסך, בלי להדפיס ובלי להחביא. מתאים לזוג לבד או לקבוצה מול מסך אחד.",
+    short:"נעולים בבית דפוס ישן בירושלים. 8 חידות קשות, שקשורות לחפצים שבחדר, ובסוף מדפיסים את הדף שפותח את הדלת.",
+    long:"נכנסתם לבית דפוס ישן בירושלים כדי לאסוף הזמנות. הדלת נטרקה מאחוריכם. המדפיס הזקן השאיר פתק: \"הדלת נפתחת רק למי שמדפיס את הדף הנכון.\" לוחצים על חפצים בחדר, כל חפץ פותח חידה: גלופה בכתב מראה שמפנה לשלט ולמדף, ריבוע קסם בגימטריה, חידת סידור של בקבוקי דיו, מודעה קרועה ל־16 חלקים, תשבץ ידע, גלגלי שיניים וחידת היגיון של חמישה לקוחות. הכול מתחבר בדף האחרון. הכול על המסך, בלי להדפיס ובלי להחביא. מתאים לזוג לבד או לקבוצה מול מסך אחד.",
     includes:["8 חידות עם 3 רמזים לכל אחת","טיימר ותעודת סיום עם הזמן שהשגתם","שמירה אוטומטית: אפשר להפסיק ולהמשיך","מתאים למחשב ולטאבלט"],
     url:"play/print-house.html"
   },
   {
-    id:"couple-quiz", tone:2, title:"כמה מכירים את החתן והכלה?", icon:"💍",
+    id:"couple-quiz", cover:"assets/img/covers/couple-quiz.svg", tone:2, title:"כמה מכירים את החתן והכלה?", icon:"💍",
     type:"חידון לשבע ברכות", players:"6–40, בשני שולחנות", time:"15–20 דק'", age:"לכולם", level:"קל",
     price:29, freeStages:"3 שאלות ראשונות בחינם",
     cats:["sheva","friends","family"],
@@ -34,7 +34,7 @@ window.GAMES = [
     url:"play/couple-quiz.html"
   },
   {
-    id:"family-race", tone:3, title:"המרוץ המשפחתי", icon:"🎡",
+    id:"family-race", cover:"assets/img/covers/family-race.svg", tone:3, title:"המרוץ המשפחתי", icon:"🎡",
     type:"משימות בקבוצות", players:"6–20 ב־2–4 קבוצות", time:"45–60 דק'", age:"20+", level:"קל",
     price:35, freeStages:"5 משימות ראשונות בחינם",
     cats:["family","chanuka","sukkot","benhazmanim","purim","birthday","friends"],
@@ -44,7 +44,7 @@ window.GAMES = [
     url:"play/family-race.html"
   },
   {
-    id:"family-court", tone:4, title:"המשפט המשפחתי", icon:"⚖️",
+    id:"family-court", cover:"assets/img/covers/family-court.svg", tone:4, title:"המשפט המשפחתי", icon:"⚖️",
     type:"משחק הצגה קומי", players:"6–14", time:"60–90 דק'", age:"20+", level:"קל",
     price:35, freeStages:"משפט ראשון בחינם",
     cats:["family","friends","birthday","benhazmanim","adults"],

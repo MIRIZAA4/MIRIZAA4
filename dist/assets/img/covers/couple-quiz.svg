@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1633"/><stop offset="1" stop-color="#3b2f5b"/></linearGradient>
+ <linearGradient id="cloth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e6e0f2"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3d27a"/><stop offset=".5" stop-color="#b9975b"/><stop offset="1" stop-color="#f3d27a"/></linearGradient>
+ <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6f6f6"/><stop offset=".5" stop-color="#b8bcc6"/><stop offset="1" stop-color="#eeeeee"/></linearGradient>
+ <linearGradient id="table" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdfaf3"/><stop offset="1" stop-color="#e5dcc8"/></linearGradient>
+ <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffe9a8" stop-opacity=".9"/><stop offset="1" stop-color="#ffe9a8" stop-opacity="0"/></radialGradient>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .07"/></feComponentTransfer></filter>
+</defs>
+<rect width="1200" height="800" fill="url(#sky)"/>
+<g fill="#fff" opacity=".7"><circle cx="120" cy="90" r="2"/><circle cx="300" cy="50" r="1.5"/><circle cx="520" cy="120" r="2"/><circle cx="900" cy="70" r="2"/><circle cx="1080" cy="140" r="1.5"/><circle cx="700" cy="40" r="1.5"/><circle cx="1000" cy="200" r="1.5"/><circle cx="200" cy="220" r="1.5"/></g>
+<!-- chuppah -->
+<g stroke="#b9975b" stroke-width="10" stroke-linecap="round"><path d="M160 780V180M1040 780V180M330 780V240M870 780V240"/></g>
+<path d="M120 190 Q600 90 1080 190 L1080 230 Q600 150 120 230Z" fill="url(#cloth)"/>
+<path d="M120 230 Q600 150 1080 230 Q940 300 870 250 Q600 330 330 250 Q260 300 120 230Z" fill="#f2eef8"/>
+<g stroke="#d9d2e8" stroke-width="3" fill="none"><path d="M200 200 q20 90 -10 160M400 170 q10 100 -20 160M600 160 q0 100 0 160M800 170 q-10 100 20 160M1000 200 q-20 90 10 160"/></g>
+<!-- flowers on posts -->
+<g><circle cx="160" cy="190" r="34" fill="#fff"/><circle cx="130" cy="210" r="22" fill="#f7e9f0"/><circle cx="190" cy="212" r="20" fill="#fff"/><circle cx="160" cy="190" r="10" fill="#f3d27a"/><path d="M110 230 q30 -40 60 -10" stroke="#7fa88a" stroke-width="6" fill="none"/>
+<circle cx="1040" cy="190" r="34" fill="#fff"/><circle cx="1010" cy="212" r="20" fill="#fff"/><circle cx="1070" cy="210" r="22" fill="#f7e9f0"/><circle cx="1040" cy="190" r="10" fill="#f3d27a"/><path d="M1090 230 q-30 -40 -60 -10" stroke="#7fa88a" stroke-width="6" fill="none"/></g>
+<!-- table -->
+<ellipse cx="600" cy="640" rx="380" ry="60" fill="url(#table)"/>
+<rect x="220" y="640" width="760" height="120" fill="#e9e1cf"/><path d="M220 760 q380 40 760 0" fill="#e9e1cf"/>
+<ellipse cx="600" cy="600" rx="320" ry="120" fill="url(#glow)"/>
+<!-- kiddush cups -->
+<g><path d="M470 560 q0 60 40 70 q40 -10 40 -70z" fill="url(#silver)"/><rect x="505" y="628" width="10" height="34" fill="#c9ccd4"/><ellipse cx="510" cy="666" rx="30" ry="8" fill="url(#silver)"/><ellipse cx="510" cy="560" rx="40" ry="8" fill="#7a1f2b"/>
+<path d="M650 560 q0 60 40 70 q40 -10 40 -70z" fill="url(#silver)"/><rect x="685" y="628" width="10" height="34" fill="#c9ccd4"/><ellipse cx="690" cy="666" rx="30" ry="8" fill="url(#silver)"/><ellipse cx="690" cy="560" rx="40" ry="8" fill="#7a1f2b"/></g>
+<!-- rings -->
+<g fill="none" stroke="url(#gold)" stroke-width="12"><circle cx="575" cy="620" r="34"/><circle cx="625" cy="626" r="34"/></g>
+<circle cx="575" cy="586" r="7" fill="#fff"/>
+<!-- invitation card -->
+<rect x="300" y="590" width="150" height="100" fill="#fffdf6" stroke="#b9975b" stroke-width="3" transform="rotate(-8 375 640)"/>
+<g stroke="#d9c79b" stroke-width="3" transform="rotate(-8 375 640)"><path d="M320 620h110M320 640h80M320 660h100"/></g>
+<!-- candles -->
+<g><rect x="820" y="540" width="14" height="110" fill="#fff8e6"/><ellipse cx="827" cy="536" rx="9" ry="16" fill="#ffd166"/><ellipse cx="827" cy="540" rx="4" ry="8" fill="#fff"/>
+<rect x="860" y="560" width="14" height="90" fill="#fff8e6"/><ellipse cx="867" cy="556" rx="9" ry="16" fill="#ffd166"/><ellipse cx="867" cy="560" rx="4" ry="8" fill="#fff"/><rect x="805" y="650" width="85" height="10" fill="#b9975b"/></g>
+<!-- confetti -->
+<g fill="#f3d27a" opacity=".9"><rect x="250" y="330" width="10" height="10" transform="rotate(20 255 335)"/><rect x="950" y="330" width="10" height="10" transform="rotate(-30 955 335)"/><rect x="600" y="360" width="8" height="8" transform="rotate(45 604 364)"/><rect x="420" y="400" width="8" height="8"/><rect x="780" y="410" width="8" height="8" transform="rotate(30 784 414)"/></g>
+<rect width="1200" height="800" filter="url(#grain)"/>
+</svg>
