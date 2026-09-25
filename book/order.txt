@@ -26,6 +26,16 @@ side_C
 side_E
 23
 24
+side_J
 side_D
 25
+26
+27
+side_F
+27b
+28
 side_B
+side_H
+29
+30
+31
