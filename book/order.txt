@@ -52,3 +52,16 @@ side_K
 39
 side_O
 40
+41
+side_N
+side_P
+42
+43
+side_Q
+44
+45
+46
+side_R
+side_S
+47
+48
