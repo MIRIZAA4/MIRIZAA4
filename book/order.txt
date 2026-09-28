@@ -50,9 +50,9 @@ side_K
 37
 38
 39
-side_O
 40
 41
+side_O
 side_N
 side_P
 42
