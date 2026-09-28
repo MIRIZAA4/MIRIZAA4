@@ -8,7 +8,7 @@ const kids=[];
 // title page
 kids.push(P([run('',{})],{align:AlignmentType.CENTER,before:2400}));
 kids.push(P([run('כתר מן הים',{size:60,bold:true})],{align:AlignmentType.CENTER,after:400}));
-kids.push(P([run('רומן',{size:32})],{align:AlignmentType.CENTER,after:1600}));
+kids.push(P([run('',{size:32})],{align:AlignmentType.CENTER,after:1600}));
 kids.push(P([run('"הנותן בים דרך, ובמים עזים נתיבה"',{size:26,italics:true})],{align:AlignmentType.CENTER}));
 kids.push(P([run('(ישעיהו מ"ג)',{size:22})],{align:AlignmentType.CENTER}));
 // TOC

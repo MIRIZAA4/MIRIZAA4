@@ -8,7 +8,7 @@ const kids=[];
 // title page
 kids.push(P([run('',{})],{align:AlignmentType.CENTER,before:2400}));
 kids.push(P([run('מעבר לקו האופק',{size:60,bold:true})],{align:AlignmentType.CENTER,after:400}));
-kids.push(P([run('רומן',{size:32})],{align:AlignmentType.CENTER,after:1600}));
+kids.push(P([run('',{size:32})],{align:AlignmentType.CENTER,after:1600}));
 kids.push(P([run('"וישמחו כי ישתוקו, וינחם אל מחוז חפצם"',{size:26,italics:true})],{align:AlignmentType.CENTER}));
 kids.push(P([run('(תהלים ק"ז)',{size:22})],{align:AlignmentType.CENTER}));
 // TOC
