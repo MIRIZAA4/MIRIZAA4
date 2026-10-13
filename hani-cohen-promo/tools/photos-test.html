@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script type="importmap">{"imports":{"three":"../node_modules/three/build/three.module.js"}}</script>
+<style>body{margin:0;background:#222}canvas{width:200px;height:250px;margin:2px}</style></head><body>
+<script type="module">
+import { buildPhotos } from '../src/photos.js';
+const p = await buildPhotos();
+for (const c of p.canvases) document.body.appendChild(c);
+document.body.appendChild(p.before);
+window.ready = true;
+</script></body></html>
