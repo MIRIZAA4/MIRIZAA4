@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="fonts/fonts.css"></head><body style="margin:0;background:#111">
+<canvas id="c" width="2160" height="1800"></canvas>
+<script src="src/core.js"></script><script src="src/photos.js"></script>
+<script>
+(async()=>{await buildPhotos();const g=document.getElementById('c').getContext('2d');
+PHOTOS.forEach((p,i)=>{g.drawImage(p.img,(i%6)*360,Math.floor(i/6)*450,360,450);});
+PHOTOS.slice(0,6).forEach((p,i)=>{g.drawImage(p.holo,(i)*360,900,360,450);});
+window.READY=true;})();
+</script></body></html>

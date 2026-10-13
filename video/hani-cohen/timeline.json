@@ -1,0 +1,46 @@
+{
+  "bpm": 104,
+  "fps": 30,
+  "totalBeats": 78,
+  "width": 1080,
+  "height": 1920,
+  "brand": {
+    "name": "חני כהן",
+    "title": "צילום",
+    "tagline": "הרגע שלך מחכה.",
+    "cta": "קבעי צילום",
+    "phone": "050-000-0000",
+    "instagram": "@hani.cohen.photo"
+  },
+  "scenes": {
+    "lens":     [0, 6],
+    "orbit":    [6, 14],
+    "holo":     [14, 30],
+    "edit":     [30, 40],
+    "approve":  [40, 48],
+    "album":    [48, 56],
+    "print":    [56, 63],
+    "deliver":  [63, 72],
+    "end":      [72, 78]
+  },
+  "events": {
+    "shutter": [4, 72],
+    "drop": 14,
+    "heroes": [16, 20, 24],
+    "words": {
+      "lens": [1],
+      "orbit": [8, 10],
+      "edit": [32, 34, 36],
+      "approve": [41],
+      "tap": 44,
+      "album": [50, 52],
+      "print": [57, 59],
+      "foil": 61,
+      "ribbon": 65,
+      "home": 67,
+      "boxOpen": 70
+    },
+    "risers": [[10, 14], [26, 30], [64, 71]],
+    "silence": [71, 72]
+  }
+}
