@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>תפירה בהתאמה אישית</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--c:#e9b8a2;--nav-h:56px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#000}
+body{background:#000;color:#fff;font-family:'Heebo',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.bar{position:fixed;top:0;right:0;height:3px;width:0;background:var(--c);z-index:60}
+.top{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:50;display:flex;align-items:center;justify-content:center;background:linear-gradient(#000 55%,transparent)}
+.top span{color:var(--c);font-weight:700}
+.demo{position:relative;height:760vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;padding-top:var(--nav-h);display:grid;grid-template-rows:minmax(0,62%) minmax(0,38%)}
+.art{order:-1;position:relative;min-height:0}
+.art svg.main{position:absolute;inset:0;width:100%;height:100%}
+.caps{position:relative;min-height:0}
+.cap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:6px 24px 0;opacity:0;pointer-events:none}
+.cap h1{color:var(--c);font-weight:900;font-size:clamp(2.2rem,8.5vw,4.6rem);line-height:1.05}
+.cap h2{color:var(--c);font-weight:900;font-size:clamp(1.7rem,6vw,3.1rem);line-height:1.1}
+.cap p{font-weight:300;font-size:clamp(1rem,3.2vw,1.4rem);line-height:1.5;max-width:30ch}
+.scroll{font-size:.95rem;opacity:.6;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(8px)}}
+.cta{display:inline-flex;align-items:center;gap:10px;margin-top:6px;padding:14px 32px;border-radius:99px;background:var(--c);color:#000;font-weight:700;text-decoration:none;font-size:1.15rem}
+.cta svg{width:22px;height:22px}
+.num{font-size:1.1rem;opacity:.85;letter-spacing:.04em;direction:ltr}
+@media(min-width:900px){
+  .stage{grid-template-rows:none;grid-template-columns:minmax(0,4fr) minmax(0,8fr)}
+  .art{order:0}
+  .cap{justify-content:center;align-items:flex-start;text-align:start;padding:0 4vw}
+  .cap p{max-width:24ch}
+}
+footer{padding:50px 20px 90px;text-align:center;font-weight:300;opacity:.65;line-height:1.7}
+@media(prefers-reduced-motion:reduce){.scroll{animation:none}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="top"><span>תפירה בהתאמה אישית</span></div>
+<svg id="defsSvg" width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="defs"></defs></svg>
+
+<section class="demo" id="demo" aria-label="תופרת">
+  <div class="stage">
+    <div class="caps">
+      <div class="cap" data-a="0" data-b="0.12">
+        <h1>תפירה בהתאמה אישית</h1>
+        <p>כל בגד מתחיל בחוט אחד.</p>
+        <span class="scroll">גללו ↓</span>
+      </div>
+      <div class="cap" data-a="0.12" data-b="0.30">
+        <h2>בוחרות את הבד</h2>
+        <p>בדים איכותיים, בגוונים שמתאימים לכן.</p>
+      </div>
+      <div class="cap" data-a="0.30" data-b="0.46">
+        <h2>מודדים בדיוק</h2>
+        <p>המידות נרשמות על בובת התאמה, ומשם מתחילים.</p>
+      </div>
+      <div class="cap" data-a="0.46" data-b="0.60">
+        <h2>גוזרים לפי התבנית</h2>
+        <p>כל חלק נגזר בדיוק לפי המידות שלכן.</p>
+      </div>
+      <div class="cap" data-a="0.60" data-b="0.73">
+        <h2>תופרים בסבלנות</h2>
+        <p>תפר אחרי תפר, עד שהחלקים נפגשים.</p>
+      </div>
+      <div class="cap" data-a="0.73" data-b="0.88">
+        <h2>וכך נראית שמלה גמורה</h2>
+        <p>גיהוץ אחרון, ובדיקה של כל תפר מקרוב.</p>
+      </div>
+      <div class="cap" data-a="0.88" data-b="1.1">
+        <h2>מוכנות להתחיל?</h2>
+        <p>התקשרו, ונקבע זמן למדידה.</p>
+        <a class="cta" href="tel:0500000000"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>להתקשר עכשיו</a>
+        <span class="num">050-000-0000 (מספר לדוגמה)</span>
+      </div>
+    </div>
+    <div class="art"><svg class="main" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg></div>
+  </div>
+</section>
+<footer>זו הדגמה. אפשר להחליף בה צבעים, בדים, טקסטים ומספר טלפון.</footer>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+const $=s=>document.querySelector(s);
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const seg=(p,a,b)=>clamp((p-a)/(b-a));
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const easeOut=t=>1-Math.pow(1-t,3);
+const back=t=>{const c=1.7;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const bounce=t=>{const n=7.5625,d=2.75;if(t<1/d)return n*t*t;if(t<2/d)return n*(t-=1.5/d)*t+.75;if(t<2.5/d)return n*(t-=2.25/d)*t+.9375;return n*(t-=2.625/d)*t+.984375};
+const rng=s=>()=>{s=(s*16807)%2147483647;return(s-1)/2147483646};
+function h(tag,attrs,parent){const n=document.createElementNS(NS,tag);if(attrs)for(const k in attrs)n.setAttribute(k,attrs[k]);if(parent)parent.appendChild(n);return n}
+const hx=c=>{c=c.replace('#','');return[0,2,4].map(i=>parseInt(c.substr(i,2),16))};
+const mix=(a,b,t)=>{const A=hx(a),B=hx(b);return'#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('')};
+const lighten=(c,t)=>mix(c,'#ffffff',t),darken=(c,t)=>mix(c,'#000000',t);
+const defs=$('#defs');let uid=0;const cache=new Map();
+function G(kind,stops,attrs){const key=kind+JSON.stringify([stops,attrs]);if(cache.has(key))return cache.get(key);
+  const id='q'+(uid++),el=h(kind==='lin'?'linearGradient':'radialGradient',Object.assign({id},attrs),defs);
+  stops.forEach(([o,c,a])=>h('stop',{offset:o,'stop-color':c,'stop-opacity':a==null?1:a},el));const u=`url(#${id})`;cache.set(key,u);return u}
+const LIN=(s,x1=0,y1=0,x2=1,y2=0)=>G('lin',s,{x1,y1,x2,y2});
+const LINU=(s,x1,y1,x2,y2)=>G('lin',s,{x1,y1,x2,y2,gradientUnits:'userSpaceOnUse'});
+const RAD=(s,cx=.5,cy=.5,r=.5,fx,fy)=>G('rad',s,{cx,cy,r,fx:fx==null?cx:fx,fy:fy==null?cy:fy});
+const blurCache={};
+function blurF(sd){if(!blurCache[sd]){const id='bl'+String(sd).replace('.','_');const f=h('filter',{id,x:'-60%',y:'-60%',width:'220%',height:'220%'},defs);h('feGaussianBlur',{stdDeviation:sd},f);blurCache[sd]=`url(#${id})`}return blurCache[sd]}
+function pattern(id,w,hh,draw){const p=h('pattern',{id,width:w,height:hh,patternUnits:'userSpaceOnUse'},defs);draw(p);return`url(#${id})`}
+
+const TEAL='#2d7a7e',PLUM='#6b2f4f',IVORY='#efe3cf',THREAD='#d6516b',WOOD='#c6975a',GOLD='#e2b650';
+const WEAVE=pattern('weave',6,6,p=>{h('rect',{width:6,height:6,fill:'rgba(0,0,0,0)'},p);h('path',{d:'M0 1H6M0 4H6',stroke:'rgba(255,255,255,.07)','stroke-width':1},p);h('path',{d:'M1 0V6M4 0V6',stroke:'rgba(0,0,0,.1)','stroke-width':1},p)});
+
+const svg=$('svg.main'),root=h('g',{},svg);
+const mkScene=()=>h('g',{},root);
+
+/* ---- A. סליל חוט ---- */
+const A=mkScene();
+{
+  const cx=500;
+  h('ellipse',{cx:cx+30,cy:640,rx:170,ry:26,fill:'rgba(0,0,0,.6)',filter:blurF(8)},A);
+  const flange=(y,top)=>{
+    h('rect',{x:cx-130,y:y,width:260,height:16,fill:LINU([[0,darken(WOOD,.45)],[.3,lighten(WOOD,.2)],[.6,WOOD],[1,darken(WOOD,.5)]],cx-130,0,cx+130,0)},A);
+    h('ellipse',{cx,cy:y+16,rx:130,ry:30,fill:darken(WOOD,.35)},A);
+    h('ellipse',{cx,cy:y,rx:130,ry:30,fill:RAD([[0,lighten(WOOD,.35)],[.7,WOOD],[1,darken(WOOD,.25)]],.4,.3,.8)},A);
+    h('ellipse',{cx,cy:y,rx:50,ry:11,fill:'rgba(0,0,0,.45)'},A);
+  };
+  flange(590);
+  h('rect',{x:cx-96,y:266,width:192,height:326,fill:LINU([[0,darken(THREAD,.55)],[.22,THREAD],[.4,lighten(THREAD,.3)],[.7,THREAD],[1,darken(THREAD,.6)]],cx-96,0,cx+96,0)},A);
+  for(let y=270;y<592;y+=6){h('path',{d:`M${cx-96} ${y} Q${cx} ${y+14} ${cx+96} ${y}`,fill:'none',stroke:'rgba(0,0,0,.22)','stroke-width':1.6},A);h('path',{d:`M${cx-96} ${y+3} Q${cx} ${y+17} ${cx+96} ${y+3}`,fill:'none',stroke:'rgba(255,255,255,.12)','stroke-width':1},A)}
+  h('ellipse',{cx,cy:592,rx:96,ry:14,fill:'rgba(0,0,0,.4)'},A);
+  flange(236);
+  h('ellipse',{cx,cy:266,rx:96,ry:14,fill:'rgba(0,0,0,.35)'},A);
+}
+const threadPath=h('path',{d:'M596 330 C690 300 700 420 780 380 C850 345 870 270 900 230',fill:'none',stroke:THREAD,'stroke-width':4,'stroke-linecap':'round'},A);
+const needle=h('g',{},A);
+h('path',{d:'M880 250 L760 560',stroke:'#cfd3d6','stroke-width':4,'stroke-linecap':'round'},needle);
+h('path',{d:'M880 250 L760 560',stroke:'#fff','stroke-opacity':.6,'stroke-width':1.2,transform:'translate(-1 0)'},needle);
+h('ellipse',{cx:878,cy:262,rx:3,ry:9,fill:'#111',transform:'rotate(21 878 262)'},needle);
+const tLen=threadPath.getTotalLength();threadPath.style.strokeDasharray=tLen;
+
+/* ---- B. גלילי בד ---- */
+const B=mkScene();
+function roll(g,x,y,w,r,color,id){
+  h('ellipse',{cx:x+w/2+20,cy:y+r+6,rx:w/2+30,ry:14,fill:'rgba(0,0,0,.45)',filter:blurF(6)},g);
+  h('rect',{x,y:y-r,width:w,height:2*r,fill:LIN([[0,lighten(color,.35)],[.35,color],[1,darken(color,.55)]],0,0,0,1)},g);
+  h('rect',{x,y:y-r,width:w,height:2*r,fill:WEAVE},g);
+  h('ellipse',{cx:x+w,cy:y,rx:r*.34,ry:r,fill:lighten(color,.1)},g);
+  h('ellipse',{cx:x+w,cy:y,rx:r*.34,ry:r,fill:'none',stroke:'rgba(0,0,0,.3)'},g);
+  h('ellipse',{cx:x,cy:y,rx:r*.34,ry:r,fill:darken(color,.25)},g);
+  let d='';for(let k=0;k<7;k++){const t=k/7;d+=`${k?'L':'M'}${x+Math.cos(k*1.9)*r*.3*(1-t)} ${y+Math.sin(k*1.9)*r*(1-t)}`}
+  h('path',{d,fill:'none',stroke:'rgba(0,0,0,.35)','stroke-width':2},g);
+}
+const rolls=[[110,640,370,58,PLUM],[510,640,370,58,IVORY],[300,520,380,58,TEAL]].map(([x,y,w,r,c])=>{const g=h('g',{},B);roll(g,x,y,w,r,c);return{g,y}});
+const sheet=h('g',{},B);
+{
+  const d='M300 580 L680 580 C690 650 676 720 690 770 L292 770 C306 720 290 650 300 580 Z';
+  h('path',{d:'M300 590 L690 590 L700 790 L290 790 Z',fill:'rgba(0,0,0,.35)',filter:blurF(10),transform:'translate(14 10)'},sheet);
+  h('path',{d,fill:LINU([[0,darken(TEAL,.4)],[.2,TEAL],[.5,lighten(TEAL,.3)],[.8,TEAL],[1,darken(TEAL,.5)]],290,0,700,0)},sheet);
+  h('path',{d,fill:WEAVE},sheet);
+  for(let k=0;k<6;k++){const x=320+k*62;h('path',{d:`M${x} 585 C${x+14} 660 ${x-10} 720 ${x+6} 775`,fill:'none',stroke:k%2?'rgba(255,255,255,.14)':'rgba(0,0,0,.25)','stroke-width':6,filter:blurF(2)},sheet)}
+}
+const sheetClip=h('clipPath',{id:'sheetClip'},defs),sheetRect=h('rect',{x:280,y:575,width:440,height:0},sheetClip);
+sheet.setAttribute('clip-path','url(#sheetClip)');
+
+/* ---- M. בובת התאמה (משותפת) ---- */
+const M=h('g',{},root);
+const LINEN='#d9cbb2';
+h('ellipse',{cx:500,cy:772,rx:190,ry:22,fill:'rgba(0,0,0,.6)',filter:blurF(8)},M);
+[[410,756],[590,756],[500,772]].forEach(([x,y])=>{h('path',{d:`M500 716 L${x} ${y}`,stroke:darken(WOOD,.3),'stroke-width':11,'stroke-linecap':'round'},M);h('path',{d:`M500 714 L${x} ${y-2}`,stroke:WOOD,'stroke-width':4,'stroke-linecap':'round'},M)});
+h('rect',{x:492,y:560,width:16,height:160,fill:LINU([[0,darken(WOOD,.4)],[.4,lighten(WOOD,.2)],[1,darken(WOOD,.5)]],492,0,508,0)},M);
+const half='M500 212 C520 214 540 222 566 236 C590 248 598 270 596 300 C594 350 580 400 568 440 C560 470 580 510 590 560 C596 590 560 606 500 608 Z';
+const bodyFill=LINU([[0,darken(LINEN,.35)],[.2,LINEN],[.5,lighten(LINEN,.35)],[.8,LINEN],[1,darken(LINEN,.35)]],400,0,600,0);
+h('path',{d:half,fill:bodyFill},M);
+h('path',{d:half,fill:bodyFill,transform:'translate(1000 0) scale(-1 1)'},M);
+h('path',{d:half,fill:WEAVE},M);h('path',{d:half,fill:WEAVE,transform:'translate(1000 0) scale(-1 1)'},M);
+h('path',{d:'M500 212 L500 608',stroke:'rgba(0,0,0,.2)','stroke-width':1.5,fill:'none'},M);
+[1,-1].forEach(s=>h('path',{d:'M548 236 C540 320 545 380 540 450 C536 500 548 540 552 590',stroke:'rgba(0,0,0,.18)','stroke-width':1.5,fill:'none',transform:s>0?'':'translate(1000 0) scale(-1 1)'},M));
+h('ellipse',{cx:500,cy:214,rx:34,ry:9,fill:darken(LINEN,.25)},M);
+h('rect',{x:494,y:186,width:12,height:26,fill:WOOD},M);
+h('circle',{cx:500,cy:184,r:17,fill:RAD([[0,lighten(WOOD,.5)],[.6,WOOD],[1,darken(WOOD,.45)]],.38,.3,.8)},M);
+/* סרט מדידה */
+const TAPES=[{y:300,rx:97,lab:'חזה',v:'92'},{y:452,rx:69,lab:'מותן',v:'70'},{y:552,rx:92,lab:'ירכיים',v:'98'}];
+TAPES.forEach(t=>{
+  const g=h('g',{},M),d=`M${500-t.rx} ${t.y} A${t.rx} 17 0 0 0 ${500+t.rx} ${t.y}`;
+  t.p1=h('path',{d,fill:'none',stroke:'#e9c24f','stroke-width':15,'stroke-linecap':'butt'},g);
+  t.p2=h('path',{d,fill:'none',stroke:'#3a2c08','stroke-width':15,'stroke-dasharray':'1.5 7',opacity:.8},g);
+  t.len=t.p1.getTotalLength();[t.p1,t.p2].forEach(p=>p.style.strokeDasharray=p===t.p2?'1.5 7':t.len);
+  t.g=g;
+  t.lbl=h('g',{},M);
+  h('line',{x1:500+t.rx,y1:t.y+2,x2:690,y2:t.y+2,stroke:'rgba(255,255,255,.45)','stroke-dasharray':'3 4'},t.lbl);
+  const tx=h('text',{x:700,y:t.y+8,fill:'#fff','font-size':26,'font-weight':700,'font-family':'Heebo,sans-serif'},t.lbl);tx.textContent=`${t.lab}  ${t.v} ס"מ`;
+});
+/* שמלה */
+const dress=h('g',{},M),dclip=h('clipPath',{id:'dclip'},defs),dr=h('rect',{x:300,y:180,width:400,height:0},dclip);
+dress.setAttribute('clip-path','url(#dclip)');
+{
+  const f=LINU([[0,darken(TEAL,.55)],[.18,darken(TEAL,.1)],[.5,lighten(TEAL,.3)],[.82,darken(TEAL,.1)],[1,darken(TEAL,.55)]],290,0,710,0);
+  const dh='M500 222 C522 224 546 228 590 254 C600 300 598 350 582 400 C574 430 572 440 570 448 C580 520 604 620 640 744 C590 754 540 758 500 758 Z';
+  const sl='M586 258 C618 300 640 420 652 522 L612 530 C604 440 584 340 566 300 Z';
+  [1,-1].forEach(s=>{const tr=s>0?'':'translate(1000 0) scale(-1 1)';
+    h('path',{d:sl,fill:f,transform:tr},dress);h('path',{d:sl,fill:WEAVE,transform:tr},dress);
+    h('path',{d:dh,fill:f,transform:tr},dress);h('path',{d:dh,fill:WEAVE,transform:tr},dress);
+    for(let k=0;k<6;k++){const x=0;h('path',{d:`M${510+k*11} 470 C${515+k*14} 560 ${520+k*18} 660 ${520+k*22} 750`,fill:'none',stroke:k%2?'rgba(255,255,255,.12)':'rgba(0,0,0,.22)','stroke-width':7,filter:blurF(3),transform:tr},dress)}
+    h('path',{d:'M606 524 L652 522',stroke:GOLD,'stroke-width':6,transform:tr},dress);
+  });
+  h('path',{d:'M476 224 Q500 246 524 224',fill:'none',stroke:GOLD,'stroke-width':5,'stroke-linecap':'round'},dress);
+  h('path',{d:'M500 236 L500 440',stroke:'rgba(0,0,0,.25)','stroke-width':2},dress);
+  for(let k=0;k<5;k++){h('circle',{cx:500,cy:262+k*40,r:5.5,fill:RAD([[0,'#fff3c4'],[.5,GOLD],[1,darken(GOLD,.5)]],.35,.3,.8)},dress)}
+  h('path',{d:'M432 444 Q500 462 568 444 L566 458 Q500 476 434 458 Z',fill:GOLD},dress);
+  h('path',{d:'M432 444 Q500 462 568 444',fill:'none',stroke:'rgba(255,255,255,.5)'},dress);
+  h('path',{d:'M640 744 Q570 764 500 760 Q430 764 360 744',fill:'none',stroke:GOLD,'stroke-width':4},dress);
+}
+const steam=[];for(let i=0;i<8;i++)steam.push(h('circle',{r:20+i*3,fill:'rgba(255,255,255,.18)',filter:blurF(8)},M));
+const stitchD=h('g',{},M);
+const seamStitch=h('path',{d:'M544 250 C548 320 548 380 542 440',fill:'none',stroke:'#fff3c4','stroke-width':2.2,'stroke-dasharray':'7 6','stroke-linecap':'round'},stitchD);
+
+/* ---- D. גזירה ---- */
+const D=mkScene();
+h('rect',{x:140,y:170,width:720,height:480,rx:22,fill:'rgba(0,0,0,.5)',filter:blurF(10),transform:'translate(0 14)'},D);
+h('rect',{x:140,y:170,width:720,height:480,rx:22,fill:LINU([[0,darken(TEAL,.3)],[.4,lighten(TEAL,.12)],[1,darken(TEAL,.35)]],140,170,860,650)},D);
+h('rect',{x:140,y:170,width:720,height:480,rx:22,fill:WEAVE},D);
+const PIECES=[
+ 'M236 258 C276 238 330 276 372 258 L430 286 L444 420 L196 420 L208 286 Z',
+ 'M530 250 L720 250 L792 606 L458 606 Z',
+ 'M250 476 C298 456 352 456 400 476 L384 604 L262 604 Z'];
+const pcs=PIECES.map(d=>{
+  const g=h('g',{},D);
+  const shadow=h('path',{d,fill:'rgba(0,0,0,.5)',filter:blurF(5),opacity:0},g);
+  const body=h('path',{d,fill:LINU([[0,TEAL],[.5,lighten(TEAL,.28)],[1,darken(TEAL,.1)]],140,170,860,650),stroke:'rgba(255,255,255,.3)','stroke-width':1.4},g);
+  const wv=h('path',{d,fill:WEAVE},g);
+  const chalk=h('path',{d,fill:'none',stroke:'rgba(255,255,255,.85)','stroke-width':2,'stroke-dasharray':'8 6'},g);
+  const cut=h('path',{d,fill:'none',stroke:'#fff','stroke-width':3},g);
+  const len=cut.getTotalLength();cut.style.strokeDasharray=len;cut.style.strokeDashoffset=len;
+  return{g,shadow,body,wv,chalk,cut,len,d};
+});
+const cutHole=h('g',{},D);
+const shears=h('g',{},D);
+{
+  const bl=(s)=>h('path',{d:'M0 0 L96 '+(s*5)+' L102 '+(s*3)+' L4 '+(s*-4)+' Z',fill:LINU([[0,'#f2f4f6'],[1,'#8f969c']],0,0,100,0),stroke:'#6b7278','stroke-width':1},shears);
+  const a=h('g',{},shears),b=h('g',{},shears);
+  h('path',{d:'M0 0 L98 -9 L104 -4 L6 6 Z',fill:LINU([[0,'#f5f6f8'],[1,'#8a9197']],0,0,100,0),stroke:'#6b7278'},a);
+  h('ellipse',{cx:-40,cy:16,rx:24,ry:15,fill:'none',stroke:'#b8323f','stroke-width':8},a);
+  h('path',{d:'M0 0 L-18 10',stroke:'#b8323f','stroke-width':7,'stroke-linecap':'round'},a);
+  h('path',{d:'M0 0 L98 9 L104 4 L6 -6 Z',fill:LINU([[0,'#e4e7ea'],[1,'#7d848a']],0,0,100,0),stroke:'#6b7278'},b);
+  h('ellipse',{cx:-40,cy:-16,rx:24,ry:15,fill:'none',stroke:'#b8323f','stroke-width':8},b);
+  h('path',{d:'M0 0 L-18 -10',stroke:'#b8323f','stroke-width':7,'stroke-linecap':'round'},b);
+  h('circle',{cx:0,cy:0,r:5,fill:'#444'},shears);
+  shears.a=a;shears.b=b;
+}
+
+/* ---- E. מכונת תפירה ---- */
+const E=mkScene();
+const MET='#cdd2d6';
+h('ellipse',{cx:500,cy:700,rx:360,ry:30,fill:'rgba(0,0,0,.6)',filter:blurF(10)},E);
+h('rect',{x:170,y:580,width:680,height:64,rx:14,fill:LIN([[0,lighten(MET,.3)],[.4,MET],[1,darken(MET,.5)]],0,0,0,1)},E);
+h('rect',{x:700,y:250,width:140,height:394,rx:34,fill:LINU([[0,darken(MET,.35)],[.4,lighten(MET,.2)],[1,darken(MET,.5)]],700,0,840,0)},E);
+h('rect',{x:226,y:240,width:614,height:120,rx:50,fill:LIN([[0,lighten(MET,.35)],[.5,MET],[1,darken(MET,.45)]],0,0,0,1)},E);
+h('rect',{x:226,y:300,width:130,height:210,rx:30,fill:LINU([[0,darken(MET,.3)],[.5,lighten(MET,.25)],[1,darken(MET,.4)]],226,0,356,0)},E);
+h('rect',{x:240,y:268,width:100,height:20,rx:10,fill:GOLD},E);
+h('circle',{cx:868,cy:300,r:46,fill:RAD([[0,lighten(MET,.4)],[.7,MET],[1,darken(MET,.5)]],.4,.3,.8)},E);
+const wheel=h('g',{},E);[0,60,120].forEach(a=>h('line',{x1:868,y1:300,x2:868+Math.cos(a*Math.PI/180)*40,y2:300+Math.sin(a*Math.PI/180)*40,stroke:'rgba(0,0,0,.35)','stroke-width':4},wheel));
+const spoolTop=h('g',{},E);
+h('rect',{x:470,y:204,width:60,height:40,rx:4,fill:THREAD},spoolTop);h('rect',{x:462,y:200,width:76,height:8,fill:WOOD},spoolTop);h('rect',{x:462,y:240,width:76,height:8,fill:WOOD},spoolTop);
+const stitchThread=h('path',{d:'M500 210 C420 180 340 250 300 300 C290 330 296 380 296 420',fill:'none',stroke:THREAD,'stroke-width':2.4},E);
+const nd=h('g',{},E);
+h('rect',{x:288,y:420,width:16,height:90,fill:'#bfc4c8'},nd);
+h('path',{d:'M296 508 L296 584',stroke:'#e8ebee','stroke-width':3,'stroke-linecap':'round'},nd);
+const fabricBed=h('g',{},E);
+h('path',{d:'M190 586 L760 586 L800 640 L150 640 Z',fill:LINU([[0,darken(TEAL,.3)],[.5,lighten(TEAL,.15)],[1,darken(TEAL,.3)]],150,0,800,0)},fabricBed);
+h('path',{d:'M190 586 L760 586 L800 640 L150 640 Z',fill:WEAVE},fabricBed);
+h('rect',{x:270,y:572,width:50,height:12,rx:3,fill:'#9aa0a5'},E);
+const stitch=h('path',{d:'M760 612 L300 612',fill:'none',stroke:'#fff3c4','stroke-width':3,'stroke-dasharray':'9 7','stroke-linecap':'round'},E);
+const sLen=stitch.getTotalLength();
+
+/* ---- נצנצים ---- */
+const sr=rng(7),sparks=[];
+for(let i=0;i<30;i++){const a=sr()*6.28,r=Math.sqrt(sr());sparks.push({n:h('path',{d:'M0 -9 L2.4 -2.4 L9 0 L2.4 2.4 L0 9 L-2.4 2.4 L-9 0 L-2.4 -2.4 Z',fill:i%3?'#e9b8a2':'#fff3c4'},root),x:500+Math.cos(a)*r*420,y:430+Math.sin(a)*r*330,s:sr()})}
+
+/* ---- אנימציה ---- */
+const demo=$('#demo'),bar=$('#bar');
+const snap=!!window.__snap||matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sceneOp=(g,p,a,b,fadeIn=.03,fadeOut=.03)=>{const o=seg(p,a,a+fadeIn)*(1-seg(p,b-fadeOut,b));g.setAttribute('opacity',o);g.style.display=o<=.001?'none':'';return o};
+function update(p){
+  // A
+  sceneOp(A,p,-.1,.15,.001,.04);
+  const ta=seg(p,.01,.09);threadPath.style.strokeDashoffset=tLen*(1-ease(ta));
+  needle.setAttribute('transform',`translate(${(1-easeOut(seg(p,0,.07)))*140} ${-(1-easeOut(seg(p,0,.07)))*60}) rotate(${Math.sin(p*60)*1.5} 820 400)`);
+  A.setAttribute('transform',`translate(${-seg(p,.09,.15)*60} 0)`);
+  // B
+  sceneOp(B,p,.12,.31);
+  rolls.forEach((r,i)=>{const t=seg(p,.13+i*.015,.19+i*.015);r.g.setAttribute('transform',`translate(0 ${-(1-bounce(t))*300})`);r.g.setAttribute('opacity',Math.min(1,t*5))});
+  sheetRect.setAttribute('height',Math.max(0,ease(seg(p,.2,.27))*230));
+  // M
+  const mo=sceneOp(M,p,.29,.47,.03,.03),mo2=seg(p,.72,.75);
+  const mop=p<.6?mo:mo2;M.setAttribute('opacity',p<.6?mo:mo2);M.style.display=(p<.6?mo:mo2)<=.001?'none':'';
+  TAPES.forEach((t,i)=>{const a=seg(p,.31+i*.035,.35+i*.035);[t.p1,t.p2].forEach(pp=>{if(pp===t.p1)pp.style.strokeDashoffset=t.len*(1-ease(a))});t.g.setAttribute('opacity',p<.6?(a>0?1:0):0);t.lbl.setAttribute('opacity',p<.6?ease(seg(p,.35+i*.035,.39+i*.035)):0)});
+  dr.setAttribute('height',Math.max(0,ease(seg(p,.74,.8))*600));
+  const zt=ease(seg(p,.79,.83))*(1-ease(seg(p,.855,.89)));
+  const z=1+.9*zt;M.setAttribute('transform',`translate(${500-(lerp(500,545,zt))*z} ${400-(lerp(430,350,zt))*z}) scale(${z})`);
+  seamStitch.setAttribute('stroke-dashoffset',0);stitchD.setAttribute('opacity',ease(seg(p,.8,.82))*(1-seg(p,.86,.89)));
+  const sv=seg(p,.74,.8);steam.forEach((c,i)=>{const t=(p*5+i*.13)%1;c.setAttribute('cx',420+(i%4)*70+Math.sin(t*6+i)*14);c.setAttribute('cy',700-t*420);c.setAttribute('opacity',sv*(1-t)*(1-seg(p,.8,.84)))});
+  // D
+  sceneOp(D,p,.46,.61);
+  const du=seg(p,.48,.58);
+  pcs.forEach((pc,i)=>{
+    const u=clamp(du*3-i);pc.cut.style.strokeDashoffset=pc.len*(1-u);
+    pc.chalk.setAttribute('opacity',1-u);
+    const lift=ease(clamp((u-.97)/.03));
+    pc.g.setAttribute('transform',`translate(0 ${-10*lift}) scale(1)`);pc.shadow.setAttribute('opacity',lift);
+  });
+  const cu=clamp(du*3),ci=Math.min(2,Math.floor(cu)),cl=cu-ci;
+  const path=document.createElementNS(NS,'path');
+  if(!pcs[ci].m){const m=h('path',{d:pcs[ci].d},null);pcs[ci].m=m}
+  const pt=pcs[ci].m.getPointAtLength(pcs[ci].len*clamp(cl)),pt2=pcs[ci].m.getPointAtLength(Math.min(pcs[ci].len,pcs[ci].len*clamp(cl)+4));
+  const ang=Math.atan2(pt2.y-pt.y,pt2.x-pt.x)*180/Math.PI,open=14+12*Math.sin(du*160);
+  shears.setAttribute('transform',`translate(${pt.x} ${pt.y}) rotate(${ang-8})`);
+  shears.a.setAttribute('transform',`rotate(${-open})`);shears.b.setAttribute('transform',`rotate(${open})`);
+  shears.setAttribute('opacity',du>0&&du<1?1:0);
+  // E
+  sceneOp(E,p,.6,.74);
+  const eu=seg(p,.62,.71);
+  nd.setAttribute('transform',`translate(0 ${Math.abs(Math.sin(eu*90))*-60+0})`);
+  wheel.setAttribute('transform',`rotate(${eu*1400} 868 300)`);
+  stitch.style.strokeDasharray=`9 7`;
+  stitch.setAttribute('d',`M${lerp(300,760,0)} 612 L${lerp(760,300,0)} 612`);
+  const sx=lerp(760,310,ease(eu));stitch.setAttribute('d',`M760 612 L${sx} 612`);
+  fabricBed.setAttribute('transform',`translate(${-(1-ease(eu))*0} 0)`);
+  stitchThread.setAttribute('stroke-dasharray','none');
+  // נצנצים
+  const sp=seg(p,.88,.93);sparks.forEach(s=>{const tw=.5+.5*Math.sin(p*80+s.s*20);s.n.setAttribute('transform',`translate(${s.x.toFixed(1)} ${s.y.toFixed(1)}) scale(${(tw*sp).toFixed(3)})`)});
+}
+const caps=p=>demo.querySelectorAll('.cap').forEach(c=>{
+  const a=+c.dataset.a,b=+c.dataset.b,fi=a<=0?1:ease(seg(p,a,a+.035)),fo=b>1?0:ease(seg(p,b-.035,b)),o=Math.min(fi,1-fo);
+  c.style.opacity=o;c.style.transform=`translateY(${((1-fi)*26-fo*26).toFixed(1)}px)`;c.style.pointerEvents=o>.6?'auto':'none';
+});
+let cur=0;
+const progress=()=>clamp(-demo.getBoundingClientRect().top/(demo.offsetHeight-innerHeight));
+function frame(){
+  const t=progress();
+  if(snap)cur=t;else{cur+=(t-cur)*.14;if(Math.abs(t-cur)<.0004)cur=t}
+  update(cur);caps(cur);
+  const r=demo.getBoundingClientRect();bar.style.width=(r.top<=0&&r.bottom>0?cur*100:0)+'%';
+  requestAnimationFrame(frame);
+}
+cur=progress();frame();
+</script>
+</body>
+</html>
