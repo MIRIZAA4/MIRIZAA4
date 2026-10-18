@@ -85,7 +85,7 @@ footer{padding:50px 20px 90px;text-align:center;font-weight:300;opacity:.65;line
         <a class="cta" href="#" onclick="return false">להזמנה</a>
       </div>
     </div>
-    <div class="art"><svg class="main" viewBox="0 0 1000 720" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg></div>
+    <div class="art"><svg class="main" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg></div>
   </div>
 </section>
 
@@ -424,32 +424,40 @@ const svg=$('svg.main');
 const SD=h('defs',{},svg);
 const root=h('g',{},svg);
 const plat=h('g',{},root);
-const CX=500,CY=400;
-// מגש חרסינה
-h('ellipse',{cx:CX,cy:CY+40,rx:488,ry:252,fill:'rgba(0,0,0,.5)',filter:blurF(14)},plat);
-h('ellipse',{cx:CX,cy:CY+14,rx:486,ry:250,fill:LINU([[0,'#9a7a38'],[.5,'#f2d68a'],[1,'#8a6a2a']],CX-486,0,CX+486,0)},plat);
-h('ellipse',{cx:CX,cy:CY+6,rx:480,ry:244,fill:LINU([[0,'#e6e5e0'],[.5,'#ffffff'],[1,'#d4d3cd']],CX-480,0,CX+480,0)},plat);
-h('ellipse',{cx:CX,cy:CY,rx:440,ry:222,fill:RAD([[0,'#ffffff'],[.7,'#f4f3ef'],[1,'#dedcd5']],.45,.35,.7)},plat);
-h('ellipse',{cx:CX,cy:CY,rx:440,ry:222,fill:'none',stroke:'rgba(0,0,0,.08)','stroke-width':3},plat);
-h('ellipse',{cx:CX-120,cy:CY-110,rx:150,ry:34,fill:'rgba(255,255,255,.7)',transform:`rotate(-8 ${CX-120} ${CY-110})`,filter:blurF(10)},plat);
+const CX=500,CY=440;
+// מגש מלבני מחרסינה, בפרספקטיבה
+const BL=[190,110],BR=[810,110],FR=[975,770],FL=[25,770];
+const poly=(o=0,dy=0,pad=0)=>{const P=[[BL[0]+pad*1.1,BL[1]+pad],[BR[0]-pad*1.1,BR[1]+pad],[FR[0]-pad,FR[1]-pad],[FL[0]+pad,FL[1]-pad]];return P.map(p=>`${p[0]+o},${p[1]+dy}`).join(' ')};
+h('polygon',{points:poly(10,46),fill:'rgba(0,0,0,.55)',filter:blurF(14)},plat);
+h('polygon',{points:poly(0,26),fill:LIN([[0,'#9b9a94'],[1,'#c9c8c2']],0,0,0,1),stroke:'#a9a8a2','stroke-width':18,'stroke-linejoin':'round'},plat);
+h('polygon',{points:poly(0,0),fill:'#fbfbf9',stroke:LIN([[0,'#ffffff'],[1,'#dcdbd5']],0,0,0,1),'stroke-width':18,'stroke-linejoin':'round'},plat);
+h('polygon',{points:poly(0,0,10),fill:LIN([[0,'#ececE8'],[.35,'#ffffff'],[1,'#f1f0ec']],0,0,0,1)},plat);
+h('polygon',{points:poly(0,0,14),fill:'none',stroke:'rgba(0,0,0,.07)','stroke-width':3,'stroke-linejoin':'round'},plat);
+h('polygon',{points:poly(0,0,-1),fill:'none',stroke:'#d4b062','stroke-width':3,'stroke-linejoin':'round'},plat);
+const tcp=h('clipPath',{id:'trayClip'},defs);h('polygon',{points:poly(0,0,14)},tcp);
+h('ellipse',{cx:420,cy:300,rx:300,ry:50,fill:'rgba(255,255,255,.9)',transform:'rotate(-6 420 300)',filter:blurF(14),'clip-path':'url(#trayClip)'},plat);
+h('polygon',{points:poly(0,0,12),fill:'none',stroke:'rgba(255,255,255,.9)','stroke-width':2,'stroke-linejoin':'round',filter:blurF(1)},plat);
 const piecesG=h('g',{},root);
 
-const LAYOUT=[4,0,6,2,8,3, 5,1,9,7,10, 6,0,2,8,1,3];
-const ROWS=[[262,[132,276,420,564,708,852]],[388,[204,348,492,636,780]],[514,[132,276,420,564,708,852]]];
-const SC=.9;
+const LAYOUT=[4,0,6,2, 8,1,5,3, 9,7,10,6, 0,2,8,3];
+const ROWS=[[230,.6],[375,.72],[530,.84],[715,.96]];
+const edgeL=y=>BL[0]+(FL[0]-BL[0])*(y-BL[1])/(FL[1]-BL[1]),edgeR=y=>BR[0]+(FR[0]-BR[0])*(y-BR[1])/(FR[1]-BR[1]);
 const pieces=[];
 let heroIdx=-1,counter=0;
-ROWS.forEach(([ry,xs],r)=>xs.forEach((x,c)=>{
-  const idx=counter++,ri=LAYOUT[idx];
-  const pg=h('g',{transform:`translate(${x} ${ry}) scale(${SC})`},piecesG);
-  const parts=drawPiece(pg,ri);
-  pieces.push({pg,parts,x,y:ry,ri});
-  if(ri===1&&heroIdx<0&&r===1)heroIdx=idx;
-}));
+ROWS.forEach(([ry,sc],r)=>{
+  const L=edgeL(ry)+30,R=edgeR(ry)-30;
+  for(let c=0;c<4;c++){
+    const x=L+(R-L)*(c+.5)/4,idx=counter++,ri=LAYOUT[idx];
+    const pg=h('g',{transform:`translate(${x.toFixed(1)} ${ry}) scale(${sc})`},piecesG);
+    const parts=drawPiece(pg,ri);
+    pieces.push({pg,parts,x,y:ry,ri,sc});
+    if(ri===1&&heroIdx<0&&r>=1)heroIdx=idx;
+  }
+});
 if(heroIdx<0)heroIdx=7;
 // נצנצים
 const sparks=[];const sr=rng(21);
-for(let i=0;i<34;i++){const a=sr()*6.28,rr2=Math.sqrt(sr());sparks.push({n:h('path',{d:'M0 -9 L2.4 -2.4 L9 0 L2.4 2.4 L0 9 L-2.4 2.4 L-9 0 L-2.4 -2.4 Z',fill:i%3?'#f2c46d':'#fff3c4'},root),x:CX+Math.cos(a)*rr2*470,y:CY-40+Math.sin(a)*rr2*250,s:sr()})}
+for(let i=0;i<34;i++){const a=sr()*6.28,rr2=Math.sqrt(sr());sparks.push({n:h('path',{d:'M0 -9 L2.4 -2.4 L9 0 L2.4 2.4 L0 9 L-2.4 2.4 L-9 0 L-2.4 -2.4 Z',fill:i%3?'#f2c46d':'#fff3c4'},root),x:CX+Math.cos(a)*rr2*430,y:CY+Math.sin(a)*rr2*320,s:sr()})}
 
 /* ---------- אנימציה ---------- */
 const demo=$('#demo'),bar=$('#bar');
@@ -460,9 +468,9 @@ const caps=p=>demo.querySelectorAll('.cap').forEach(c=>{
 });
 function update(p){
   const zt=ease(seg(p,.64,.70))*(1-ease(seg(p,.76,.82)));
-  const hp=pieces[heroIdx],z=1+2.7*zt;
-  const fx=lerp(500,hp.x,zt),fy=lerp(360,hp.y-75,zt);
-  root.setAttribute('transform',`translate(${500-fx*z} ${360-fy*z}) scale(${z})`);
+  const hp=pieces[heroIdx],z=1+1.9*zt;
+  const fx=lerp(500,hp.x,zt),fy=lerp(400,hp.y-70*hp.sc,zt);
+  root.setAttribute('transform',`translate(${500-fx*z} ${400-fy*z}) scale(${z})`);
   plat.setAttribute('opacity',ease(seg(p,0,.06)));
   pieces.forEach((pc,i)=>{
     pc.parts.forEach(pt=>{
