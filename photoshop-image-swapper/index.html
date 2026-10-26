@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { padding: 8px; font-size: 12px; }
+    h3 { margin: 0 0 6px; }
+    .row { margin: 8px 0; display: flex; flex-direction: column; }
+    sp-picker { width: 100%; }
+    sp-button { margin-top: 6px; }
+    #status { margin-top: 8px; opacity: .8; }
+    #target { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h3>Image Swapper</h3>
+  <div class="row">
+    <span>Selected image (click it in the canvas):</span>
+    <span id="target">— none —</span>
+  </div>
+  <div class="row">
+    <span>Replace with:</span>
+    <sp-picker id="source" placeholder="Choose another layer"><sp-menu id="menu"></sp-menu></sp-picker>
+  </div>
+  <div class="row">
+    <sp-checkbox id="stretch">Stretch to fill (ignore proportions)</sp-checkbox>
+    <sp-checkbox id="keep">Keep original (hide instead of delete)</sp-checkbox>
+    <sp-checkbox id="swap">Swap — put the original in the other's place</sp-checkbox>
+  </div>
+  <sp-button id="go" variant="cta" disabled>Replace</sp-button>
+  <div id="status"></div>
+  <script src="index.js"></script>
+</body>
+</html>

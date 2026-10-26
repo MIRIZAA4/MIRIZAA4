@@ -1,0 +1,18 @@
+{
+  "id": "com.mirizaa4.imageswapper",
+  "name": "Image Swapper",
+  "version": "1.0.0",
+  "main": "index.html",
+  "host": { "app": "PS", "minVersion": "23.3.0" },
+  "manifestVersion": 5,
+  "entrypoints": [
+    {
+      "type": "panel",
+      "id": "imageSwapperPanel",
+      "label": { "default": "Image Swapper" },
+      "minimumSize": { "width": 230, "height": 200 },
+      "preferredDockedSize": { "width": 280, "height": 320 }
+    }
+  ],
+  "requiredPermissions": {}
+}
